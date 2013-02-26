@@ -1,0 +1,78 @@
+<html>
+
+<head>
+<title>Range of data collection dates, 2004-2012</title>
+</head>
+
+<body>
+
+<p>This table shows the number of plants assessed on each date in the 1996-1998 experiments</p>
+
+<!--begin.rcode
+load("cg12004-2012.RData")
+lookAtYear <- function(x){
+tapply(pp[pp$measureYr==x,"measureDt2"],list(pp[pp$measureYr==x,"measureDt2"],pp[pp$measureYr==x,"expNm"]),length)
+}
+
+yrs <- c(2004:2012)
+tapply(yrs,yrs,lookAtYear)
+end.rcode-->
+
+<p>There is a possibility that the measure dates reflect can't finds that were added later.</p>
+
+<!--begin.rcode
+load("cg12004-2012.RData")
+lookAtYear <- function(x,y){
+tapply(pp[pp$measureYr==x & pp$expNm==y,"measureDt2"],list(pp[pp$measureYr==x & pp$expNm==y,"measureDt2"],pp[pp$measureYr==x & pp$expNm==y,"Status"]),length)
+}
+
+lookAtYear(2004,1996)
+lookAtYear(2005,1996)
+lookAtYear(2006,1996)
+lookAtYear(2007,1996)
+lookAtYear(2008,1996)
+lookAtYear(2009,1996)
+lookAtYear(2010,1996)
+lookAtYear(2011,1996)
+lookAtYear(2012,1996)
+
+
+lookAtYear(2004,1997)
+lookAtYear(2005,1997)
+lookAtYear(2006,1997)
+lookAtYear(2007,1997)
+lookAtYear(2008,1997)
+lookAtYear(2009,1997)
+lookAtYear(2010,1997)
+lookAtYear(2011,1997)
+lookAtYear(2012,1997)
+
+
+lookAtYear(2004,1998)
+lookAtYear(2005,1998)
+lookAtYear(2006,1998)
+lookAtYear(2007,1998)
+lookAtYear(2008,1998)
+lookAtYear(2009,1998)
+lookAtYear(2010,1998)
+lookAtYear(2011,1998)
+lookAtYear(2012,1998)
+
+
+lookAtYear(2004,1999)
+lookAtYear(2005,1999)
+lookAtYear(2006,1999)
+lookAtYear(2007,1999)
+lookAtYear(2008,1999)
+lookAtYear(2009,1999)
+lookAtYear(2010,1999)
+lookAtYear(2011,1999)
+lookAtYear(2012,1999)
+end.rcode-->
+
+#nope
+
+
+
+</body>
+</html>
