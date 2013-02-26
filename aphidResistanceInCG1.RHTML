@@ -70,7 +70,86 @@ lookAtYear(2011,1999)
 lookAtYear(2012,1999)
 end.rcode-->
 
-#nope
+<p>Visualize aphid abundance by site and year</p>
+
+<!--begin.rcode
+#switch factor levels of aphid abundance for visualizing
+pp$aphids2 <- factor(pp$aphids2,levels=c(">80","11-80","1-10","0"))
+pp <- pp[pp$Status !="can'tFind",] #only look at plants
+pp96 <- pp[pp$expNm==1996 & pp$siteOfOriginPedigree != "unknown",]
+pp97 <- pp[pp$expNm==1997 & pp$siteOfOriginPedigree != "unknown",]
+pp98 <- pp[pp$expNm==1998 & pp$siteOfOriginPedigree != "unknown",]
+pp99 <- pp[pp$expNm==1999 & pp$siteOfOriginPedigree != "unknown",]
+
+#fix site levels and order by size
+pp96$siteOfOriginPedigree <- factor(pp96$siteOfOriginPedigree,levels=unique(pp96$siteOfOriginPedigree))
+pp96$siteOfOriginPedigree <- factor(pp96$siteOfOriginPedigree,levels=dimnames(sort(table(pp96$siteOfOriginPedigree)))[[1]]
+)
+pp97$siteOfOriginPedigree <- factor(pp97$siteOfOriginPedigree,levels=unique(pp97$siteOfOriginPedigree))
+pp97$siteOfOriginPedigree <- factor(pp97$siteOfOriginPedigree,levels=dimnames(sort(table(pp97$siteOfOriginPedigree)))[[1]])
+
+pp99$siteOfOriginPedigree <- factor(pp99$siteOfOriginPedigree,levels=unique(pp99$siteOfOriginPedigree))
+pp99$siteOfOriginPedigree <- factor(pp99$siteOfOriginPedigree,levels=dimnames(sort(table(pp99$siteOfOriginPedigree)))[[1]])
+
+lookAtAphids <- function(x,y){
+   zz <- tapply(x[x$measureYr==y,"aphids2"],list(x[x$measureYr==y,"aphids2"],x[x$measureYr==y,"siteOfOriginPedigree"]),length)
+   zz[is.na(zz)] <- 0
+   zzt <- zz
+   for(i in 1:dim(zz)[1]){
+     zzt[i,] <-  zz[i,]/apply(zz,2,sum)
+   }
+#par(xpd=T, mar=par()$mar+c(1,0,0,6)))
+  cols <- gray(c(seq(0,1,by=1/3)))  
+ bp <- barplot(zzt,ylim=c(0,1),col=cols)
+   text(bp,0.05,table(x[x$measureYr==y,"siteOfOriginPedigree"]),col="red")
+   legend("topright",legend=levels(x$aphids2),fill=cols,bty="n")
+   legend("topleft",legend=c(paste(unique(x$expNm),"exp",sep=""),y)     ,bty="n")
+#par(mar=c(5,4,4,2) + 0.1)
+}
+
+end.rcode-->
+
+<b>1996 Garden, 2004-2012:</b>
+<!--begin.rcode fig.width=8,fig.height=6
+lookAtAphids(pp96,2004)
+lookAtAphids(pp96,2005)
+lookAtAphids(pp96,2006)
+lookAtAphids(pp96,2007)
+lookAtAphids(pp96,2008)
+lookAtAphids(pp96,2009)
+lookAtAphids(pp96,2010)
+lookAtAphids(pp96,2011)
+lookAtAphids(pp96,2012)
+
+end.rcode-->
+
+<b>1997 Garden, 2004-2012:</b>
+<!--begin.rcode fig.width=10,fig.height=6
+lookAtAphids(pp97,2004)
+lookAtAphids(pp97,2005)
+lookAtAphids(pp97,2006)
+lookAtAphids(pp97,2007)
+lookAtAphids(pp97,2008)
+lookAtAphids(pp97,2009)
+lookAtAphids(pp97,2010)
+lookAtAphids(pp97,2011)
+lookAtAphids(pp97,2012)
+end.rcode-->
+
+<b>1999 Garden, 2004-2012:</b>
+<!--begin.rcode fig.width=16,fig.height=8
+lookAtAphids(pp99,2004)
+lookAtAphids(pp99,2005)
+lookAtAphids(pp99,2006)
+lookAtAphids(pp99,2007)
+lookAtAphids(pp99,2008)
+lookAtAphids(pp99,2009)
+lookAtAphids(pp99,2010)
+lookAtAphids(pp99,2011)
+lookAtAphids(pp99,2012)
+end.rcode-->
+
+
 
 
 
