@@ -1,0 +1,401 @@
+<html>
+
+<head>
+<title>The effect of aphid infestation on changes in plant traits from 2011 to 2012</title>
+</head>
+
+<body>
+
+<p>This script examines the effect of aphid addition/exclusion and naturally-occurring aphid infestation on changes in plant traits from 2011 to 2012. It uses data from my aphid addition/exclusion experiment and from my aphid survey in CG1.</p>
+
+
+<p>Effectiveness of aphid addition/exclusion:</p>
+
+<!--begin.rcode fig.width=9, fig.height=6
+load("combinedDataforAphidExperimentAnalysis.RData")
+load("objectsForAssessingPlantChangesInCG1Survey.RData")
+dd <- data.frame(treatment=rep(pd12$treatment,2))
+dd$year <- c(rep(2011,100),rep(2012,100))
+dd$aphidMaxCat <- c(as.character(pd12$aphidMax11Cat),as.character(pd12$aphidMax12Cat))
+dd$aphidMaxCat <- factor(dd$aphidMaxCat,levels=c(">80","11-80","1-10","0"))
+dd$Status <- c(rep("basal",100),pd12$Status12)
+dd$row <- rep(pd12$row,2)
+dd$pos <- rep(pd12$pos,2)
+dd$treatmentY <- as.character(dd$treatment)
+dd[dd$year==2011,"treatmentY"] <- paste(dd[dd$year==2011,"treatmentY"],"11",sep="")
+dd[dd$year==2012,"treatmentY"] <- paste(dd[dd$year==2012,"treatmentY"],"12",sep="")
+dd$treatmentY <- factor(dd$treatmentY,levels=c("addition11","exclusion11","addition12","exclusion12"))
+dds <- dd[dd$Status !="can'tFind",] #take out dead plants
+# setwd("C:\\Users\\Katherine\\Dropbox\\plots")
+# png(filename="treatmentEffectiveness20112012.png",width=800,height=600)
+cols <- rep(gray(seq(0,1,by=1/3)),16)
+both <-tapply(dds$treatmentY,list(dds$aphidMaxCat,dds$treatmentY),length)
+both[is.na(both)]<- 0
+par(xpd=T, mar=par()$mar+c(1,0,0,6))
+bp <- barplot(both/c(rep(50,8),rep(48,4),rep(49,4)),col=cols,axes=FALSE,axisnames=FALSE,ylab="prop. of plants",cex.lab=2)
+axis(2,at=c(seq(0.0,1.0,by=0.2)),
+     labels=seq(0,1,by=0.2),las=1,cex.axis=1.5)
+axis(1,at=c(0.7,1.9,3.1,4.3),labels=c("add","exclude","add","exclude"),cex.axis=2,tick=FALSE,lty=0)
+legend(5,0.9,c(">80 aphids","11-80 aphids","1-10 aphids","no aphids"),
+       fill=gray(seq(0,1,by=1/3)),x.intersp=0.6,y.intersp=2,box.col=NA,cex=1.2)
+segments(0.18,-0.12,2.3,-0.12,lwd=2)
+segments(2.7,-0.12,4.8,-0.12,lwd=2)
+text(1.29,-0.15,labels="2011",cex=2)
+text(3.7,-0.15,labels="2012",cex=2)
+par(mar=c(5,4,4,2) + 0.1)
+# dev.off()
+end.rcode-->
+
+<p>Contingency tables: compare effect of treatment, aphid abundance, plant size, and previous year's growth on changes in basal leaf count, rosett count, and status
+</p>
+
+<!--begin.rcode
+#Contingency tables: compare effect of treatment, aphid abundance, plant size, and previous year's growth
+# on changes in basal leaf count, rosett count, and status
+
+predi <- c("treatment","aphidMax11Cat","aphidsPresent", "lfClass11","lfctDir10to11","rosDir10to11","Status10")
+#respo <- c("lfctDir11to12","rosDir11to12","Status12")
+
+tableTest <-  function(x,y){
+  (zz <- table(pd12[,x],pd12[,y]))
+  print(zz)
+  print(round(zz/apply(zz,1,sum),digits=2))
+  if(length(zz[zz<=5])>=1)
+    fisher.test(zz)
+  else
+    chisq.test(zz)
+}
+#
+#treatment x basal leaf count (flowering= +1, dying= -1)
+tableTest(predi[1],"lfctDir11to12")
+#treatment x rosette count (dying= -1)
+tableTest(predi[1],"rosDir11to12")
+#treatment x status
+tableTest(predi[1],"Status12")
+
+#max aphid abundance x basal leaf count (flowering= +1, dying= -1)
+tableTest(predi[2],"lfctDir11to12")
+#max aphid abundance x rosette count (dying= -1)
+tableTest(predi[2],"rosDir11to12")
+#max aphid abundance x status
+tableTest(predi[2],"Status12")
+
+#aphid presence x basal leaf count (flowering= +1, dying= -1)
+tableTest(predi[3],"lfctDir11to12")
+#aphid presence x rosette count (dying= -1)
+tableTest(predi[3],"rosDir11to12")
+#aphid presence x status
+tableTest(predi[3],"Status12")
+
+#plant size (lf count) x basal leaf count (flowering= +1, dying= -1)
+tableTest(predi[4],"lfctDir11to12")
+#plant size (lf count) x rosette count (dying= -1)
+tableTest(predi[4],"rosDir11to12")
+#plant size (lf count) x status
+tableTest(predi[4],"Status12")
+
+#change in lf count 2010-2011 x basal leaf count (flowering= +1, dying= -1)
+tableTest(predi[5],"lfctDir11to12")
+#change in rosette count 2010-2011 x rosette count (dying= -1)
+tableTest(predi[6],"rosDir11to12")
+#Status 2010 x status
+tableTest(predi[7],"Status12")
+
+end.rcode-->
+
+
+<p>Treatment had no significant effect on the direction of change in leaf count, rosette count, or status. The values for plants that had aphids are different than those for plants with no aphids observed. There is a slight effect of the presence/absence of aphids on change in leaf count. Plants with aphids are more likely to increas however, there may be an interaction with plant size
+</p>
+<P>plant size class did not have a significant association with changes in leaf count and rosette count.
+ There was a slight association with rosette count, with large plants more likely to change.
+Large plants were also more likely to flower in 2012.</p>
+
+
+<p>Were large plants more likely to have lots of aphids?</p>
+<!--begin.rcode
+tableTest("lfClass11","aphidMax11Cat")
+
+end.rcode-->
+<p> No, they were actually less likely to have a lot of aphids, but the difference was not significant. </p>
+<p>were large plants more likely to have aphids at all?</p>
+<!--begin.rcode
+tableTest("lfClass11","aphidsPresent")
+end.rcode-->
+<p>no. They were slightly less likely to have aphids than small plants, but the difference was not significant.</p>
+
+<p>The majority of plants kept the same rosette count in all three years. Plants that decreased their rosette count
+#in 2011 were more likley to increase rosette count in 2012. Only 7 plants flowered in 2010.
+#These 7 were equally likely to flower or remain basal. 
+# equally likely to be flowering or basal in 2012. 
+#The majority of plants increased their leaf count in 2012, regardless of their previous state (56%,n=100) 
+# Most of the plants that declined in 2012 increased the previous year (66%,n=29). There was a slight but non-significant association
+# between the direction of growth in 2012 and 2011 (Fisher test, p=0.2461).
+
+#The majority of plants increased in leaf length in 2012 (71%,n=100). There was a slight, but non-significant association between the direction of change
+# in 2011 and 2012; 74% of plants that increased in 2012 had decreased in the previous year (fisher test, p= 0.1004).
+</p>
+
+<p>Change in the length of the longest leaf: linear model</p>
+<p>Visualize:</p>
+
+<!--begin.rcode fig.width=9, fig.height=9
+#only plants that were basal in 2012 (take out flowering and dead plants)
+pd12b <- pd12[pd12$updatedStatusCd ==2,]
+
+par(mfcol=c(2,3))
+plot(lflnDiff11to12~treatment,data=pd12b)
+plot(lflnDiff11to12~aphidMax11Cat,data=pd12b)
+plot(lflnDiff11to12~aphidsPresent,data=pd12b)
+plot(lflnDiff11to12~basalLfCt11,data=pd12b)
+plot(lflnDiff11to12~lflnDiff10to11,data=pd12b)
+par(mfcol=c(1,1))
+
+end.rcode-->
+
+<!--begin.rcode fig.width=9, fig.height=6
+par(mfcol=c(1,2))
+hist(pd12b$lflnDiff10to11,breaks=c(-18:32))
+hist(pd12b$lflnDiff11to12,breaks=c(-18:32))
+par(mfcol=c(1,1))
+end.rcode-->
+
+<p>Based on these graphs, it does not look like there major difference in the change in the length of the longest leaf based on treatment, aphid abundance, aphid presence, or change in the previous year.</p>
+
+<p>Linear model: change in leaf length as a function of basal leaf count and treatment </p>
+
+<!--begin.rcode
+
+#analysis with treatment
+m3 <- lm(lflnDiff11to12 ~ basalLfCt11*treatment, data=pd12b) 
+m2 <- lm(lflnDiff11to12 ~ basalLfCt11 + treatment, data=pd12b) 
+anova(m2,m3)
+m1.1 <- lm(lflnDiff11to12 ~ treatment, data=pd12b) 
+m1.2 <- lm(lflnDiff11to12 ~ basalLfCt11, data=pd12b) 
+anova(m1.1,m2)
+anova(m1.2,m2)
+m1 <- m1.2
+null <- lm(lflnDiff11to12 ~ 1, data = pd12b)
+anova(null,m1,m2,m3)
+coef(m2)
+summary(m2)
+
+end.rcode-->
+
+<p>Conclusion: Treatment and plant size did not influence the change in the length of the longest leaf.
+</p>
+
+<p>Replace treatment with max. aphid abundance:</p>
+
+<!--begin.rcode
+
+#analysis with aphidMax11Cat
+m3 <- lm(lflnDiff11to12 ~ basalLfCt11*aphidMax11Cat, data=pd12b) 
+m2 <- lm(lflnDiff11to12 ~ basalLfCt11 + aphidMax11Cat, data=pd12b) 
+anova(m2,m3)
+m1.1 <- lm(lflnDiff11to12 ~ aphidMax11Cat, data=pd12b) 
+m1.2 <- lm(lflnDiff11to12 ~ basalLfCt11, data=pd12b) 
+anova(m1.1,m2)
+anova(m1.2,m2)
+m1 <- m1.2
+null <- lm(lflnDiff11to12 ~ 1, data = pd12b)
+anova(null,m1,m2,m3)
+coef(m2)
+summary(m2)
+
+end.rcode-->
+
+<p> Max. aphid abundance did not significantly influence change in the length of the longest leaf.
+</p>
+<p>What about presence of aphids?</p>
+<!--begin.rcode
+
+#analysis with aphidMax11Cat
+m3 <- lm(lflnDiff11to12 ~ basalLfCt11*aphidsPresent, data=pd12b) 
+m2 <- lm(lflnDiff11to12 ~ basalLfCt11 + aphidsPresent, data=pd12b) 
+anova(m2,m3)
+m1.1 <- lm(lflnDiff11to12 ~ aphidsPresent, data=pd12b) 
+m1.2 <- lm(lflnDiff11to12 ~ basalLfCt11, data=pd12b) 
+anova(m1.1,m2)
+anova(m1.2,m2)
+m1 <- m1.2
+null <- lm(lflnDiff11to12 ~ 1, data = pd12b)
+anova(null,m1,m2,m3)
+coef(m2)
+summary(m2)
+
+end.rcode-->
+
+<p>Nope.</p>
+
+<p>Next step: Look at the relationship between aphid abundance and changes in plant traits in observational data from CG1 (aphid survey, 2011-2012)</p>
+
+<p>Were flowering plants more likely to have high levels of aphid infestation?</p>
+<!--begin.rcode
+#2011
+tableTest <-  function(x,y){
+  (zz <- table(x,y))
+  print(zz)
+  print(round(zz/apply(zz,1,sum),digits=2))
+  if(length(zz[zz<=5])>=1)
+    fisher.test(zz)
+  else
+    chisq.test(zz)
+}
+
+#2011
+tableTest(al$Status11,al$aphidMax11.1)
+#basal plants only
+tableTest(ab$lfClass11,ab$aphidMax11.1)
+#2012
+tableTest(al[al$Status12!="can'tFind","Status12"], al[al$Status12!="can'tFind","aphidMax12.1"])
+tableTest(ab$lfClass12,ab$aphidMax12.1)
+
+end.rcode-->
+
+
+<p>Flowering plants and large basal plants were more likely to have a high level of aphid infestation in 2011. In 2012, flowering plants were equally likely to have 0 aphids, >80 aphids, and 11-80 aphids. This is probably because there were fewer observations--we missed the highest level of aphid abundance.To addres this issue, I replaced aphid abundance with presence/absenc eof aphids(including observations of dead aphids in 2012, which are not included in aphid abundance).
+</p>
+
+<!--begin.rcode
+#2011
+tableTest(al$Status11,al$aphidsPresent11)
+tableTest(ab$lfClass11,ab$aphidsPresent11)
+
+#2012
+tableTest(al[al$Status12!="can'tFind","Status12"], al[al$Status12!="can'tFind","aphidsPresent12"])
+tableTest(ab$lfClass12,ab$aphidsPresent12)
+
+end.rcode-->
+<p>Flowering plants and large basal plants were more likely to have aphids than small bsal plants in 2011 and 2012</p>
+
+<p>Look at the relationship between aphid abundance in 2011 and the direction of change of plant traits from 2011 to 2012. I separated basal and flowering plants.</p>
+<!--begin.rcode
+#max aphid abundance, basal plants
+####rosette count
+tableTest(ab$aphidMax11.1,ab$rosDir11to12)
+####basal leaf count
+tableTest(ab$aphidMax11.1,ab$lfCtDir11to12)
+####status 2012
+tableTest(ab$aphidMax11.1,ab$Status12)
+end.rcode-->
+
+<p>There was no significant relationship between max. aphid abundance and changes in leaf count or rosette count. However, plants with 11-80 aphids were more likely to flower than plants in any other category of aphid abundance.</p>
+<!--begin.rcode
+#aphid presence (overall), basal plants
+####rosette count
+tableTest(ab$aphidsPresent11,ab$rosDir11to12)
+####basal leaf count
+tableTest(ab$aphidsPresent11,ab$lfCtDir11to12)
+####status 2012
+tableTest(ab$aphidsPresent11,ab$Status12)
+end.rcode-->
+
+<!--begin.rcode
+#aphid presence (on July 1st), basal plants
+####rosette count
+tableTest(ab$aphidsPresentInitial11,ab$rosDir11to12)
+####basal leaf count
+tableTest(ab$aphidsPresentInitial11,ab$lfCtDir11to12)
+####status 2012
+tableTest(ab$aphidsPresentInitial11,ab$Status12)
+end.rcode-->
+
+<p>Plants with aphids during the season were more likely to flower than plants that did not have aphids. However, there was no relationship between trait or status changes and the initial presence of aphids. </p>
+
+<!--begin.rcode
+#plant size (category of basal leaf count), basal plants
+####rosette count
+tableTest(ab$lfClass11,ab$rosDir11to12)
+####basal leaf count
+tableTest(ab$lfClass11,ab$lfCtDir11to12)
+####status 2012
+tableTest(ab$lfClass11,ab$Status12)
+end.rcode-->
+
+<p>Relationship between aphid abundance and plant size in the change in length of the longest basal leaf: </p>
+<!--begin.rcode
+a3 <- lm(lfLnDiff11to12 ~ aphidMax11.1*basalLfCt11, data=ab)
+a2 <- update(a3,~.-aphidMax11.1:basalLfCt11)
+anova(a2,a3)
+a1.1 <- update(a2,~.-aphidMax11.1)
+a1.2 <- update(a2,~.-basalLfCt11)
+anova(a1.1,a2)
+anova(a1.2,a2)
+a1 <- a1.2
+null <- lm(lfLnDiff11to12 ~ 1, data=ab)
+anova(null,a1,a2,a3)
+
+end.rcode-->
+<p>Aphid Presence (overall)</p>
+<!--begin.rcode
+a3 <- lm(lfLnDiff11to12 ~ aphidsPresent11*basalLfCt11, data=ab)
+a2 <- update(a3,~.-aphidsPresent11:basalLfCt11)
+anova(a2,a3)
+a1.1 <- update(a2,~.-aphidsPresent11)
+a1.2 <- update(a2,~.-basalLfCt11)
+anova(a1.1,a2)
+anova(a1.2,a2)
+a1 <- a1.2
+null <- lm(lfLnDiff11to12 ~ 1, data=ab)
+anova(null,a1,a2,a3)
+end.rcode-->
+
+<p>Big plants were more likely to increase in basal leaf count and rosette count and were more likely to flower. Small plants were more likely to die.</p>
+
+<p>Flowering Plants:</p>
+
+<!--begin.rcode
+#max aphid abundance, flowering plants
+####rosette count
+tableTest(af$aphidMax11.1,af$rosDir11to12)
+####head count (if it goes basal or does, hdctDir11to12= -1)
+tableTest(af$aphidMax11.1,af$hdctDir11to12)
+####max hd. height (if it goes basal or does, value is -1)
+tableTest(af$aphidMax11.1,af$maxHdHeightDir11to12)
+####status 2012
+tableTest(af$aphidMax11.1,af$Status12)
+end.rcode-->
+
+<!--begin.rcode
+#aphid presence (overall), flowering plants
+####rosette count
+tableTest(af$aphidsPresent11,af$rosDir11to12)
+####head count (if it goes basal or does, hdctDir11to12= -1)
+tableTest(af$aphidsPresent11,af$hdctDir11to12)
+####max hd. height (if it goes basal or does, value is -1)
+tableTest(af$aphidsPresent11,af$maxHdHeightDir11to12)
+####status 2012
+tableTest(af$aphidsPresent11,af$Status12)
+end.rcode-->
+
+<!--begin.rcode
+#aphid presence (initial), flowering plants
+####rosette count
+tableTest(af$aphidsPresentInitial11,af$rosDir11to12)
+####head count (if it goes basal or does, hdctDir11to12= -1)
+tableTest(af$aphidsPresentInitial11,af$hdctDir11to12)
+####max hd. height (if it goes basal or does, value is -1)
+tableTest(af$aphidsPresentInitial11,af$maxHdHeightDir11to12)
+####status 2012
+tableTest(af$aphidsPresentInitial11,af$Status12)
+end.rcode-->
+
+<!--begin.rcode
+#size (category of max. hd. height), flowering plants
+####rosette count
+tableTest(af$htClass11,af$rosDir11to12)
+####head count (if it goes basal or does, value is -1)
+tableTest(af$htClass11,af$hdctDir11to12)
+####max hd. height(if it goes basal or does, value is -1)
+tableTest(af$htClass11,af$maxHdHeightDir11to12)
+####status 2012
+tableTest(af$htClass11,af$Status12)
+end.rcode-->
+
+<p>There was no relationship between aphid abundance or presence (initial or overall) and trait changes in flowering plants. However, since the majority of flowering plants went basal in 2012, looking at traits unique to flowering (i.e. head count and stem height) doesn't tell me much. I will only present results for basal plants.</p>
+
+
+
+<p></p>
+</body>
+</html>
