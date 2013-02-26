@@ -149,8 +149,22 @@ lookAtAphids(pp99,2011)
 lookAtAphids(pp99,2012)
 end.rcode-->
 
+<b>Next step: analyze aphid abundance as a function of size, location, measure date, and population.</b>
 
+Start with the 1997 garden in 2004
 
+<!--begin.rcode
+#make categories for plant size and status:
+ss <- pp96[pp96$measureYr==2004,]
+str(ss)
+table(ss$measureDt2)
+ss$date <- factor(ss$measureDt2)
+#these dates are within a week of each other--leave them all in for now
+
+zz <- tapply(ss$aphids2,list(ss$aphids2,ss$date),length)
+zz[is.na(zz)] <- 0
+barplot(zz)
+end.rcode-->
 
 
 </body>
