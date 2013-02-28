@@ -9,7 +9,9 @@
 <p>This table shows the number of plants assessed on each date in the 1996-1998 experiments</p>
 
 <!--begin.rcode
-load("C:\\Users\\Katherine\\Dropbox\\KMullerdatasets\\cg12004-2012.RData")
+#load("C:\\Users\\Katherine\\Dropbox\\KMullerdatasets\\cg12004-2012.RData") #for use on my computer, when I'm disconnected from the internet
+load(url("http://dl.dropbox.com/s/e8xg6k2cqvalnhj/cg12004-2012.RData"))
+
 lookAtYear <- function(x){
 tapply(pp[pp$measureYr==x,"measureDt2"],list(pp[pp$measureYr==x,"measureDt2"],pp[pp$measureYr==x,"expNm"]),length)
 }
@@ -21,7 +23,6 @@ end.rcode-->
 <p>There is a possibility that the measure dates reflect can't finds that were added later.</p>
 
 <!--begin.rcode
-load("cg12004-2012.RData")
 lookAtYear <- function(x,y){
 tapply(pp[pp$measureYr==x & pp$expNm==y,"measureDt2"],list(pp[pp$measureYr==x & pp$expNm==y,"measureDt2"],pp[pp$measureYr==x & pp$expNm==y,"Status"]),length)
 }
@@ -69,7 +70,8 @@ lookAtYear(2010,1999)
 lookAtYear(2011,1999)
 lookAtYear(2012,1999)
 end.rcode-->
-
+It doesn't look like that's an issue.
+<p></p>
 <p>Visualize aphid abundance by site and year</p>
 
 <!--begin.rcode
@@ -147,14 +149,17 @@ lookAtAphids(pp99,2011)
 lookAtAphids(pp99,2012)
 end.rcode-->
 
-<b>Next step: analyze aphid abundance as a function of size, location, measure date, and population.</b>
+<b>Next step: analyze aphid abundance as a function of size, location, measure date, and population. Strategy for model selection: </b>
+<p>1. Remove factors one at a time and test against larger model with an ANOVA</p>
+<p>2. Remove the factor that produces the largest p-value when removed from the model. </p>
+<p>3. Repeat until all factors have been removed. </p>
 
-Start with the 1996 garden in 2004
+<p>Start with the 1996 garden in 2004</p>
 
 <!--begin.rcode
-#look at differences my measuredate
+#look at differences by measuredate
 ss <- pp96[pp96$measureYr==2004,]
-str(ss)
+#str(ss)
 table(ss$measureDt2)
 ss$date <- factor(ss$measureDt2)
 #these dates are within a week of each other--leave them all in for now
@@ -217,10 +222,12 @@ a1 <-polr(aphids2 ~ lfClass,data=ss)
 null <-polr(aphids2 ~ 1,data=ss) 
 anova(null,a1,a2,a3,a4,a5,a6)
 
-#examine model:
+#examine best model:
 best <- polr(aphids2 ~ lfClass+ date,data=ss) 
 (pb <- profile(best))
+#I don't know what the profile tells you.
 plot(pb)
+#Here's my guess: I think the pairs plot tells you whether factor levels have similar variance--If the red and green lines line up, the levels have similar variance.
 pairs(pb)
 
 ##use goodness of fit test (if p val >0.05, model is a good fit)
@@ -233,22 +240,22 @@ obs <- tapply(ss$lfClass,list(ss$lfClass,ss$aphids2),length)
 (obs <- obs/apply(obs,1,sum))
 par(mfcol=c(1,2))
 barplot(pred,beside=T)
-legend("topleft",legend="pred.")
+legend("topleft",legend="pred.",bty="n")
 barplot(obs,beside=T)
-legend("topleft",legend="obs")
+legend("topleft",legend="obs",bty="n")
 par(mfcol=c(1,1))
 
 #it looks pretty good. 
 
 end.rcode-->
 
-Next: compare results of polr with a glm binomial of aphid presence/absence:
+<b>Next: compare results of polr with a glm binomial of aphid presence/absence (1996 garden, 2004):</b>
 <!--begin.rcode
 ss$aphidsPresent <- 0
 ss[ss$aphids2 !="0","aphidsPresent"] <- 1
 
 a6 <- glm(aphidsPresent ~ siteOfOriginPedigree:lfClass + siteOfOriginPedigree + lfClass + row + pos + date,family=binomial,data=ss)
-summary(a6)
+#summary(a6)
 a5 <- glm(aphidsPresent ~  siteOfOriginPedigree + lfClass + row + pos + date,family=binomial,data=ss)
 anova(a5,a6,test="Chi") 
 a5.1 <- glm(aphidsPresent ~                       + lfClass + row + pos + date,family=binomial,data=ss)
@@ -298,7 +305,6 @@ par(mfcol=c(1,1))
 #doesn't look great
 end.rcode-->
 
-Site of origin did not make a difference in aphid abundance in the 1996 garden in 2004. The test of aphid presence/absence did not detect differences based on date and detected a weaker effect of plant size.
 
 How about categories of low vs. high abundance?
 <!--begin.rcode
@@ -307,7 +313,7 @@ ss[ss$aphids2 %in% c("0","1-10"),"aphidLH"] <- 0
 ss[ss$aphids2 %in% c("11-80",">80"),"aphidLH"] <- 1
 
 a6 <- glm(aphidLH ~ siteOfOriginPedigree:lfClass + siteOfOriginPedigree + lfClass + row + pos + date,family=quasibinomial,data=ss)
-summary(a6)
+#summary(a6)
 #overdispersion--use quasibinomial
 a5 <- glm(aphidLH ~  siteOfOriginPedigree + lfClass + row + pos + date,family=quasibinomial,data=ss)
 anova(a5,a6,test="F") 
@@ -360,10 +366,18 @@ par(mfcol=c(1,1))
 
 end.rcode-->
 
-The qualitative result is more similar to the POLR when I use high and low aphid abundance (0-10 and >10) instead of presence/absence. This leads me to believe that this respose is a better simplified represenation of aphid abundance than presence/absence.
-
-
-Now try the 1997 garden in 2004
+<p><b>Summary for 1996 garden, 2004, 3 types of models:</b></p>
+<p><b>1. POLR</b></p>
+The best model included size/status (p=0.000028) and measure date (p=0.025). Maternal population did not contribute significantly to model variance (p=0.78). Out of the three models, the POLR seemed to be the most informative and the best fit for the data.
+<p></p>
+<p>2. GLM binomial of aphid presence/absence:</p>
+<p> The test of aphid presence/absence did not detect differences based on date (p=0.51585) and detected a weaker effect of plant size (p=0.076). Similar to the POLR, maternal population did not matter (p=0.90757). Based on the model checking, this model may not be a good fit for the data.</p>
+<p></p>
+<p>3. GLM quasibinomial of low (1-10) vs high (>10) aphid abundance:</p>
+ Plant size/status was the most important factor (p=0.00113), followed by date, which was not significant (p=0.111).Maternal population was not significant (p=0.459). The qualitative result is more similar to the POLR when I use high and low aphid abundance (0-10 and >10) instead of presence/absence.  
+</p>
+<p><b>Now try the 1997 garden in 2004</b>
+</p>
 
 <!--begin.rcode
 #look at differences my measuredate
@@ -384,7 +398,7 @@ ss[ss$basalLfCt >=4,"lfClass"] <- ">3"
 ss[ss$basalLfCt <=3,"lfClass"] <- "1-3"
 ss[ss$Status=="flowering","lfClass"] <- "flowering"
 ss$lfClass <- factor(ss$lfClass, levels=c("1-3",">3","flowering"))
-uu <- table(ss$lfClass,ss$siteOfOriginPedigree)#look at distribution of plant sizes/status among pops
+(uu <- table(ss$lfClass,ss$siteOfOriginPedigree))#look at distribution of plant sizes/status among pops
 apply(uu,2,sum) #exclude sites with <10 plants
 
 ss <- ss[!ss$siteOfOriginPedigree %in% c("BTG","TH"),]
@@ -443,17 +457,21 @@ anova(null,a1,a2,a3,a4,a5,a6)
 
 ##evaluate model:
 best <- polr(aphids2 ~ lfClass*siteOfOriginPedigree + row + pos + date, data=ss)
-(pb <- profile(best))
-plot(pb)
- pairs(pb)
+#There are too many factor levels in the predictors to visualize the model in this way:
+#(pb <- profile(best))
+#plot(pb)
+# pairs(pb)
 
 ##use goodness of fit test (if p val >0.05, model is a good fit)
 pchisq(deviance(best),df.residual(best))
 
-#compare predicted abundances to actual abundances (by size class on modal date in median location
-newd <- data.frame(lfClass=levels(ss$lfClass),date="2004-08-08",pos=median(ss$pos),row=median(ss$row))
+#compare predicted abundances to actual abundances for a typical individual (modal date and size class in median location)
+table(ss$lfClass)
+table(ss$date)
+newd <- data.frame(lfClass=">3",date="2004-08-08",pos=median(ss$pos),row=median(ss$row),siteOfOriginPedigree=levels(ss$siteOfOriginPedigree))
 pred <- predict(best,type="prob",newdata=newd)
-obs <- tapply(ss$lfClass,list(ss$lfClass,ss$aphids2),length)
+obs <- tapply(ss$siteOfOriginPedigree,list(ss$siteOfOriginPedigree,ss$aphids2),length)
+obs[is.na(obs)]<-0
 (obs <- obs/apply(obs,1,sum))
 par(mfcol=c(1,2))
 barplot(pred,beside=T,ylim=c(0,1))
@@ -472,7 +490,7 @@ ss$aphidsPresent <- 0
 ss[ss$aphids2 !="0","aphidsPresent"] <- 1
 
 a6 <- glm(aphidsPresent ~ siteOfOriginPedigree:lfClass + siteOfOriginPedigree + lfClass + row + pos + date,family=quasibinomial,data=ss)
-summary(a6)
+#summary(a6)
 #overdispersion, use quasibinomial
 a5 <- glm(aphidsPresent ~  siteOfOriginPedigree + lfClass + row + pos + date,family=quasibinomial,data=ss)
 anova(a5,a6,test="F") 
@@ -522,7 +540,6 @@ par(mfcol=c(2,2))
 plot(best)
 par(mfcol=c(1,1))
 
-
 end.rcode-->
 
 
@@ -534,7 +551,7 @@ ss[ss$aphids2 %in% c("0","1-10"),"aphidLH"] <- 0
 ss[ss$aphids2 %in% c("11-80",">80"),"aphidLH"] <- 1
 
 a6 <- glm(aphidLH ~ siteOfOriginPedigree:lfClass + siteOfOriginPedigree + lfClass + row + pos + date,family=quasibinomial,data=ss)
-summary(a6)
+#summary(a6)
 #overdispersion--use quasibinomial
 a5 <- glm(aphidLH ~  siteOfOriginPedigree + lfClass + row + pos + date,family=quasibinomial,data=ss)
 anova(a5,a6,test="F") 
@@ -599,6 +616,9 @@ newd$se <- pred$se.fit
 ss$siteOfOriginPedigree <- factor(ss$siteOfOriginPedigree,levels=sites)
 obs <- tapply(ss$aphidLH,ss$siteOfOriginPedigree,mean)
 #compare predicted to observed values:
+end.rcode-->
+
+<!--begin.rcode, fig.height=5,fig.width=15
 par(mfcol=c(1,2))
 bp <- barplot(newd$fit,ylim=c(0,1))
 segments(bp,newd$fit + newd$se,bp,newd$fit-newd$se)
@@ -607,8 +627,17 @@ bp <- barplot(obs,ylim=c(0,1))
 text(bp,0.03,labels=sites)
 par(mfcol=c(1,1))
 end.rcode-->
+<b>Summary for 1997 garden, 2004</b>
 
+<p><b>1. POLR of 4 categories of aphid abundance </b>(0,1-10, 11-80,>80)</p>
+<p>The best model included size/status (p<0.0001),measure date (p<0.0001), position (p=0.009), and the interaction between maternal population and size/status (p=0.0025). The main effect of maternal population was not significant (p=0.126). One issue with this model is that I get an error message (fitted probabilities of 0 or 1 occurred) when I include the interaction between site and size/status. However, the model passed the goodness of fit test.  
+</p>
 
+<p><b>2. GLM quasibinomial of aphid presence/absence</b></p>
+<p>The best model had the same factors as the POLR: size/class (p<0.0001), date (p=0.00012), row(0.00012), position (p=0.0008), and the interaction between size/class and maternal population (p=0.008). Similar to the POLR, the main effect of maternal population was not significant (p=0.113). The qq plot looked okay--much better than the one for the presence/absence model in the 1996 garden. </p>
+
+<p>3. GLM quasibinomial of low (1-10) vs. high (>10) aphid abundance</p>:
+Similar to the first 2 models, the best model included size/status (p<0.0001), date (p<0.0001), and the interaction between size/status and maternal population (p=0.0114). However, unlike in the other models, row was not significant (p=0.203) and position was marginally significant (p=0.08). Also, the main effect of maternal population was significant at p=0.0138. The qq plot looked decent--better than the one for presence/absence. This is probably the most suitable model for the 1997 garden in 2004.
 
 </body>
 </html>
