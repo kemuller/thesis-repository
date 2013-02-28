@@ -1,0 +1,2956 @@
+<html>
+
+<head>
+<style type="text/css">.knitr.inline {
+  background-color: #f7f7f7;
+  border:solid 1px #B0B0B0;
+}
+.error {
+	font-weight: bold;
+	color: #FF0000;
+}, 
+.warning {
+	font-weight: bold;
+} 
+.message {
+	font-style: italic;
+} 
+.source, .output, .warning, .error, .message {
+	padding: 0em 1em;
+  border:solid 1px #F7F7F7;
+}
+.source {
+  background-color: #f7f7f7;
+}
+.rimage.left {
+  text-align: left;
+}
+.rimage.right {
+  text-align: right;
+}
+.rimage.center {
+  text-align: center;
+}
+
+.source {
+  color: #333333;
+}
+.background {
+  color: #F7F7F7;
+}
+
+.number {
+  color: #000000;
+}
+
+.functioncall {
+  color: #800054;
+  font-weight: bolder;
+}
+
+.string {
+  color: #9999FF;
+}
+
+.keyword {
+  font-weight: bolder;
+  color: black;
+}
+
+.argument {
+  color: #B04005;
+}
+
+.comment {
+  color: #2E9957;
+}
+
+.roxygencomment {
+  color: #707AB3;
+}
+
+.formalargs {
+  color: #B04005;
+}
+
+.eqformalargs {
+  color: #B04005;
+}
+
+.assignement {
+  font-weight: bolder;
+  color: #000000;
+}
+
+.package {
+  color: #96B525;
+}
+
+.slot {
+  font-style: italic;
+}
+
+.symbol {
+  color: #000000;
+}
+
+.prompt {
+  color: #333333;
+}
+</style>
+<title>Range of data collection dates, 2004-2012</title>
+</head>
+
+<body>
+
+<p>This table shows the number of plants assessed on each date in the 1996-1998 experiments</p>
+
+<div class="chunk" id="unnamed-chunk-1"><div class="rcode"><div class="source"><pre class="knitr r"><span class="functioncall">load</span>(<span class="string">"C:\\Users\\Katherine\\Dropbox\\KMullerdatasets\\cg12004-2012.RData"</span>)
+lookAtYear &lt;- <span class="functioncall"><span class="keyword">function</span></span>(x) {
+    <span class="functioncall">tapply</span>(pp[pp$measureYr == x, <span class="string">"measureDt2"</span>], <span class="functioncall">list</span>(pp[pp$measureYr == x, <span class="string">"measureDt2"</span>], 
+        pp[pp$measureYr == x, <span class="string">"expNm"</span>]), length)
+}
+
+yrs &lt;- <span class="functioncall">c</span>(2004:2012)
+<span class="functioncall">tapply</span>(yrs, yrs, lookAtYear)
+</pre></div><div class="output"><pre class="knitr r">## $`2004`
+##            1996 1997 1998 1999
+## 2004-08-03   NA   NA   NA  217
+## 2004-08-04   NA   NA   NA  584
+## 2004-08-05   NA   NA   NA   76
+## 2004-08-06   42   NA   45   NA
+## 2004-08-07  195  183  119    6
+## 2004-08-08  236  209  117   NA
+## 2004-08-09  166  163   88   NA
+## 2004-08-10   NA   21   NA   NA
+## 2004-08-11   NA   NA   NA    3
+## 2004-08-12    6   15    5   NA
+## 2004-08-31    1   NA    1   NA
+## 
+## $`2005`
+##            1996 1997 1998 1999
+## 2005-07-28   NA   NA   NA  504
+## 2005-07-29   NA   NA   NA  360
+## 2005-07-30   NA   NA   NA   16
+## 2005-08-01   NA   NA   99   NA
+## 2005-08-02   NA   NA   NA    6
+## 2005-08-11  161  117   NA   NA
+## 2005-08-12  160  142    6   NA
+## 2005-08-14  125  163   NA   NA
+## 2005-08-15   12   18   NA   NA
+## 2005-08-17  151  116   NA   NA
+## 2005-08-19   37   30   NA   NA
+## 2005-08-29   NA    5    1   NA
+## 2006-10-04   NA   NA  269   NA
+## 
+## $`2006`
+##            1996 1997 1998 1999
+## 2006-07-13   70   NA    1   NA
+## 2006-07-14   41   47   NA   NA
+## 2006-07-16  100   78   NA   NA
+## 2006-07-17  198  200   NA   NA
+## 2006-07-18  144  100   NA   NA
+## 2006-07-19   81  103   NA   NA
+## 2006-07-20    2   33   93   NA
+## 2006-07-21   NA   NA   NA  868
+## 2006-07-22   NA   NA   NA    1
+## 2006-08-03    6   27    4   10
+## 2006-08-04    3   NA   NA    2
+## 2006-08-05    1    3    2    5
+## 
+## $`2007`
+##            1996 1997 1998 1999
+## 2007-07-19  111   74   75   NA
+## 2007-07-20  188  158  104   NA
+## 2007-07-22   25   24   15   NA
+## 2007-07-23  254  237  150   NA
+## 2007-07-24   13   14   30   52
+## 2007-07-25   55   72   NA  413
+## 2007-07-26   NA   NA   NA   34
+## 2007-07-27   NA    9   NA  349
+## 2007-07-31   NA   NA   NA   35
+## 2007-08-08   NA    3    1    3
+## 
+## $`2008`
+##            1996 1997 1998 1999
+## 2008-07-23   12    1   NA    5
+## 2008-07-29   NA   NA   NA   32
+## 2008-07-30   NA   NA   NA  529
+## 2008-08-01   NA   NA   NA  236
+## 2008-08-07   29   NA   40   NA
+## 2008-08-08   96   55   44   NA
+## 2008-08-10   23   31   NA   NA
+## 2008-08-12   47   52   13   NA
+## 2008-08-13  101   45   70   NA
+## 2008-08-14   84   76   45   10
+## 2008-08-15    6   40   NA   NA
+## 2008-08-16   23   43   14   NA
+## 2008-08-19  225  248  149   NA
+## 2008-08-22   NA   NA   NA   74
+## 
+## $`2009`
+##            1996 1997 1998 1999
+## 2009-07-24    1   NA   NA   NA
+## 2009-07-29   NA   NA   NA  327
+## 2009-07-30   NA   NA   NA  551
+## 2009-07-31  381  311  220   NA
+## 2009-08-03  257  272  150   NA
+## 2009-08-05    7    8    5    8
+## 
+## $`2010`
+##            1996 1997 1998 1999
+## 2010-07-14  307  188  177   NA
+## 2010-07-15  329  365  195  357
+## 2010-07-16    4   24   NA  519
+## 2010-07-18   NA   NA   NA    1
+## 2010-07-27    6   14    3    9
+## 
+## $`2011`
+##            1996 1997 1998 1999
+## 2011-07-22  286  244  179   NA
+## 2011-07-25  354  308  195   31
+## 2011-07-26    4   24   NA  853
+## 2011-08-02   NA   NA    1   NA
+## 2011-08-09   NA   13   NA   NA
+## 2011-08-12   NA    1   NA   NA
+## 2011-08-16    2    1   NA    2
+## 
+## $`2012`
+##            1996 1997 1998 1999
+## 2012-07-06  447  385  333   NA
+## 2012-07-10  194  200   41  336
+## 2012-07-11   NA   NA    1  540
+## 2012-07-23    2    1   NA   NA
+## 2012-07-27    1    3   NA   NA
+## 2012-07-30    1   NA   NA    6
+## 2012-07-31    1    1   NA    1
+## 2012-08-01   NA    1   NA    3
+</pre></div></div></div>
+
+
+<p>There is a possibility that the measure dates reflect can't finds that were added later.</p>
+
+<div class="chunk" id="unnamed-chunk-2"><div class="rcode"><div class="source"><pre class="knitr r"><span class="functioncall">load</span>(<span class="string">"cg12004-2012.RData"</span>)
+</pre></div><div class="warning"><pre class="knitr r">## Warning: cannot open compressed file 'cg12004-2012.RData', probable reason
+## 'No such file or directory'
+</pre></div><div class="error"><pre class="knitr r">## Error: cannot open the connection
+</pre></div><div class="source"><pre class="knitr r">lookAtYear &lt;- <span class="functioncall"><span class="keyword">function</span></span>(x, y) {
+    <span class="functioncall">tapply</span>(pp[pp$measureYr == x &amp; pp$expNm == y, <span class="string">"measureDt2"</span>], <span class="functioncall">list</span>(pp[pp$measureYr == 
+        x &amp; pp$expNm == y, <span class="string">"measureDt2"</span>], pp[pp$measureYr == x &amp; pp$expNm == 
+        y, <span class="string">"Status"</span>]), length)
+}
+
+<span class="functioncall">lookAtYear</span>(2004, 1996)
+</pre></div><div class="output"><pre class="knitr r">##            basal can'tFind flowering
+## 2004-08-06     9        19        14
+## 2004-08-07    57        67        71
+## 2004-08-08    68        80        88
+## 2004-08-09    47        56        63
+## 2004-08-12     4         2        NA
+## 2004-08-31    NA         1        NA
+</pre></div><div class="source"><pre class="knitr r"><span class="functioncall">lookAtYear</span>(2005, 1996)
+</pre></div><div class="output"><pre class="knitr r">##            basal can'tFind flowering
+## 2005-08-11    75        45        41
+## 2005-08-12    61        62        37
+## 2005-08-14    56        47        22
+## 2005-08-15    NA        12        NA
+## 2005-08-17    54        60        37
+## 2005-08-19    24         4         9
+</pre></div><div class="source"><pre class="knitr r"><span class="functioncall">lookAtYear</span>(2006, 1996)
+</pre></div><div class="output"><pre class="knitr r">##            basal can'tFind flowering
+## 2006-07-13    17        33        20
+## 2006-07-14    18        14         9
+## 2006-07-16    32        35        33
+## 2006-07-17    57        71        70
+## 2006-07-18    42        61        41
+## 2006-07-19    22        25        34
+## 2006-07-20    NA        NA         2
+## 2006-08-03    NA         6        NA
+## 2006-08-04     3        NA        NA
+## 2006-08-05     1        NA        NA
+</pre></div><div class="source"><pre class="knitr r"><span class="functioncall">lookAtYear</span>(2007, 1996)
+</pre></div><div class="output"><pre class="knitr r">##            basal can'tFind flowering
+## 2007-07-19    32        40        39
+## 2007-07-20    51        74        63
+## 2007-07-22     7        12         6
+## 2007-07-23    69       107        78
+## 2007-07-24     4         5         4
+## 2007-07-25     9        12        34
+</pre></div><div class="source"><pre class="knitr r"><span class="functioncall">lookAtYear</span>(2008, 1996)
+</pre></div><div class="output"><pre class="knitr r">##            basal can'tFind flowering
+## 2008-07-23     9         1         2
+## 2008-08-07     5        19         5
+## 2008-08-08    34        36        26
+## 2008-08-10     7         7         9
+## 2008-08-12    15        23         9
+## 2008-08-13    22        50        29
+## 2008-08-14    28        36        20
+## 2008-08-15     5         1        NA
+## 2008-08-16     7        13         3
+## 2008-08-19    65        98        62
+</pre></div><div class="source"><pre class="knitr r"><span class="functioncall">lookAtYear</span>(2009, 1996)
+</pre></div><div class="output"><pre class="knitr r">##            basal can'tFind flowering
+## 2009-07-24    NA        NA         1
+## 2009-07-31   111       167       103
+## 2009-08-03    55       129        73
+## 2009-08-05     1         6        NA
+</pre></div><div class="source"><pre class="knitr r"><span class="functioncall">lookAtYear</span>(2010, 1996)
+</pre></div><div class="output"><pre class="knitr r">##            basal can'tFind flowering
+## 2010-07-14   109       140        58
+## 2010-07-15   103       161        65
+## 2010-07-16     4        NA        NA
+## 2010-07-27     4         2        NA
+</pre></div><div class="source"><pre class="knitr r"><span class="functioncall">lookAtYear</span>(2011, 1996)
+</pre></div><div class="output"><pre class="knitr r">##            basal can'tFind flowering
+## 2011-07-22    56       139        91
+## 2011-07-25    67       170       117
+## 2011-07-26    NA         2         2
+## 2011-08-16     2        NA        NA
+</pre></div><div class="source"><pre class="knitr r"><span class="functioncall">lookAtYear</span>(2012, 1996)
+</pre></div><div class="output"><pre class="knitr r">##            basal can'tFind flowering
+## 2012-07-06   102       270        75
+## 2012-07-10    94        41        59
+## 2012-07-23    NA         2        NA
+## 2012-07-27     1        NA        NA
+## 2012-07-30     1        NA        NA
+## 2012-07-31     1        NA        NA
+</pre></div><div class="source"><pre class="knitr r">
+
+<span class="functioncall">lookAtYear</span>(2004, 1997)
+</pre></div><div class="output"><pre class="knitr r">##            basal can'tFind flowering
+## 2004-08-07    84        62        37
+## 2004-08-08   100        73        36
+## 2004-08-09    68        45        50
+## 2004-08-10     9         9         3
+## 2004-08-12    11         4        NA
+</pre></div><div class="source"><pre class="knitr r"><span class="functioncall">lookAtYear</span>(2005, 1997)
+</pre></div><div class="output"><pre class="knitr r">##            basal can'tFind flowering
+## 2005-08-11    70        40         7
+## 2005-08-12    87        51         4
+## 2005-08-14    88        69         6
+## 2005-08-15    NA        18        NA
+## 2005-08-17    71        39         6
+## 2005-08-19    24         2         4
+## 2005-08-29     5        NA        NA
+</pre></div><div class="source"><pre class="knitr r"><span class="functioncall">lookAtYear</span>(2006, 1997)
+</pre></div><div class="output"><pre class="knitr r">##            basal can'tFind flowering
+## 2006-07-14    15        25         7
+## 2006-07-16    45        15        18
+## 2006-07-17    98        71        31
+## 2006-07-18    46        33        21
+## 2006-07-19    48        41        14
+## 2006-07-20    17        10         6
+## 2006-08-03     1        26        NA
+## 2006-08-05     2         1        NA
+</pre></div><div class="source"><pre class="knitr r"><span class="functioncall">lookAtYear</span>(2007, 1997)
+</pre></div><div class="output"><pre class="knitr r">##            basal can'tFind flowering
+## 2007-07-19    32        37         5
+## 2007-07-20    83        57        18
+## 2007-07-22    10        14        NA
+## 2007-07-23   140        75        22
+## 2007-07-24     6         6         2
+## 2007-07-25    26        38         8
+## 2007-07-27     8         1        NA
+## 2007-08-08     3        NA        NA
+</pre></div><div class="source"><pre class="knitr r"><span class="functioncall">lookAtYear</span>(2008, 1997)
+</pre></div><div class="output"><pre class="knitr r">##            basal can'tFind flowering
+## 2008-07-23     1        NA        NA
+## 2008-08-08    24        25         6
+## 2008-08-10    16        12         3
+## 2008-08-12    28        19         5
+## 2008-08-13    16        22         7
+## 2008-08-14    35        27        14
+## 2008-08-15    15        18         7
+## 2008-08-16    15        19         9
+## 2008-08-19    98       122        28
+</pre></div><div class="source"><pre class="knitr r"><span class="functioncall">lookAtYear</span>(2009, 1997)
+</pre></div><div class="output"><pre class="knitr r">##            basal can'tFind flowering
+## 2009-07-31   132       151        28
+## 2009-08-03   109       122        41
+## 2009-08-05     3         5        NA
+</pre></div><div class="source"><pre class="knitr r"><span class="functioncall">lookAtYear</span>(2010, 1997)
+</pre></div><div class="output"><pre class="knitr r">##            basal can'tFind flowering
+## 2010-07-14    81        85        22
+## 2010-07-15   160       182        23
+## 2010-07-16     7        14         3
+## 2010-07-27    10         4        NA
+</pre></div><div class="source"><pre class="knitr r"><span class="functioncall">lookAtYear</span>(2011, 1997)
+</pre></div><div class="output"><pre class="knitr r">##            basal can'tFind flowering
+## 2011-07-22    60       133        51
+## 2011-07-25    93       142        73
+## 2011-07-26     7        15         2
+## 2011-08-09     7         4         2
+## 2011-08-12     1        NA        NA
+## 2011-08-16     1        NA        NA
+</pre></div><div class="source"><pre class="knitr r"><span class="functioncall">lookAtYear</span>(2012, 1997)
+</pre></div><div class="output"><pre class="knitr r">##            basal can'tFind flowering
+## 2012-07-06   109       254        22
+## 2012-07-10   135        40        25
+## 2012-07-23    NA         1        NA
+## 2012-07-27     2         1        NA
+## 2012-07-31     1        NA        NA
+## 2012-08-01     1        NA        NA
+</pre></div><div class="source"><pre class="knitr r">
+
+<span class="functioncall">lookAtYear</span>(2004, 1998)
+</pre></div><div class="output"><pre class="knitr r">##            basal can'tFind flowering
+## 2004-08-06     5        38         2
+## 2004-08-07    27        92        NA
+## 2004-08-08    28        85         4
+## 2004-08-09    16        72        NA
+## 2004-08-12     5        NA        NA
+## 2004-08-31    NA         1        NA
+</pre></div><div class="source"><pre class="knitr r"><span class="functioncall">lookAtYear</span>(2005, 1998)
+</pre></div><div class="output"><pre class="knitr r">##            basal can'tFind flowering
+## 2005-08-01    75        16         8
+## 2005-08-12    NA         6        NA
+## 2005-08-29     1        NA        NA
+## 2006-10-04    NA       269        NA
+</pre></div><div class="source"><pre class="knitr r"><span class="functioncall">lookAtYear</span>(2006, 1998)
+</pre></div><div class="output"><pre class="knitr r">##            basal can'tFind flowering
+## 2006-07-13    NA        NA         1
+## 2006-07-20    57        17        19
+## 2006-08-03    NA         4        NA
+## 2006-08-05     1         1        NA
+</pre></div><div class="source"><pre class="knitr r"><span class="functioncall">lookAtYear</span>(2007, 1998)
+</pre></div><div class="output"><pre class="knitr r">##            basal can'tFind flowering
+## 2007-07-19    12        63        NA
+## 2007-07-20    18        80         6
+## 2007-07-22     2        12         1
+## 2007-07-23    26       120         4
+## 2007-07-24     7        23        NA
+## 2007-08-08     1        NA        NA
+</pre></div><div class="source"><pre class="knitr r"><span class="functioncall">lookAtYear</span>(2008, 1998)
+</pre></div><div class="output"><pre class="knitr r">##            basal can'tFind flowering
+## 2008-08-07     4        32         4
+## 2008-08-08     2        41         1
+## 2008-08-12    NA        13        NA
+## 2008-08-13    11        58         1
+## 2008-08-14     4        39         2
+## 2008-08-16    NA        13         1
+## 2008-08-19    20       120         9
+</pre></div><div class="source"><pre class="knitr r"><span class="functioncall">lookAtYear</span>(2009, 1998)
+</pre></div><div class="output"><pre class="knitr r">##            basal can'tFind flowering
+## 2009-07-31    28       184         8
+## 2009-08-03    20       126         4
+## 2009-08-05    NA         5        NA
+</pre></div><div class="source"><pre class="knitr r"><span class="functioncall">lookAtYear</span>(2010, 1998)
+</pre></div><div class="output"><pre class="knitr r">##            basal can'tFind flowering
+## 2010-07-14    25       148         4
+## 2010-07-15    25       165         5
+## 2010-07-27    NA         3        NA
+</pre></div><div class="source"><pre class="knitr r"><span class="functioncall">lookAtYear</span>(2011, 1998)
+</pre></div><div class="output"><pre class="knitr r">##            basal can'tFind flowering
+## 2011-07-22    15       152        12
+## 2011-07-25    15       171         9
+## 2011-08-02    NA         1        NA
+</pre></div><div class="source"><pre class="knitr r"><span class="functioncall">lookAtYear</span>(2012, 1998)
+</pre></div><div class="output"><pre class="knitr r">##            basal can'tFind flowering
+## 2012-07-06    20       311         2
+## 2012-07-10    22        17         2
+## 2012-07-11     1        NA        NA
+</pre></div><div class="source"><pre class="knitr r">
+
+<span class="functioncall">lookAtYear</span>(2004, 1999)
+</pre></div><div class="output"><pre class="knitr r">##            basal can'tFind flowering
+## 2004-08-03   164        47         6
+## 2004-08-04   449       115        20
+## 2004-08-05    59        15         2
+## 2004-08-07     6        NA        NA
+## 2004-08-11     3        NA        NA
+</pre></div><div class="source"><pre class="knitr r"><span class="functioncall">lookAtYear</span>(2005, 1999)
+</pre></div><div class="output"><pre class="knitr r">##            basal can'tFind flowering
+## 2005-07-28   371       123        10
+## 2005-07-29   281        74         5
+## 2005-07-30    13         3        NA
+## 2005-08-02     3         3        NA
+</pre></div><div class="source"><pre class="knitr r"><span class="functioncall">lookAtYear</span>(2006, 1999)
+</pre></div><div class="output"><pre class="knitr r">##            basal can'tFind flowering
+## 2006-07-21   524       229       115
+## 2006-07-22     1        NA        NA
+## 2006-08-03     5         5        NA
+## 2006-08-04     1         1        NA
+## 2006-08-05     5        NA        NA
+</pre></div><div class="source"><pre class="knitr r"><span class="functioncall">lookAtYear</span>(2007, 1999)
+</pre></div><div class="output"><pre class="knitr r">##            basal can'tFind flowering
+## 2007-07-24    23        20         9
+## 2007-07-25   230       142        41
+## 2007-07-26    25         5         4
+## 2007-07-27   213        75        61
+## 2007-07-31    20         6         9
+## 2007-08-08     3        NA        NA
+</pre></div><div class="source"><pre class="knitr r"><span class="functioncall">lookAtYear</span>(2008, 1999)
+</pre></div><div class="output"><pre class="knitr r">##            basal can'tFind flowering
+## 2008-07-23     3        NA         2
+## 2008-07-29    16        13         3
+## 2008-07-30   230       183       116
+## 2008-08-01   119        69        48
+## 2008-08-14     3         7        NA
+## 2008-08-22    35        15        24
+</pre></div><div class="source"><pre class="knitr r"><span class="functioncall">lookAtYear</span>(2009, 1999)
+</pre></div><div class="output"><pre class="knitr r">##            basal can'tFind flowering
+## 2009-07-29   157       118        52
+## 2009-07-30   273       175       103
+## 2009-08-05     3         5        NA
+</pre></div><div class="source"><pre class="knitr r"><span class="functioncall">lookAtYear</span>(2010, 1999)
+</pre></div><div class="output"><pre class="knitr r">##            basal can'tFind flowering
+## 2010-07-15   179       130        48
+## 2010-07-16   266       170        83
+## 2010-07-18    NA         1        NA
+## 2010-07-27     5         4        NA
+</pre></div><div class="source"><pre class="knitr r"><span class="functioncall">lookAtYear</span>(2011, 1999)
+</pre></div><div class="output"><pre class="knitr r">##            basal can'tFind flowering
+## 2011-07-25    13        10         8
+## 2011-07-26   295       296       262
+## 2011-08-16     2        NA        NA
+</pre></div><div class="source"><pre class="knitr r"><span class="functioncall">lookAtYear</span>(2012, 1999)
+</pre></div><div class="output"><pre class="knitr r">##            basal can'tFind flowering
+## 2012-07-10   186       133        17
+## 2012-07-11   304       188        48
+## 2012-07-30     3         3        NA
+## 2012-07-31     1        NA        NA
+## 2012-08-01     2         1        NA
+</pre></div></div></div>
+
+
+<p>Visualize aphid abundance by site and year</p>
+
+<div class="chunk" id="unnamed-chunk-3"><div class="rcode"><div class="source"><pre class="knitr r"><span class="comment"># switch factor levels of aphid abundance <span class="keyword">for</span> visualizing</span>
+pp$aphids2 &lt;- <span class="functioncall">factor</span>(pp$aphids2, levels = <span class="functioncall">c</span>(<span class="string">"&gt;80"</span>, <span class="string">"11-80"</span>, <span class="string">"1-10"</span>, <span class="string">"0"</span>))
+pp &lt;- pp[pp$Status != <span class="string">"can'tFind"</span>, ]  #only look at plants
+pp96 &lt;- pp[pp$expNm == 1996 &amp; pp$siteOfOriginPedigree != <span class="string">"unknown"</span>, ]
+pp97 &lt;- pp[pp$expNm == 1997 &amp; pp$siteOfOriginPedigree != <span class="string">"unknown"</span>, ]
+pp98 &lt;- pp[pp$expNm == 1998 &amp; pp$siteOfOriginPedigree != <span class="string">"unknown"</span>, ]
+pp99 &lt;- pp[pp$expNm == 1999 &amp; pp$siteOfOriginPedigree != <span class="string">"unknown"</span>, ]
+
+<span class="comment"># fix site levels and order by size</span>
+pp96$siteOfOriginPedigree &lt;- <span class="functioncall">factor</span>(pp96$siteOfOriginPedigree, levels = <span class="functioncall">unique</span>(pp96$siteOfOriginPedigree))
+pp96$siteOfOriginPedigree &lt;- <span class="functioncall">factor</span>(pp96$siteOfOriginPedigree, levels = <span class="functioncall">dimnames</span>(<span class="functioncall">sort</span>(<span class="functioncall">table</span>(pp96$siteOfOriginPedigree)))[[1]])
+pp97$siteOfOriginPedigree &lt;- <span class="functioncall">factor</span>(pp97$siteOfOriginPedigree, levels = <span class="functioncall">unique</span>(pp97$siteOfOriginPedigree))
+pp97$siteOfOriginPedigree &lt;- <span class="functioncall">factor</span>(pp97$siteOfOriginPedigree, levels = <span class="functioncall">dimnames</span>(<span class="functioncall">sort</span>(<span class="functioncall">table</span>(pp97$siteOfOriginPedigree)))[[1]])
+pp99$siteOfOriginPedigree &lt;- <span class="functioncall">factor</span>(pp99$siteOfOriginPedigree, levels = <span class="functioncall">unique</span>(pp99$siteOfOriginPedigree))
+pp99$siteOfOriginPedigree &lt;- <span class="functioncall">factor</span>(pp99$siteOfOriginPedigree, levels = <span class="functioncall">dimnames</span>(<span class="functioncall">sort</span>(<span class="functioncall">table</span>(pp99$siteOfOriginPedigree)))[[1]])
+
+lookAtAphids &lt;- <span class="functioncall"><span class="keyword">function</span></span>(x, y) {
+    zz &lt;- <span class="functioncall">tapply</span>(x[x$measureYr == y, <span class="string">"aphids2"</span>], <span class="functioncall">list</span>(x[x$measureYr == y, <span class="string">"aphids2"</span>], 
+        x[x$measureYr == y, <span class="string">"siteOfOriginPedigree"</span>]), length)
+    zz[<span class="functioncall">is.na</span>(zz)] &lt;- 0
+    zzt &lt;- zz
+    <span class="functioncall"><span class="keyword">for</span></span> (i <span class="keyword">in</span> 1:<span class="functioncall">dim</span>(zz)[1]) {
+        zzt[i, ] &lt;- zz[i, ]/<span class="functioncall">apply</span>(zz, 2, sum)
+    }
+    # <span class="functioncall">par</span>(xpd=T, mar=<span class="functioncall">par</span>()$mar+<span class="functioncall">c</span>(1,0,0,6)))
+    cols &lt;- <span class="functioncall">gray</span>(<span class="functioncall">c</span>(<span class="functioncall">seq</span>(0, 1, by = 1/3)))
+    bp &lt;- <span class="functioncall">barplot</span>(zzt, ylim = <span class="functioncall">c</span>(0, 1), col = cols)
+    <span class="functioncall">text</span>(bp, 0.05, <span class="functioncall">table</span>(x[x$measureYr == y, <span class="string">"siteOfOriginPedigree"</span>]), col = <span class="string">"red"</span>)
+    <span class="functioncall">legend</span>(<span class="string">"topright"</span>, legend = <span class="functioncall">levels</span>(x$aphids2), fill = cols, bty = <span class="string">"n"</span>)
+    <span class="functioncall">legend</span>(<span class="string">"topleft"</span>, legend = <span class="functioncall">c</span>(<span class="functioncall">paste</span>(<span class="functioncall">unique</span>(x$expNm), <span class="string">"exp"</span>, sep = <span class="string">""</span>), y), 
+        bty = <span class="string">"n"</span>)
+    # <span class="functioncall">par</span>(mar=<span class="functioncall">c</span>(5,4,4,2) + 0.1)
+}
+</pre></div></div></div>
+
+
+<b>1996 Garden, 2004-2012:</b>
+<div class="chunk" id="unnamed-chunk-4"><div class="rcode"><div class="source"><pre class="knitr r"><span class="functioncall">lookAtAphids</span>(pp96, 2004)
+</pre></div></div><div class="rimage default"><img src="figure/unnamed-chunk-41.png" title="plot of chunk unnamed-chunk-4" alt="plot of chunk unnamed-chunk-4" class="plot" /></div><div class="rcode">
+<div class="source"><pre class="knitr r"><span class="functioncall">lookAtAphids</span>(pp96, 2005)
+</pre></div></div><div class="rimage default"><img src="figure/unnamed-chunk-42.png" title="plot of chunk unnamed-chunk-4" alt="plot of chunk unnamed-chunk-4" class="plot" /></div><div class="rcode">
+<div class="source"><pre class="knitr r"><span class="functioncall">lookAtAphids</span>(pp96, 2006)
+</pre></div></div><div class="rimage default"><img src="figure/unnamed-chunk-43.png" title="plot of chunk unnamed-chunk-4" alt="plot of chunk unnamed-chunk-4" class="plot" /></div><div class="rcode">
+<div class="source"><pre class="knitr r"><span class="functioncall">lookAtAphids</span>(pp96, 2007)
+</pre></div></div><div class="rimage default"><img src="figure/unnamed-chunk-44.png" title="plot of chunk unnamed-chunk-4" alt="plot of chunk unnamed-chunk-4" class="plot" /></div><div class="rcode">
+<div class="source"><pre class="knitr r"><span class="functioncall">lookAtAphids</span>(pp96, 2008)
+</pre></div></div><div class="rimage default"><img src="figure/unnamed-chunk-45.png" title="plot of chunk unnamed-chunk-4" alt="plot of chunk unnamed-chunk-4" class="plot" /></div><div class="rcode">
+<div class="source"><pre class="knitr r"><span class="functioncall">lookAtAphids</span>(pp96, 2009)
+</pre></div></div><div class="rimage default"><img src="figure/unnamed-chunk-46.png" title="plot of chunk unnamed-chunk-4" alt="plot of chunk unnamed-chunk-4" class="plot" /></div><div class="rcode">
+<div class="source"><pre class="knitr r"><span class="functioncall">lookAtAphids</span>(pp96, 2010)
+</pre></div></div><div class="rimage default"><img src="figure/unnamed-chunk-47.png" title="plot of chunk unnamed-chunk-4" alt="plot of chunk unnamed-chunk-4" class="plot" /></div><div class="rcode">
+<div class="source"><pre class="knitr r"><span class="functioncall">lookAtAphids</span>(pp96, 2011)
+</pre></div></div><div class="rimage default"><img src="figure/unnamed-chunk-48.png" title="plot of chunk unnamed-chunk-4" alt="plot of chunk unnamed-chunk-4" class="plot" /></div><div class="rcode">
+<div class="source"><pre class="knitr r"><span class="functioncall">lookAtAphids</span>(pp96, 2012)
+</pre></div></div><div class="rimage default"><img src="figure/unnamed-chunk-49.png" title="plot of chunk unnamed-chunk-4" alt="plot of chunk unnamed-chunk-4" class="plot" /></div></div>
+
+
+<b>1997 Garden, 2004-2012:</b>
+<div class="chunk" id="unnamed-chunk-5"><div class="rcode"><div class="source"><pre class="knitr r"><span class="functioncall">lookAtAphids</span>(pp97, 2004)
+</pre></div></div><div class="rimage default"><img src="figure/unnamed-chunk-51.png" title="plot of chunk unnamed-chunk-5" alt="plot of chunk unnamed-chunk-5" class="plot" /></div><div class="rcode">
+<div class="source"><pre class="knitr r"><span class="functioncall">lookAtAphids</span>(pp97, 2005)
+</pre></div></div><div class="rimage default"><img src="figure/unnamed-chunk-52.png" title="plot of chunk unnamed-chunk-5" alt="plot of chunk unnamed-chunk-5" class="plot" /></div><div class="rcode">
+<div class="source"><pre class="knitr r"><span class="functioncall">lookAtAphids</span>(pp97, 2006)
+</pre></div></div><div class="rimage default"><img src="figure/unnamed-chunk-53.png" title="plot of chunk unnamed-chunk-5" alt="plot of chunk unnamed-chunk-5" class="plot" /></div><div class="rcode">
+<div class="source"><pre class="knitr r"><span class="functioncall">lookAtAphids</span>(pp97, 2007)
+</pre></div></div><div class="rimage default"><img src="figure/unnamed-chunk-54.png" title="plot of chunk unnamed-chunk-5" alt="plot of chunk unnamed-chunk-5" class="plot" /></div><div class="rcode">
+<div class="source"><pre class="knitr r"><span class="functioncall">lookAtAphids</span>(pp97, 2008)
+</pre></div></div><div class="rimage default"><img src="figure/unnamed-chunk-55.png" title="plot of chunk unnamed-chunk-5" alt="plot of chunk unnamed-chunk-5" class="plot" /></div><div class="rcode">
+<div class="source"><pre class="knitr r"><span class="functioncall">lookAtAphids</span>(pp97, 2009)
+</pre></div></div><div class="rimage default"><img src="figure/unnamed-chunk-56.png" title="plot of chunk unnamed-chunk-5" alt="plot of chunk unnamed-chunk-5" class="plot" /></div><div class="rcode">
+<div class="source"><pre class="knitr r"><span class="functioncall">lookAtAphids</span>(pp97, 2010)
+</pre></div></div><div class="rimage default"><img src="figure/unnamed-chunk-57.png" title="plot of chunk unnamed-chunk-5" alt="plot of chunk unnamed-chunk-5" class="plot" /></div><div class="rcode">
+<div class="source"><pre class="knitr r"><span class="functioncall">lookAtAphids</span>(pp97, 2011)
+</pre></div></div><div class="rimage default"><img src="figure/unnamed-chunk-58.png" title="plot of chunk unnamed-chunk-5" alt="plot of chunk unnamed-chunk-5" class="plot" /></div><div class="rcode">
+<div class="source"><pre class="knitr r"><span class="functioncall">lookAtAphids</span>(pp97, 2012)
+</pre></div></div><div class="rimage default"><img src="figure/unnamed-chunk-59.png" title="plot of chunk unnamed-chunk-5" alt="plot of chunk unnamed-chunk-5" class="plot" /></div></div>
+
+
+<b>1999 Garden, 2004-2012:</b>
+<div class="chunk" id="unnamed-chunk-6"><div class="rcode"><div class="source"><pre class="knitr r"><span class="functioncall">lookAtAphids</span>(pp99, 2004)
+</pre></div></div><div class="rimage default"><img src="figure/unnamed-chunk-61.png" title="plot of chunk unnamed-chunk-6" alt="plot of chunk unnamed-chunk-6" class="plot" /></div><div class="rcode">
+<div class="source"><pre class="knitr r"><span class="functioncall">lookAtAphids</span>(pp99, 2005)
+</pre></div></div><div class="rimage default"><img src="figure/unnamed-chunk-62.png" title="plot of chunk unnamed-chunk-6" alt="plot of chunk unnamed-chunk-6" class="plot" /></div><div class="rcode">
+<div class="source"><pre class="knitr r"><span class="functioncall">lookAtAphids</span>(pp99, 2006)
+</pre></div></div><div class="rimage default"><img src="figure/unnamed-chunk-63.png" title="plot of chunk unnamed-chunk-6" alt="plot of chunk unnamed-chunk-6" class="plot" /></div><div class="rcode">
+<div class="source"><pre class="knitr r"><span class="functioncall">lookAtAphids</span>(pp99, 2007)
+</pre></div></div><div class="rimage default"><img src="figure/unnamed-chunk-64.png" title="plot of chunk unnamed-chunk-6" alt="plot of chunk unnamed-chunk-6" class="plot" /></div><div class="rcode">
+<div class="source"><pre class="knitr r"><span class="functioncall">lookAtAphids</span>(pp99, 2008)
+</pre></div></div><div class="rimage default"><img src="figure/unnamed-chunk-65.png" title="plot of chunk unnamed-chunk-6" alt="plot of chunk unnamed-chunk-6" class="plot" /></div><div class="rcode">
+<div class="source"><pre class="knitr r"><span class="functioncall">lookAtAphids</span>(pp99, 2009)
+</pre></div></div><div class="rimage default"><img src="figure/unnamed-chunk-66.png" title="plot of chunk unnamed-chunk-6" alt="plot of chunk unnamed-chunk-6" class="plot" /></div><div class="rcode">
+<div class="source"><pre class="knitr r"><span class="functioncall">lookAtAphids</span>(pp99, 2010)
+</pre></div></div><div class="rimage default"><img src="figure/unnamed-chunk-67.png" title="plot of chunk unnamed-chunk-6" alt="plot of chunk unnamed-chunk-6" class="plot" /></div><div class="rcode">
+<div class="source"><pre class="knitr r"><span class="functioncall">lookAtAphids</span>(pp99, 2011)
+</pre></div></div><div class="rimage default"><img src="figure/unnamed-chunk-68.png" title="plot of chunk unnamed-chunk-6" alt="plot of chunk unnamed-chunk-6" class="plot" /></div><div class="rcode">
+<div class="source"><pre class="knitr r"><span class="functioncall">lookAtAphids</span>(pp99, 2012)
+</pre></div></div><div class="rimage default"><img src="figure/unnamed-chunk-69.png" title="plot of chunk unnamed-chunk-6" alt="plot of chunk unnamed-chunk-6" class="plot" /></div></div>
+
+
+<b>Next step: analyze aphid abundance as a function of size, location, measure date, and population.</b>
+
+Start with the 1996 garden in 2004
+
+<div class="chunk" id="unnamed-chunk-7"><div class="rcode"><div class="source"><pre class="knitr r"><span class="comment"># look at differences my measuredate</span>
+ss &lt;- pp96[pp96$measureYr == 2004, ]
+<span class="functioncall">str</span>(ss)
+</pre></div><div class="output"><pre class="knitr r">## 'data.frame':	379 obs. of  43 variables:
+##  $ row                 : num  17 17 17 17 17 17 17 17 17 17 ...
+##  $ pos                 : num  959 958 957 956 955 954 951 950 949 948 ...
+##  $ cgPlaId             : int  1 2 3 4 5 6 9 10 11 12 ...
+##  $ expNm               : int  1996 1996 1996 1996 1996 1996 1996 1996 1996 1996 ...
+##  $ siteOfOriginPedigree: Factor w/ 8 levels "tower","ness",..: 5 7 7 7 5 7 7 7 7 6 ...
+##  $ measureYr           : int  2004 2004 2004 2004 2004 2004 2004 2004 2004 2004 ...
+##  $ measureDt           : Factor w/ 87 levels "","10/4/2006",..: 83 83 83 83 83 83 83 83 83 83 ...
+##  $ plaStatusDesc       : Factor w/ 13 levels "basal","basal based on subsequent yrs data",..: 1 1 9 9 9 1 9 1 8 8 ...
+##  $ basalRosetteCt      : int  2 1 NA NA NA 2 NA 1 NA NA ...
+##  $ floweringRosetteCt  : int  0 0 NA NA NA 0 NA 0 NA NA ...
+##  $ basalLfCt           : int  9 5 0 0 7 7 8 4 0 5 ...
+##  $ longestBasalLf      : int  24 29 0 0 22 29 25 19 0 18 ...
+##  $ longestCaulineLf    : int  NA NA NA NA NA NA NA NA NA NA ...
+##  $ hdct                : int  NA NA 2 1 1 NA 1 NA 0 0 ...
+##  $ minHdHeight         : int  NA NA 37 65 48 NA 37 NA 10 9 ...
+##  $ maxHdHeight         : int  NA NA 55 65 48 NA 37 NA 10 9 ...
+##  $ wrinkledLvsPres     : int  NA NA NA NA NA NA NA NA NA 1 ...
+##  $ insects             : Factor w/ 226 levels "",">10 ants",..: 92 176 92 92 1 134 56 92 92 92 ...
+##  $ ant1                : int  0 0 0 0 0 0 0 0 0 0 ...
+##  $ ant2to10            : int  0 0 0 0 0 0 0 0 0 0 ...
+##  $ antGT10             : int  0 0 0 0 0 0 0 0 0 0 ...
+##  $ aphid1              : int  0 0 0 0 0 0 0 0 0 0 ...
+##  $ aphid2to10          : int  0 1 0 0 0 0 0 0 0 0 ...
+##  $ aphid11to80         : int  1 0 1 1 0 1 0 1 1 1 ...
+##  $ aphidGT80           : int  0 0 0 0 0 0 1 0 0 0 ...
+##  $ lfMiner             : int  0 0 0 0 0 0 0 0 0 0 ...
+##  $ lfRolled            : int  0 0 0 0 0 0 0 0 0 0 ...
+##  $ antNest             : int  0 0 0 0 0 1 0 0 0 0 ...
+##  $ lfHopper            : int  0 0 0 0 0 0 0 0 0 0 ...
+##  $ pupa                : int  0 0 0 0 0 0 0 0 0 0 ...
+##  $ eggSac              : int  0 0 0 0 0 0 0 0 0 0 ...
+##  $ beetle              : int  0 0 0 0 0 0 0 0 0 0 ...
+##  $ grasshopper         : int  0 0 0 0 0 0 0 0 0 0 ...
+##  $ spittle             : int  0 0 0 0 0 0 0 0 0 0 ...
+##  $ whtFuzzy            : int  0 0 0 0 0 0 0 0 0 0 ...
+##  $ whtScary            : int  0 0 0 0 0 0 0 0 0 0 ...
+##  $ other.Note.         : int  0 0 0 0 0 0 1 0 0 0 ...
+##  $ insectsNote         : Factor w/ 257 levels ""," beetles; ",..: 1 1 1 1 1 1 170 1 1 1 ...
+##  $ measureDt2          : Date, format: "2004-08-08" "2004-08-08" ...
+##  $ aphids              : Factor w/ 5 levels "0","1","2-10",..: 4 3 4 4 1 4 5 4 4 4 ...
+##  $ ants                : chr  "0" "0" "0" "0" ...
+##  $ aphids2             : Factor w/ 4 levels ">80","11-80",..: 2 3 2 2 4 2 1 2 2 2 ...
+##  $ Status              : Factor w/ 3 levels "basal","can'tFind",..: 1 1 3 3 3 1 3 1 3 3 ...
+</pre></div><div class="source"><pre class="knitr r"><span class="functioncall">table</span>(ss$measureDt2)
+</pre></div><div class="output"><pre class="knitr r">## 
+## 2004-08-06 2004-08-07 2004-08-08 2004-08-09 2004-08-12 
+##         17        125        126        108          3
+</pre></div><div class="source"><pre class="knitr r">ss$date &lt;- <span class="functioncall">factor</span>(ss$measureDt2)
+<span class="comment"># these dates are within a week of each other--leave them all <span class="keyword">in</span> for now</span>
+zz &lt;- <span class="functioncall">tapply</span>(ss$aphids2, <span class="functioncall">list</span>(ss$aphids2, ss$date), length)
+zz[<span class="functioncall">is.na</span>(zz)] &lt;- 0
+<span class="functioncall">barplot</span>(zz)
+</pre></div></div><div class="rimage default"><img src="figure/unnamed-chunk-71.png" title="plot of chunk unnamed-chunk-7" alt="plot of chunk unnamed-chunk-7" class="plot" /></div><div class="rcode">
+<div class="source"><pre class="knitr r"><span class="comment"># no obvious difference</span>
+ss$lfClass &lt;- <span class="string">""</span>
+ss[ss$basalLfCt &gt;= 6, <span class="string">"lfClass"</span>] &lt;- <span class="string">"&gt;6"</span>
+ss[ss$basalLfCt &lt;= 5, <span class="string">"lfClass"</span>] &lt;- <span class="string">"1-5"</span>
+ss[ss$Status == <span class="string">"flowering"</span>, <span class="string">"lfClass"</span>] &lt;- <span class="string">"flowering"</span>
+ss$lfClass &lt;- <span class="functioncall">factor</span>(ss$lfClass, levels = <span class="functioncall">c</span>(<span class="string">"1-5"</span>, <span class="string">"&gt;6"</span>, <span class="string">"flowering"</span>))
+<span class="functioncall">table</span>(ss$lfClass, ss$siteOfOriginPedigree)  #look at distribution of plant sizes/status among pops
+</pre></div><div class="output"><pre class="knitr r">##            
+##             tower ness aa sap lf spp eri nwlf
+##   1-5           1    6  2   7 12   7  11   21
+##   >6            0    8  6  12  9  13  23   25
+##   flowering     0    6 13  31 28  43  43   52
+</pre></div><div class="source"><pre class="knitr r"># exclude <span class="functioncall">tower</span> (only 1 plant)
+ss &lt;- ss[ss$siteOfOriginPedigree != <span class="string">"tower"</span>, ]
+ss$siteOfOriginPedigree &lt;- <span class="functioncall">factor</span>(ss$siteOfOriginPedigree, levels = <span class="functioncall">unique</span>(ss$siteOfOriginPedigree))
+
+
+ss$aphids2 &lt;- <span class="functioncall">ordered</span>(ss$aphids2, levels = <span class="functioncall">c</span>(<span class="string">"0"</span>, <span class="string">"1-10"</span>, <span class="string">"11-80"</span>, <span class="string">"&gt;80"</span>))
+
+<span class="comment"># keep row and position as numeric</span>
+<span class="functioncall">library</span>(MASS)
+a6 &lt;- <span class="functioncall">polr</span>(aphids2 ~ lfClass:siteOfOriginPedigree + lfClass + siteOfOriginPedigree + 
+    row + pos + date, data = ss)
+a5 &lt;- <span class="functioncall">polr</span>(aphids2 ~ lfClass + siteOfOriginPedigree + row + pos + date, data = ss)
+<span class="functioncall">anova</span>(a5, a6)
+</pre></div><div class="output"><pre class="knitr r">## Likelihood ratio tests of ordinal regression models
+## 
+## Response: aphids2
+##                                                                              Model
+## 1                                lfClass + siteOfOriginPedigree + row + pos + date
+## 2 lfClass:siteOfOriginPedigree + lfClass + siteOfOriginPedigree + row + pos + date
+##   Resid. df Resid. Dev   Test    Df LR stat. Pr(Chi)
+## 1       361      884.0                              
+## 2       349      870.2 1 vs 2    12    13.76  0.3165
+</pre></div><div class="source"><pre class="knitr r">a5.1 &lt;- <span class="functioncall">polr</span>(aphids2 ~ siteOfOriginPedigree + row + pos + date, data = ss)
+a5.2 &lt;- <span class="functioncall">polr</span>(aphids2 ~ lfClass + row + pos + date, data = ss)
+a5.3 &lt;- <span class="functioncall">polr</span>(aphids2 ~ lfClass + siteOfOriginPedigree + pos + date, data = ss)
+a5.4 &lt;- <span class="functioncall">polr</span>(aphids2 ~ lfClass + siteOfOriginPedigree + row + date, data = ss)
+a5.5 &lt;- <span class="functioncall">polr</span>(aphids2 ~ lfClass + siteOfOriginPedigree + row + pos, data = ss)
+<span class="functioncall">anova</span>(a5.1, a5)
+</pre></div><div class="output"><pre class="knitr r">## Likelihood ratio tests of ordinal regression models
+## 
+## Response: aphids2
+##                                               Model Resid. df Resid. Dev
+## 1           siteOfOriginPedigree + row + pos + date       363        904
+## 2 lfClass + siteOfOriginPedigree + row + pos + date       361        884
+##     Test    Df LR stat.   Pr(Chi)
+## 1                                
+## 2 1 vs 2     2       20 4.542e-05
+</pre></div><div class="source"><pre class="knitr r"><span class="functioncall">anova</span>(a5.2, a5)
+</pre></div><div class="output"><pre class="knitr r">## Likelihood ratio tests of ordinal regression models
+## 
+## Response: aphids2
+##                                               Model Resid. df Resid. Dev
+## 1                        lfClass + row + pos + date       367      887.7
+## 2 lfClass + siteOfOriginPedigree + row + pos + date       361      884.0
+##     Test    Df LR stat. Pr(Chi)
+## 1                              
+## 2 1 vs 2     6    3.767  0.7081
+</pre></div><div class="source"><pre class="knitr r"><span class="functioncall">anova</span>(a5.3, a5)
+</pre></div><div class="output"><pre class="knitr r">## Likelihood ratio tests of ordinal regression models
+## 
+## Response: aphids2
+##                                               Model Resid. df Resid. Dev
+## 1       lfClass + siteOfOriginPedigree + pos + date       362        887
+## 2 lfClass + siteOfOriginPedigree + row + pos + date       361        884
+##     Test    Df LR stat. Pr(Chi)
+## 1                              
+## 2 1 vs 2     1    3.024 0.08205
+</pre></div><div class="source"><pre class="knitr r"><span class="functioncall">anova</span>(a5.4, a5)
+</pre></div><div class="output"><pre class="knitr r">## Likelihood ratio tests of ordinal regression models
+## 
+## Response: aphids2
+##                                               Model Resid. df Resid. Dev
+## 1       lfClass + siteOfOriginPedigree + row + date       362      884.4
+## 2 lfClass + siteOfOriginPedigree + row + pos + date       361      884.0
+##     Test    Df LR stat. Pr(Chi)
+## 1                              
+## 2 1 vs 2     1   0.4704  0.4928
+</pre></div><div class="source"><pre class="knitr r"><span class="functioncall">anova</span>(a5.5, a5)
+</pre></div><div class="output"><pre class="knitr r">## Likelihood ratio tests of ordinal regression models
+## 
+## Response: aphids2
+##                                               Model Resid. df Resid. Dev
+## 1        lfClass + siteOfOriginPedigree + row + pos       365      894.3
+## 2 lfClass + siteOfOriginPedigree + row + pos + date       361      884.0
+##     Test    Df LR stat. Pr(Chi)
+## 1                              
+## 2 1 vs 2     4    10.32 0.03536
+</pre></div><div class="source"><pre class="knitr r">a4 &lt;- <span class="functioncall">polr</span>(aphids2 ~ lfClass + row + pos + date, data = ss)
+a4.1 &lt;- <span class="functioncall">polr</span>(aphids2 ~ row + pos + date, data = ss)
+a4.2 &lt;- <span class="functioncall">polr</span>(aphids2 ~ lfClass + pos + date, data = ss)
+a4.3 &lt;- <span class="functioncall">polr</span>(aphids2 ~ lfClass + row + date, data = ss)
+a4.4 &lt;- <span class="functioncall">polr</span>(aphids2 ~ lfClass + row + pos, data = ss)
+
+<span class="functioncall">anova</span>(a4.1, a4)
+</pre></div><div class="output"><pre class="knitr r">## Likelihood ratio tests of ordinal regression models
+## 
+## Response: aphids2
+##                        Model Resid. df Resid. Dev   Test    Df LR stat.
+## 1           row + pos + date       369      908.0                      
+## 2 lfClass + row + pos + date       367      887.7 1 vs 2     2    20.22
+##     Pr(Chi)
+## 1          
+## 2 4.064e-05
+</pre></div><div class="source"><pre class="knitr r"><span class="functioncall">anova</span>(a4.2, a4)
+</pre></div><div class="output"><pre class="knitr r">## Likelihood ratio tests of ordinal regression models
+## 
+## Response: aphids2
+##                        Model Resid. df Resid. Dev   Test    Df LR stat.
+## 1       lfClass + pos + date       368      891.0                      
+## 2 lfClass + row + pos + date       367      887.7 1 vs 2     1    3.314
+##   Pr(Chi)
+## 1        
+## 2  0.0687
+</pre></div><div class="source"><pre class="knitr r"><span class="functioncall">anova</span>(a4.3, a4)
+</pre></div><div class="output"><pre class="knitr r">## Likelihood ratio tests of ordinal regression models
+## 
+## Response: aphids2
+##                        Model Resid. df Resid. Dev   Test    Df LR stat.
+## 1       lfClass + row + date       368      888.2                      
+## 2 lfClass + row + pos + date       367      887.7 1 vs 2     1   0.5151
+##   Pr(Chi)
+## 1        
+## 2  0.4729
+</pre></div><div class="source"><pre class="knitr r"><span class="functioncall">anova</span>(a4.4, a4)
+</pre></div><div class="output"><pre class="knitr r">## Likelihood ratio tests of ordinal regression models
+## 
+## Response: aphids2
+##                        Model Resid. df Resid. Dev   Test    Df LR stat.
+## 1        lfClass + row + pos       371      898.7                      
+## 2 lfClass + row + pos + date       367      887.7 1 vs 2     4    10.99
+##   Pr(Chi)
+## 1        
+## 2 0.02668
+</pre></div><div class="source"><pre class="knitr r">
+a3 &lt;- <span class="functioncall">polr</span>(aphids2 ~ lfClass + row + date, data = ss)
+a3.1 &lt;- <span class="functioncall">polr</span>(aphids2 ~ row + date, data = ss)
+a3.2 &lt;- <span class="functioncall">polr</span>(aphids2 ~ lfClass + date, data = ss)
+a3.3 &lt;- <span class="functioncall">polr</span>(aphids2 ~ lfClass + row, data = ss)
+<span class="functioncall">anova</span>(a3.1, a3)
+</pre></div><div class="output"><pre class="knitr r">## Likelihood ratio tests of ordinal regression models
+## 
+## Response: aphids2
+##                  Model Resid. df Resid. Dev   Test    Df LR stat.
+## 1           row + date       370      908.2                      
+## 2 lfClass + row + date       368      888.2 1 vs 2     2    19.97
+##     Pr(Chi)
+## 1          
+## 2 4.619e-05
+</pre></div><div class="source"><pre class="knitr r"><span class="functioncall">anova</span>(a3.2, a3)
+</pre></div><div class="output"><pre class="knitr r">## Likelihood ratio tests of ordinal regression models
+## 
+## Response: aphids2
+##                  Model Resid. df Resid. Dev   Test    Df LR stat. Pr(Chi)
+## 1       lfClass + date       369      891.5                              
+## 2 lfClass + row + date       368      888.2 1 vs 2     1    3.207 0.07332
+</pre></div><div class="source"><pre class="knitr r"><span class="functioncall">anova</span>(a3.3, a3)
+</pre></div><div class="output"><pre class="knitr r">## Likelihood ratio tests of ordinal regression models
+## 
+## Response: aphids2
+##                  Model Resid. df Resid. Dev   Test    Df LR stat. Pr(Chi)
+## 1        lfClass + row       372      899.9                              
+## 2 lfClass + row + date       368      888.2 1 vs 2     4    11.63 0.02033
+</pre></div><div class="source"><pre class="knitr r">a2 &lt;- <span class="functioncall">polr</span>(aphids2 ~ lfClass + date, data = ss)
+a2.1 &lt;- <span class="functioncall">polr</span>(aphids2 ~ date, data = ss)
+a2.2 &lt;- <span class="functioncall">polr</span>(aphids2 ~ lfClass, data = ss)
+<span class="functioncall">anova</span>(a2.1, a2)
+</pre></div><div class="output"><pre class="knitr r">## Likelihood ratio tests of ordinal regression models
+## 
+## Response: aphids2
+##            Model Resid. df Resid. Dev   Test    Df LR stat.   Pr(Chi)
+## 1           date       371      910.5                                
+## 2 lfClass + date       369      891.5 1 vs 2     2    19.05 7.318e-05
+</pre></div><div class="source"><pre class="knitr r"><span class="functioncall">anova</span>(a2.2, a2)
+</pre></div><div class="output"><pre class="knitr r">## Likelihood ratio tests of ordinal regression models
+## 
+## Response: aphids2
+##            Model Resid. df Resid. Dev   Test    Df LR stat. Pr(Chi)
+## 1        lfClass       373      902.6                              
+## 2 lfClass + date       369      891.5 1 vs 2     4    11.16 0.02478
+</pre></div><div class="source"><pre class="knitr r">a1 &lt;- <span class="functioncall">polr</span>(aphids2 ~ lfClass, data = ss)
+null &lt;- <span class="functioncall">polr</span>(aphids2 ~ 1, data = ss)
+<span class="functioncall">anova</span>(null, a1, a2, a3, a4, a5, a6)
+</pre></div><div class="output"><pre class="knitr r">## Likelihood ratio tests of ordinal regression models
+## 
+## Response: aphids2
+##                                                                              Model
+## 1                                                                                1
+## 2                                                                          lfClass
+## 3                                                                   lfClass + date
+## 4                                                             lfClass + row + date
+## 5                                                       lfClass + row + pos + date
+## 6                                lfClass + siteOfOriginPedigree + row + pos + date
+## 7 lfClass:siteOfOriginPedigree + lfClass + siteOfOriginPedigree + row + pos + date
+##   Resid. df Resid. Dev   Test    Df LR stat.   Pr(Chi)
+## 1       375      923.6                                
+## 2       373      902.6 1 vs 2     2  20.9540 2.818e-05
+## 3       369      891.5 2 vs 3     4  11.1642 2.478e-02
+## 4       368      888.2 3 vs 4     1   3.2072 7.332e-02
+## 5       367      887.7 4 vs 5     1   0.5151 4.729e-01
+## 6       361      884.0 5 vs 6     6   3.7675 7.081e-01
+## 7       349      870.2 6 vs 7    12  13.7574 3.165e-01
+</pre></div><div class="source"><pre class="knitr r">
+<span class="comment"># examine model:</span>
+best &lt;- <span class="functioncall">polr</span>(aphids2 ~ lfClass + date, data = ss)
+(pb &lt;- <span class="functioncall">profile</span>(best))
+</pre></div><div class="message"><pre class="knitr r">## Re-fitting to get Hessian
+</pre></div><div class="output"><pre class="knitr r">## $`lfClass>6`
+##          z par.vals.lfClass>6 par.vals.lfClassflowering
+## 1  -2.5842             0.1073                    0.6964
+## 2  -2.0667             0.2581                    0.7871
+## 3  -1.5492             0.4090                    0.8776
+## 4  -1.0321             0.5598                    0.9683
+## 5  -0.5156             0.7106                    1.0589
+## 6   0.0000             0.8614                    1.1496
+## 7   0.5146             1.0123                    1.2403
+## 8   1.0279             1.1631                    1.3312
+## 9   1.5396             1.3139                    1.4223
+## 10  2.0496             1.4648                    1.5136
+## 11  2.5575             1.6156                    1.6051
+## 12  3.0633             1.7664                    1.6969
+##    par.vals.date2004-08-07 par.vals.date2004-08-08 par.vals.date2004-08-09
+## 1                  -0.8894                 -1.1456                 -1.2695
+## 2                  -0.8895                 -1.1513                 -1.2784
+## 3                  -0.8900                 -1.1573                 -1.2877
+## 4                  -0.8902                 -1.1633                 -1.2970
+## 5                  -0.8912                 -1.1701                 -1.3072
+## 6                  -0.8924                 -1.1772                 -1.3178
+## 7                  -0.8941                 -1.1849                 -1.3290
+## 8                  -0.8948                 -1.1918                 -1.3395
+## 9                  -0.8962                 -1.1995                 -1.3509
+## 10                 -0.8978                 -1.2074                 -1.3626
+## 11                 -0.8995                 -1.2157                 -1.3747
+## 12                 -0.9014                 -1.2242                 -1.3872
+##    par.vals.date2004-08-12
+## 1                  -3.2196
+## 2                  -3.1811
+## 3                  -3.1455
+## 4                  -3.1108
+## 5                  -3.0818
+## 6                  -3.0556
+## 7                  -3.0326
+## 8                  -3.0087
+## 9                  -2.9885
+## 10                 -2.9706
+## 11                 -2.9546
+## 12                 -2.9405
+## 
+## $lfClassflowering
+##          z par.vals.lfClass>6 par.vals.lfClassflowering
+## 1  -2.5891             0.3577                    0.4669
+## 2  -2.0699             0.4590                    0.6034
+## 3  -1.5511             0.5599                    0.7399
+## 4  -1.0330             0.6607                    0.8765
+## 5  -0.5159             0.7611                    1.0130
+## 6   0.0000             0.8614                    1.1496
+## 7   0.5144             0.9616                    1.2861
+## 8   1.0270             1.0616                    1.4227
+## 9   1.5375             1.1616                    1.5592
+## 10  2.0458             1.2616                    1.6957
+## 11  2.5515             1.3616                    1.8323
+## 12  3.0545             1.4617                    1.9688
+##    par.vals.date2004-08-07 par.vals.date2004-08-08 par.vals.date2004-08-09
+## 1                  -0.9463                 -1.1876                 -1.3289
+## 2                  -0.9355                 -1.1851                 -1.3263
+## 3                  -0.9247                 -1.1829                 -1.3238
+## 4                  -0.9139                 -1.1808                 -1.3216
+## 5                  -0.9029                 -1.1786                 -1.3193
+## 6                  -0.8924                 -1.1772                 -1.3178
+## 7                  -0.8815                 -1.1756                 -1.3161
+## 8                  -0.8705                 -1.1740                 -1.3145
+## 9                  -0.8595                 -1.1726                 -1.3131
+## 10                 -0.8483                 -1.1712                 -1.3119
+## 11                 -0.8371                 -1.1700                 -1.3108
+## 12                 -0.8258                 -1.1689                 -1.3099
+##    par.vals.date2004-08-12
+## 1                  -3.3881
+## 2                  -3.3180
+## 3                  -3.2499
+## 4                  -3.1834
+## 5                  -3.1172
+## 6                  -3.0556
+## 7                  -2.9942
+## 8                  -2.9337
+## 9                  -2.8749
+## 10                 -2.8173
+## 11                 -2.7610
+## 12                 -2.7057
+## 
+## $`date2004-08-07`
+##          z par.vals.lfClass>6 par.vals.lfClassflowering
+## 1  -2.9452            0.87551                   1.13607
+## 2  -2.4823            0.87203                   1.13582
+## 3  -2.0060            0.86885                   1.13643
+## 4  -1.5178            0.86612                   1.13806
+## 5  -1.0195            0.86392                   1.14078
+## 6  -0.5129            0.86236                   1.14466
+## 7   0.0000            0.86144                   1.14957
+## 8   0.5168            0.86119                   1.15544
+## 9   1.0357            0.86160                   1.16213
+## 10  1.5547            0.86266                   1.16949
+## 11  2.0723            0.86437                   1.17739
+## 12  2.5869            0.86677                   1.18576
+##    par.vals.date2004-08-07 par.vals.date2004-08-08 par.vals.date2004-08-09
+## 1                 -2.53230                -2.67211                -2.81642
+## 2                 -2.25899                -2.41783                -2.56160
+## 3                 -1.98567                -2.16593                -2.30909
+## 4                 -1.71236                -1.91622                -2.05877
+## 5                 -1.43904                -1.66845                -1.81034
+## 6                 -1.16573                -1.42226                -1.56350
+## 7                 -0.89241                -1.17723                -1.31783
+## 8                 -0.61910                -0.93293                -1.07294
+## 9                 -0.34578                -0.68894                -0.82840
+## 10                -0.07247                -0.44489                -0.58387
+## 11                 0.20085                -0.20045                -0.33905
+## 12                 0.47416                 0.04461                -0.09370
+##    par.vals.date2004-08-12
+## 1                 -4.57732
+## 2                 -4.32000
+## 3                 -4.06446
+## 4                 -3.81022
+## 5                 -3.55784
+## 6                 -3.30585
+## 7                 -3.05563
+## 8                 -2.80538
+## 9                 -2.55554
+## 10                -2.30579
+## 11                -2.05599
+## 12                -1.80598
+## 
+## $`date2004-08-08`
+##          z par.vals.lfClass>6 par.vals.lfClassflowering
+## 1  -2.9418            0.89270                   1.15961
+## 2  -2.4797            0.88688                   1.15617
+## 3  -2.0042            0.88110                   1.15324
+## 4  -1.5168            0.87554                   1.15103
+## 5  -1.0190            0.87034                   1.14963
+## 6  -0.5127            0.86566                   1.14918
+## 7   0.0000            0.86144                   1.14957
+## 8   0.5169            0.85775                   1.15076
+## 9   1.0362            0.85495                   1.15291
+## 10  1.5558            0.85272                   1.15567
+## 11  2.0742            0.85124                   1.15906
+## 12  2.5898            0.85055                   1.16304
+##    par.vals.date2004-08-07 par.vals.date2004-08-08 par.vals.date2004-08-09
+## 1                 -2.38572                -2.81440                -2.82044
+## 2                 -2.13218                -2.54154                -2.56539
+## 3                 -1.88085                -2.26868                -2.31247
+## 4                 -1.63154                -1.99581                -2.06156
+## 5                 -1.38395                -1.72295                -1.81237
+## 6                 -1.13773                -1.45009                -1.56460
+## 7                 -0.89241                -1.17723                -1.31783
+## 8                 -0.64755                -0.90436                -1.07168
+## 9                 -0.40281                -0.63150                -0.82581
+## 10                -0.15773                -0.35864                -0.57982
+## 11                 0.08796                -0.08578                -0.33345
+## 12                 0.33449                 0.18708                -0.08649
+##    par.vals.date2004-08-12
+## 1                 -4.57454
+## 2                 -4.31782
+## 3                 -4.06283
+## 4                 -3.80923
+## 5                 -3.55722
+## 6                 -3.30518
+## 7                 -3.05563
+## 8                 -2.80641
+## 9                 -2.55570
+## 10                -2.30586
+## 11                -2.05594
+## 12                -1.80573
+## 
+## $`date2004-08-09`
+##          z par.vals.lfClass>6 par.vals.lfClassflowering
+## 1  -2.9440            0.90244                   1.15938
+## 2  -2.4811            0.89528                   1.15597
+## 3  -2.0050            0.88804                   1.15308
+## 4  -1.5171            0.88089                   1.15090
+## 5  -1.0191            0.87399                   1.14956
+## 6  -0.5127            0.86750                   1.14915
+## 7   0.0000            0.86144                   1.14957
+## 8   0.5169            0.85596                   1.15088
+## 9   1.0363            0.85112                   1.15298
+## 10  1.5562            0.84698                   1.15579
+## 11  2.0750            0.84360                   1.15922
+## 12  2.5913            0.84102                   1.16324
+##    par.vals.date2004-08-07 par.vals.date2004-08-08 par.vals.date2004-08-09
+## 1                 -2.38044                -2.67083                -2.96714
+## 2                 -2.12735                -2.41678                -2.69225
+## 3                 -1.87670                -2.16514                -2.41737
+## 4                 -1.62825                -1.91571                -2.14248
+## 5                 -1.38167                -1.66818                -1.86760
+## 6                 -1.13656                -1.42218                -1.59271
+## 7                 -0.89241                -1.17723                -1.31783
+## 8                 -0.64876                -0.93289                -1.04295
+## 9                 -0.40516                -0.68871                -0.76806
+## 10                -0.16119                -0.44431                -0.49318
+## 11                 0.08348                -0.19935                -0.21829
+## 12                 0.32912                 0.04643                 0.05659
+##    par.vals.date2004-08-12
+## 1                 -4.57387
+## 2                 -4.31707
+## 3                 -4.06208
+## 4                 -3.80860
+## 5                 -3.55663
+## 6                 -3.30489
+## 7                 -3.05563
+## 8                 -2.80584
+## 9                 -2.55631
+## 10                -2.30676
+## 11                -2.05690
+## 12                -1.80666
+## 
+## $`date2004-08-12`
+##          z par.vals.lfClass>6 par.vals.lfClassflowering
+## 1  -2.5968             0.8530                    1.1218
+## 2  -2.3320             0.8530                    1.1222
+## 3  -2.0406             0.8531                    1.1230
+## 4  -1.7167             0.8533                    1.1244
+## 5  -1.3542             0.8537                    1.1270
+## 6  -0.9479             0.8547                    1.1315
+## 7  -0.4957             0.8555                    1.1376
+## 8   0.0000             0.8614                    1.1496
+## 9   0.5315             0.8689                    1.1641
+## 10  1.0880             0.8796                    1.1819
+## 11  1.6564             0.8926                    1.2014
+## 12  2.2234             0.9065                    1.2206
+## 13  2.7764             0.9192                    1.2374
+##    par.vals.date2004-08-07 par.vals.date2004-08-08 par.vals.date2004-08-09
+## 1                  -1.1500                 -1.4345                 -1.5768
+## 2                  -1.1456                 -1.4301                 -1.5724
+## 3                  -1.1374                 -1.4219                 -1.5641
+## 4                  -1.1222                 -1.4067                 -1.5488
+## 5                  -1.0952                 -1.3797                 -1.5217
+## 6                  -1.0507                 -1.3352                 -1.4769
+## 7                  -0.9829                 -1.2675                 -1.4087
+## 8                  -0.8924                 -1.1772                 -1.3178
+## 9                  -0.7811                 -1.0662                 -1.2062
+## 10                 -0.6578                 -0.9435                 -1.0827
+## 11                 -0.5331                 -0.8194                 -0.9580
+## 12                 -0.4178                 -0.7047                 -0.8428
+## 13                 -0.3209                 -0.6085                 -0.7462
+##    par.vals.date2004-08-12
+## 1                  -7.7387
+## 2                  -7.0697
+## 3                  -6.4006
+## 4                  -5.7316
+## 5                  -5.0626
+## 6                  -4.3936
+## 7                  -3.7246
+## 8                  -3.0556
+## 9                  -2.3866
+## 10                 -1.7176
+## 11                 -1.0486
+## 12                 -0.3796
+## 13                  0.2894
+## 
+## attr(,"original.fit")
+## Call:
+## polr(formula = aphids2 ~ lfClass + date, data = ss)
+## 
+## Coefficients:
+##        lfClass>6 lfClassflowering   date2004-08-07   date2004-08-08 
+##           0.8614           1.1496          -0.8924          -1.1772 
+##   date2004-08-09   date2004-08-12 
+##          -1.3178          -3.0556 
+## 
+## Intercepts:
+##     0|1-10 1-10|11-80  11-80|>80 
+##     -1.818     -1.267      1.032 
+## 
+## Residual Deviance: 891.46 
+## AIC: 909.46 
+## attr(,"summary")
+## Call:
+## polr(formula = aphids2 ~ lfClass + date, data = ss)
+## 
+## Coefficients:
+##                    Value Std. Error t value
+## lfClass>6         0.8614     0.2928   2.942
+## lfClassflowering  1.1496     0.2650   4.337
+## date2004-08-07   -0.8924     0.5305  -1.682
+## date2004-08-08   -1.1772     0.5297  -2.223
+## date2004-08-09   -1.3178     0.5336  -2.470
+## date2004-08-12   -3.0556     1.2986  -2.353
+## 
+## Intercepts:
+##            Value   Std. Error t value
+## 0|1-10     -1.8180  0.5520    -3.2931
+## 1-10|11-80 -1.2668  0.5488    -2.3082
+## 11-80|>80   1.0319  0.5475     1.8847
+## 
+## Residual Deviance: 891.46 
+## AIC: 909.46 
+## attr(,"class")
+## [1] "profile.polr" "profile"
+</pre></div><div class="source"><pre class="knitr r"><span class="functioncall">plot</span>(pb)
+</pre></div></div><div class="rimage default"><img src="figure/unnamed-chunk-72.png" title="plot of chunk unnamed-chunk-7" alt="plot of chunk unnamed-chunk-7" class="plot" /></div><div class="rcode">
+<div class="source"><pre class="knitr r"><span class="functioncall">pairs</span>(pb)
+</pre></div></div><div class="rimage default"><img src="figure/unnamed-chunk-73.png" title="plot of chunk unnamed-chunk-7" alt="plot of chunk unnamed-chunk-7" class="plot" /></div><div class="rcode">
+<div class="source"><pre class="knitr r">
+## use goodness of fit <span class="functioncall">test</span> (<span class="keyword">if</span> p val &gt;0.05, model is a good fit)
+<span class="functioncall">pchisq</span>(<span class="functioncall">deviance</span>(best), <span class="functioncall">df.residual</span>(best))
+</pre></div><div class="output"><pre class="knitr r">## [1] 1
+</pre></div><div class="source"><pre class="knitr r">
+# compare predicted abundances to actual <span class="functioncall">abundances</span> (by size class on one
+<span class="comment"># date)</span>
+newd &lt;- <span class="functioncall">data.frame</span>(lfClass = <span class="functioncall">c</span>(<span class="string">"1-5"</span>, <span class="string">"&gt;6"</span>, <span class="string">"flowering"</span>), date = <span class="string">"2004-08-07"</span>)
+pred &lt;- <span class="functioncall">predict</span>(best, type = <span class="string">"prob"</span>, newdata = newd)
+obs &lt;- <span class="functioncall">tapply</span>(ss$lfClass, <span class="functioncall">list</span>(ss$lfClass, ss$aphids2), length)
+(obs &lt;- obs/<span class="functioncall">apply</span>(obs, 1, sum))
+</pre></div><div class="output"><pre class="knitr r">##                0   1-10  11-80     >80
+## 1-5       0.2879 0.1818 0.4697 0.06061
+## >6        0.1562 0.0625 0.6146 0.16667
+## flowering 0.1667 0.0787 0.4398 0.31481
+</pre></div><div class="source"><pre class="knitr r"><span class="functioncall">par</span>(mfcol = <span class="functioncall">c</span>(1, 2))
+<span class="functioncall">barplot</span>(pred, beside = T)
+<span class="functioncall">legend</span>(<span class="string">"topleft"</span>, legend = <span class="string">"pred."</span>)
+<span class="functioncall">barplot</span>(obs, beside = T)
+<span class="functioncall">legend</span>(<span class="string">"topleft"</span>, legend = <span class="string">"obs"</span>)
+</pre></div></div><div class="rimage default"><img src="figure/unnamed-chunk-74.png" title="plot of chunk unnamed-chunk-7" alt="plot of chunk unnamed-chunk-7" class="plot" /></div><div class="rcode">
+<div class="source"><pre class="knitr r"><span class="functioncall">par</span>(mfcol = <span class="functioncall">c</span>(1, 1))
+
+<span class="comment"># it looks pretty good.</span>
+</pre></div></div></div>
+
+
+Next: compare results of polr with a glm binomial of aphid presence/absence:
+<div class="chunk" id="unnamed-chunk-8"><div class="rcode"><div class="source"><pre class="knitr r">ss$aphidsPresent &lt;- 0
+ss[ss$aphids2 != <span class="string">"0"</span>, <span class="string">"aphidsPresent"</span>] &lt;- 1
+
+a6 &lt;- <span class="functioncall">glm</span>(aphidsPresent ~ siteOfOriginPedigree:lfClass + siteOfOriginPedigree + 
+    lfClass + row + pos + date, family = binomial, data = ss)
+<span class="functioncall">summary</span>(a6)
+</pre></div><div class="output"><pre class="knitr r">## 
+## Call:
+## glm(formula = aphidsPresent ~ siteOfOriginPedigree:lfClass + 
+##     siteOfOriginPedigree + lfClass + row + pos + date, family = binomial, 
+##     data = ss)
+## 
+## Deviance Residuals: 
+##    Min      1Q  Median      3Q     Max  
+## -2.273   0.372   0.529   0.638   1.709  
+## 
+## Coefficients:
+##                                            Estimate Std. Error z value
+## (Intercept)                                -21.1763    19.8967   -1.06
+## siteOfOriginPedigreeeri                     -1.6518     1.2472   -1.32
+## siteOfOriginPedigreespp                     -1.9210     1.3303   -1.44
+## siteOfOriginPedigreeaa                      -2.5719     1.7835   -1.44
+## siteOfOriginPedigreeness                    -1.7406     1.3728   -1.27
+## siteOfOriginPedigreesap                     -0.6699     1.5138   -0.44
+## siteOfOriginPedigreenwlf                    -1.7826     1.1585   -1.54
+## lfClass>6                                   14.9187  1314.0046    0.01
+## lfClassflowering                            -1.7842     1.1302   -1.58
+## row                                         -0.0135     0.0223   -0.61
+## pos                                          0.0256     0.0211    1.21
+## date2004-08-07                              -0.3412     0.7605   -0.45
+## date2004-08-08                              -0.2484     0.7535   -0.33
+## date2004-08-09                              -0.1337     0.7490   -0.18
+## date2004-08-12                              -1.9747     1.5325   -1.29
+## siteOfOriginPedigreeeri:lfClass>6          -14.7132  1314.0049   -0.01
+## siteOfOriginPedigreespp:lfClass>6          -12.9873  1314.0053   -0.01
+## siteOfOriginPedigreeaa:lfClass>6           -14.1511  1314.0057   -0.01
+## siteOfOriginPedigreeness:lfClass>6           1.8875  1913.9474    0.00
+## siteOfOriginPedigreesap:lfClass>6          -14.9641  1314.0054   -0.01
+## siteOfOriginPedigreenwlf:lfClass>6         -13.9945  1314.0048   -0.01
+## siteOfOriginPedigreeeri:lfClassflowering     2.5394     1.3722    1.85
+## siteOfOriginPedigreespp:lfClassflowering     3.1350     1.4694    2.13
+## siteOfOriginPedigreeaa:lfClassflowering      4.2679     2.0986    2.03
+## siteOfOriginPedigreeness:lfClassflowering    1.7413     1.6784    1.04
+## siteOfOriginPedigreesap:lfClassflowering     1.8279     1.6560    1.10
+## siteOfOriginPedigreenwlf:lfClassflowering    2.6909     1.2802    2.10
+##                                           Pr(>|z|)  
+## (Intercept)                                  0.287  
+## siteOfOriginPedigreeeri                      0.185  
+## siteOfOriginPedigreespp                      0.149  
+## siteOfOriginPedigreeaa                       0.149  
+## siteOfOriginPedigreeness                     0.205  
+## siteOfOriginPedigreesap                      0.658  
+## siteOfOriginPedigreenwlf                     0.124  
+## lfClass>6                                    0.991  
+## lfClassflowering                             0.114  
+## row                                          0.543  
+## pos                                          0.225  
+## date2004-08-07                               0.654  
+## date2004-08-08                               0.742  
+## date2004-08-09                               0.858  
+## date2004-08-12                               0.198  
+## siteOfOriginPedigreeeri:lfClass>6            0.991  
+## siteOfOriginPedigreespp:lfClass>6            0.992  
+## siteOfOriginPedigreeaa:lfClass>6             0.991  
+## siteOfOriginPedigreeness:lfClass>6           0.999  
+## siteOfOriginPedigreesap:lfClass>6            0.991  
+## siteOfOriginPedigreenwlf:lfClass>6           0.992  
+## siteOfOriginPedigreeeri:lfClassflowering     0.064 .
+## siteOfOriginPedigreespp:lfClassflowering     0.033 *
+## siteOfOriginPedigreeaa:lfClassflowering      0.042 *
+## siteOfOriginPedigreeness:lfClassflowering    0.300  
+## siteOfOriginPedigreesap:lfClassflowering     0.270  
+## siteOfOriginPedigreenwlf:lfClassflowering    0.036 *
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1 
+## 
+## (Dispersion parameter for binomial family taken to be 1)
+## 
+##     Null deviance: 362.25  on 377  degrees of freedom
+## Residual deviance: 331.17  on 351  degrees of freedom
+## AIC: 385.2
+## 
+## Number of Fisher Scoring iterations: 16
+</pre></div><div class="source"><pre class="knitr r">a5 &lt;- <span class="functioncall">glm</span>(aphidsPresent ~ siteOfOriginPedigree + lfClass + row + pos + date, 
+    family = binomial, data = ss)
+<span class="functioncall">anova</span>(a5, a6, test = <span class="string">"Chi"</span>)
+</pre></div><div class="output"><pre class="knitr r">## Analysis of Deviance Table
+## 
+## Model 1: aphidsPresent ~ siteOfOriginPedigree + lfClass + row + pos + 
+##     date
+## Model 2: aphidsPresent ~ siteOfOriginPedigree:lfClass + siteOfOriginPedigree + 
+##     lfClass + row + pos + date
+##   Resid. Df Resid. Dev Df Deviance Pr(>Chi)
+## 1       363        350                     
+## 2       351        331 12     18.4      0.1
+</pre></div><div class="source"><pre class="knitr r">a5.1 &lt;- <span class="functioncall">glm</span>(aphidsPresent ~ +lfClass + row + pos + date, family = binomial, 
+    data = ss)
+a5.2 &lt;- <span class="functioncall">glm</span>(aphidsPresent ~ siteOfOriginPedigree + row + pos + date, family = binomial, 
+    data = ss)
+a5.3 &lt;- <span class="functioncall">glm</span>(aphidsPresent ~ siteOfOriginPedigree + lfClass + pos + date, family = binomial, 
+    data = ss)
+a5.4 &lt;- <span class="functioncall">glm</span>(aphidsPresent ~ siteOfOriginPedigree + lfClass + row + date, family = binomial, 
+    data = ss)
+a5.5 &lt;- <span class="functioncall">glm</span>(aphidsPresent ~ siteOfOriginPedigree + lfClass + row + pos, family = binomial, 
+    data = ss)
+<span class="functioncall">anova</span>(a5.1, a5, test = <span class="string">"Chi"</span>)
+</pre></div><div class="output"><pre class="knitr r">## Analysis of Deviance Table
+## 
+## Model 1: aphidsPresent ~ +lfClass + row + pos + date
+## Model 2: aphidsPresent ~ siteOfOriginPedigree + lfClass + row + pos + 
+##     date
+##   Resid. Df Resid. Dev Df Deviance Pr(>Chi)
+## 1       369        352                     
+## 2       363        350  6     2.13     0.91
+</pre></div><div class="source"><pre class="knitr r"><span class="functioncall">anova</span>(a5.2, a5, test = <span class="string">"Chi"</span>)
+</pre></div><div class="output"><pre class="knitr r">## Analysis of Deviance Table
+## 
+## Model 1: aphidsPresent ~ siteOfOriginPedigree + row + pos + date
+## Model 2: aphidsPresent ~ siteOfOriginPedigree + lfClass + row + pos + 
+##     date
+##   Resid. Df Resid. Dev Df Deviance Pr(>Chi)
+## 1       365        352                     
+## 2       363        350  2     2.66     0.26
+</pre></div><div class="source"><pre class="knitr r"><span class="functioncall">anova</span>(a5.3, a5, test = <span class="string">"Chi"</span>)
+</pre></div><div class="output"><pre class="knitr r">## Analysis of Deviance Table
+## 
+## Model 1: aphidsPresent ~ siteOfOriginPedigree + lfClass + pos + date
+## Model 2: aphidsPresent ~ siteOfOriginPedigree + lfClass + row + pos + 
+##     date
+##   Resid. Df Resid. Dev Df Deviance Pr(>Chi)
+## 1       364        350                     
+## 2       363        350  1    0.397     0.53
+</pre></div><div class="source"><pre class="knitr r"><span class="functioncall">anova</span>(a5.4, a5, test = <span class="string">"Chi"</span>)
+</pre></div><div class="output"><pre class="knitr r">## Analysis of Deviance Table
+## 
+## Model 1: aphidsPresent ~ siteOfOriginPedigree + lfClass + row + date
+## Model 2: aphidsPresent ~ siteOfOriginPedigree + lfClass + row + pos + 
+##     date
+##   Resid. Df Resid. Dev Df Deviance Pr(>Chi)
+## 1       364        351                     
+## 2       363        350  1     1.78     0.18
+</pre></div><div class="source"><pre class="knitr r"><span class="functioncall">anova</span>(a5.5, a5, test = <span class="string">"Chi"</span>)
+</pre></div><div class="output"><pre class="knitr r">## Analysis of Deviance Table
+## 
+## Model 1: aphidsPresent ~ siteOfOriginPedigree + lfClass + row + pos
+## Model 2: aphidsPresent ~ siteOfOriginPedigree + lfClass + row + pos + 
+##     date
+##   Resid. Df Resid. Dev Df Deviance Pr(>Chi)
+## 1       367        353                     
+## 2       363        350  4      3.3     0.51
+</pre></div><div class="source"><pre class="knitr r">
+a4 &lt;- <span class="functioncall">glm</span>(aphidsPresent ~ lfClass + row + pos + date, family = binomial, data = ss)
+a4.1 &lt;- <span class="functioncall">glm</span>(aphidsPresent ~ +row + pos + date, family = binomial, data = ss)
+a4.2 &lt;- <span class="functioncall">glm</span>(aphidsPresent ~ lfClass + pos + date, family = binomial, data = ss)
+a4.3 &lt;- <span class="functioncall">glm</span>(aphidsPresent ~ lfClass + row + date, family = binomial, data = ss)
+a4.4 &lt;- <span class="functioncall">glm</span>(aphidsPresent ~ lfClass + row + pos, family = binomial, data = ss)
+<span class="functioncall">anova</span>(a4.1, a4, test = <span class="string">"Chi"</span>)
+</pre></div><div class="output"><pre class="knitr r">## Analysis of Deviance Table
+## 
+## Model 1: aphidsPresent ~ +row + pos + date
+## Model 2: aphidsPresent ~ lfClass + row + pos + date
+##   Resid. Df Resid. Dev Df Deviance Pr(>Chi)
+## 1       371        355                     
+## 2       369        352  2     2.91     0.23
+</pre></div><div class="source"><pre class="knitr r"><span class="functioncall">anova</span>(a4.2, a4, test = <span class="string">"Chi"</span>)
+</pre></div><div class="output"><pre class="knitr r">## Analysis of Deviance Table
+## 
+## Model 1: aphidsPresent ~ lfClass + pos + date
+## Model 2: aphidsPresent ~ lfClass + row + pos + date
+##   Resid. Df Resid. Dev Df Deviance Pr(>Chi)
+## 1       370        352                     
+## 2       369        352  1    0.514     0.47
+</pre></div><div class="source"><pre class="knitr r"><span class="functioncall">anova</span>(a4.3, a4, test = <span class="string">"Chi"</span>)
+</pre></div><div class="output"><pre class="knitr r">## Analysis of Deviance Table
+## 
+## Model 1: aphidsPresent ~ lfClass + row + date
+## Model 2: aphidsPresent ~ lfClass + row + pos + date
+##   Resid. Df Resid. Dev Df Deviance Pr(>Chi)
+## 1       370        353                     
+## 2       369        352  1     1.79     0.18
+</pre></div><div class="source"><pre class="knitr r"><span class="functioncall">anova</span>(a4.4, a4, test = <span class="string">"Chi"</span>)
+</pre></div><div class="output"><pre class="knitr r">## Analysis of Deviance Table
+## 
+## Model 1: aphidsPresent ~ lfClass + row + pos
+## Model 2: aphidsPresent ~ lfClass + row + pos + date
+##   Resid. Df Resid. Dev Df Deviance Pr(>Chi)
+## 1       373        355                     
+## 2       369        352  4     3.26     0.52
+</pre></div><div class="source"><pre class="knitr r">
+a3 &lt;- <span class="functioncall">glm</span>(aphidsPresent ~ lfClass + row + pos, family = binomial, data = ss)
+a3.1 &lt;- <span class="functioncall">glm</span>(aphidsPresent ~ +row + pos, family = binomial, data = ss)
+a3.2 &lt;- <span class="functioncall">glm</span>(aphidsPresent ~ lfClass + pos, family = binomial, data = ss)
+a3.3 &lt;- <span class="functioncall">glm</span>(aphidsPresent ~ lfClass + row, family = binomial, data = ss)
+<span class="functioncall">anova</span>(a3.1, a3, test = <span class="string">"Chi"</span>)
+</pre></div><div class="output"><pre class="knitr r">## Analysis of Deviance Table
+## 
+## Model 1: aphidsPresent ~ +row + pos
+## Model 2: aphidsPresent ~ lfClass + row + pos
+##   Resid. Df Resid. Dev Df Deviance Pr(>Chi)
+## 1       375        359                     
+## 2       373        355  2     3.68     0.16
+</pre></div><div class="source"><pre class="knitr r"><span class="functioncall">anova</span>(a3.2, a3, test = <span class="string">"Chi"</span>)
+</pre></div><div class="output"><pre class="knitr r">## Analysis of Deviance Table
+## 
+## Model 1: aphidsPresent ~ lfClass + pos
+## Model 2: aphidsPresent ~ lfClass + row + pos
+##   Resid. Df Resid. Dev Df Deviance Pr(>Chi)
+## 1       374        355                     
+## 2       373        355  1    0.309     0.58
+</pre></div><div class="source"><pre class="knitr r"><span class="functioncall">anova</span>(a3.3, a3, test = <span class="string">"Chi"</span>)
+</pre></div><div class="output"><pre class="knitr r">## Analysis of Deviance Table
+## 
+## Model 1: aphidsPresent ~ lfClass + row
+## Model 2: aphidsPresent ~ lfClass + row + pos
+##   Resid. Df Resid. Dev Df Deviance Pr(>Chi)
+## 1       374        357                     
+## 2       373        355  1     1.74     0.19
+</pre></div><div class="source"><pre class="knitr r">
+a2 &lt;- <span class="functioncall">glm</span>(aphidsPresent ~ lfClass + pos, family = binomial, data = ss)
+a2.1 &lt;- <span class="functioncall">glm</span>(aphidsPresent ~ pos, family = binomial, data = ss)
+a2.2 &lt;- <span class="functioncall">glm</span>(aphidsPresent ~ lfClass, family = binomial, data = ss)
+<span class="functioncall">anova</span>(a2.1, a2, test = <span class="string">"Chi"</span>)
+</pre></div><div class="output"><pre class="knitr r">## Analysis of Deviance Table
+## 
+## Model 1: aphidsPresent ~ pos
+## Model 2: aphidsPresent ~ lfClass + pos
+##   Resid. Df Resid. Dev Df Deviance Pr(>Chi)
+## 1       376        359                     
+## 2       374        355  2     3.49     0.17
+</pre></div><div class="source"><pre class="knitr r"><span class="functioncall">anova</span>(a2.2, a2, test = <span class="string">"Chi"</span>)
+</pre></div><div class="output"><pre class="knitr r">## Analysis of Deviance Table
+## 
+## Model 1: aphidsPresent ~ lfClass
+## Model 2: aphidsPresent ~ lfClass + pos
+##   Resid. Df Resid. Dev Df Deviance Pr(>Chi)
+## 1       375        357                     
+## 2       374        355  1     1.83     0.18
+</pre></div><div class="source"><pre class="knitr r">a1 &lt;- <span class="functioncall">glm</span>(aphidsPresent ~ lfClass, family = binomial, data = ss)
+null &lt;- <span class="functioncall">glm</span>(aphidsPresent ~ 1, family = binomial, data = ss)
+<span class="functioncall">anova</span>(null, a1, a2, a3, a4, a5, a6, test = <span class="string">"Chi"</span>)
+</pre></div><div class="output"><pre class="knitr r">## Analysis of Deviance Table
+## 
+## Model 1: aphidsPresent ~ 1
+## Model 2: aphidsPresent ~ lfClass
+## Model 3: aphidsPresent ~ lfClass + pos
+## Model 4: aphidsPresent ~ lfClass + row + pos
+## Model 5: aphidsPresent ~ lfClass + row + pos + date
+## Model 6: aphidsPresent ~ siteOfOriginPedigree + lfClass + row + pos + 
+##     date
+## Model 7: aphidsPresent ~ siteOfOriginPedigree:lfClass + siteOfOriginPedigree + 
+##     lfClass + row + pos + date
+##   Resid. Df Resid. Dev Df Deviance Pr(>Chi)  
+## 1       377        362                       
+## 2       375        357  2     5.16    0.076 .
+## 3       374        355  1     1.84    0.176  
+## 4       373        355  1     0.31    0.578  
+## 5       369        352  4     3.26    0.516  
+## 6       363        350  6     2.13    0.908  
+## 7       351        331 12    18.39    0.104  
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+</pre></div><div class="source"><pre class="knitr r">
+<span class="comment"># evaluate best model:</span>
+best &lt;- <span class="functioncall">glm</span>(aphidsPresent ~ lfClass, family = binomial, data = ss)
+<span class="functioncall">summary</span>(best)
+</pre></div><div class="output"><pre class="knitr r">## 
+## Call:
+## glm(formula = aphidsPresent ~ lfClass, family = binomial, data = ss)
+## 
+## Deviance Residuals: 
+##    Min      1Q  Median      3Q     Max  
+## -1.927   0.583   0.604   0.604   0.824  
+## 
+## Coefficients:
+##                  Estimate Std. Error z value Pr(>|z|)    
+## (Intercept)         0.906      0.272    3.33  0.00086 ***
+## lfClass>6           0.781      0.391    2.00  0.04589 *  
+## lfClassflowering    0.704      0.327    2.15  0.03164 *  
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1 
+## 
+## (Dispersion parameter for binomial family taken to be 1)
+## 
+##     Null deviance: 362.25  on 377  degrees of freedom
+## Residual deviance: 357.09  on 375  degrees of freedom
+## AIC: 363.1
+## 
+## Number of Fisher Scoring iterations: 4
+</pre></div><div class="source"><pre class="knitr r"><span class="functioncall">par</span>(mfcol = <span class="functioncall">c</span>(2, 2))
+<span class="functioncall">plot</span>(best)
+</pre></div></div><div class="rimage default"><img src="figure/unnamed-chunk-8.png" title="plot of chunk unnamed-chunk-8" alt="plot of chunk unnamed-chunk-8" class="plot" /></div><div class="rcode">
+<div class="source"><pre class="knitr r"><span class="functioncall">par</span>(mfcol = <span class="functioncall">c</span>(1, 1))
+<span class="comment"># doesn't look great</span>
+</pre></div></div></div>
+
+
+Site of origin did not make a difference in aphid abundance in the 1996 garden in 2004. The test of aphid presence/absence did not detect differences based on date and detected a weaker effect of plant size.
+
+How about categories of low vs. high abundance?
+<div class="chunk" id="unnamed-chunk-9"><div class="rcode"><div class="source"><pre class="knitr r">ss$aphidLH &lt;- 0
+ss[ss$aphids2 %<span class="keyword">in</span>% <span class="functioncall">c</span>(<span class="string">"0"</span>, <span class="string">"1-10"</span>), <span class="string">"aphidLH"</span>] &lt;- 0
+ss[ss$aphids2 %<span class="keyword">in</span>% <span class="functioncall">c</span>(<span class="string">"11-80"</span>, <span class="string">"&gt;80"</span>), <span class="string">"aphidLH"</span>] &lt;- 1
+
+a6 &lt;- <span class="functioncall">glm</span>(aphidLH ~ siteOfOriginPedigree:lfClass + siteOfOriginPedigree + lfClass + 
+    row + pos + date, family = quasibinomial, data = ss)
+<span class="functioncall">summary</span>(a6)
+</pre></div><div class="output"><pre class="knitr r">## 
+## Call:
+## glm(formula = aphidLH ~ siteOfOriginPedigree:lfClass + siteOfOriginPedigree + 
+##     lfClass + row + pos + date, family = quasibinomial, data = ss)
+## 
+## Deviance Residuals: 
+##    Min      1Q  Median      3Q     Max  
+## -2.300  -1.091   0.629   0.842   1.387  
+## 
+## Coefficients:
+##                                            Estimate Std. Error t value
+## (Intercept)                               -5.36e+00   1.73e+01   -0.31
+## siteOfOriginPedigreeeri                   -7.41e-01   9.00e-01   -0.82
+## siteOfOriginPedigreespp                   -5.71e-01   1.03e+00   -0.55
+## siteOfOriginPedigreeaa                    -8.71e-01   1.57e+00   -0.55
+## siteOfOriginPedigreeness                  -8.00e-01   1.05e+00   -0.76
+## siteOfOriginPedigreesap                   -1.00e+00   9.99e-01   -1.00
+## siteOfOriginPedigreenwlf                  -5.32e-01   7.78e-01   -0.68
+## lfClass>6                                  1.69e+01   1.31e+03    0.01
+## lfClassflowering                          -3.22e-01   7.40e-01   -0.44
+## row                                       -2.70e-02   1.97e-02   -1.37
+## pos                                        8.01e-03   1.84e-02    0.44
+## date2004-08-07                            -7.60e-01   7.33e-01   -1.04
+## date2004-08-08                            -7.81e-01   7.28e-01   -1.07
+## date2004-08-09                            -9.77e-01   7.19e-01   -1.36
+## date2004-08-12                            -1.89e+01   2.15e+03   -0.01
+## siteOfOriginPedigreeeri:lfClass>6         -1.62e+01   1.31e+03   -0.01
+## siteOfOriginPedigreespp:lfClass>6         -1.45e+01   1.31e+03   -0.01
+## siteOfOriginPedigreeaa:lfClass>6          -1.61e+01   1.31e+03   -0.01
+## siteOfOriginPedigreeness:lfClass>6         7.64e-01   1.91e+03    0.00
+## siteOfOriginPedigreesap:lfClass>6         -1.52e+01   1.31e+03   -0.01
+## siteOfOriginPedigreenwlf:lfClass>6        -1.62e+01   1.31e+03   -0.01
+## siteOfOriginPedigreeeri:lfClassflowering   1.21e+00   1.03e+00    1.17
+## siteOfOriginPedigreespp:lfClassflowering   1.79e+00   1.18e+00    1.52
+## siteOfOriginPedigreeaa:lfClassflowering    2.94e+00   1.92e+00    1.53
+## siteOfOriginPedigreeness:lfClassflowering  1.21e+00   1.42e+00    0.85
+## siteOfOriginPedigreesap:lfClassflowering   2.03e+00   1.17e+00    1.74
+## siteOfOriginPedigreenwlf:lfClassflowering  1.15e+00   9.22e-01    1.25
+##                                           Pr(>|t|)  
+## (Intercept)                                  0.757  
+## siteOfOriginPedigreeeri                      0.411  
+## siteOfOriginPedigreespp                      0.581  
+## siteOfOriginPedigreeaa                       0.579  
+## siteOfOriginPedigreeness                     0.446  
+## siteOfOriginPedigreesap                      0.317  
+## siteOfOriginPedigreenwlf                     0.494  
+## lfClass>6                                    0.990  
+## lfClassflowering                             0.663  
+## row                                          0.171  
+## pos                                          0.663  
+## date2004-08-07                               0.301  
+## date2004-08-08                               0.283  
+## date2004-08-09                               0.175  
+## date2004-08-12                               0.993  
+## siteOfOriginPedigreeeri:lfClass>6            0.990  
+## siteOfOriginPedigreespp:lfClass>6            0.991  
+## siteOfOriginPedigreeaa:lfClass>6             0.990  
+## siteOfOriginPedigreeness:lfClass>6           1.000  
+## siteOfOriginPedigreesap:lfClass>6            0.991  
+## siteOfOriginPedigreenwlf:lfClass>6           0.990  
+## siteOfOriginPedigreeeri:lfClassflowering     0.242  
+## siteOfOriginPedigreespp:lfClassflowering     0.130  
+## siteOfOriginPedigreeaa:lfClassflowering      0.127  
+## siteOfOriginPedigreeness:lfClassflowering    0.395  
+## siteOfOriginPedigreesap:lfClassflowering     0.083 .
+## siteOfOriginPedigreenwlf:lfClassflowering    0.213  
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1 
+## 
+## (Dispersion parameter for quasibinomial family taken to be 1.002)
+## 
+##     Null deviance: 446.68  on 377  degrees of freedom
+## Residual deviance: 399.40  on 351  degrees of freedom
+## AIC: NA
+## 
+## Number of Fisher Scoring iterations: 16
+</pre></div><div class="source"><pre class="knitr r"><span class="comment"># overdispersion--use quasibinomial</span>
+a5 &lt;- <span class="functioncall">glm</span>(aphidLH ~ siteOfOriginPedigree + lfClass + row + pos + date, family = quasibinomial, 
+    data = ss)
+<span class="functioncall">anova</span>(a5, a6, test = <span class="string">"F"</span>)
+</pre></div><div class="output"><pre class="knitr r">## Analysis of Deviance Table
+## 
+## Model 1: aphidLH ~ siteOfOriginPedigree + lfClass + row + pos + date
+## Model 2: aphidLH ~ siteOfOriginPedigree:lfClass + siteOfOriginPedigree + 
+##     lfClass + row + pos + date
+##   Resid. Df Resid. Dev Df Deviance    F Pr(>F)
+## 1       363        417                        
+## 2       351        399 12     17.6 1.46   0.14
+</pre></div><div class="source"><pre class="knitr r">a5.1 &lt;- <span class="functioncall">glm</span>(aphidLH ~ +lfClass + row + pos + date, family = quasibinomial, data = ss)
+a5.2 &lt;- <span class="functioncall">glm</span>(aphidLH ~ siteOfOriginPedigree + row + pos + date, family = quasibinomial, 
+    data = ss)
+a5.3 &lt;- <span class="functioncall">glm</span>(aphidLH ~ siteOfOriginPedigree + lfClass + pos + date, family = quasibinomial, 
+    data = ss)
+a5.4 &lt;- <span class="functioncall">glm</span>(aphidLH ~ siteOfOriginPedigree + lfClass + row + date, family = quasibinomial, 
+    data = ss)
+a5.5 &lt;- <span class="functioncall">glm</span>(aphidLH ~ siteOfOriginPedigree + lfClass + row + pos, family = quasibinomial, 
+    data = ss)
+<span class="functioncall">anova</span>(a5.1, a5, test = <span class="string">"F"</span>)
+</pre></div><div class="output"><pre class="knitr r">## Analysis of Deviance Table
+## 
+## Model 1: aphidLH ~ +lfClass + row + pos + date
+## Model 2: aphidLH ~ siteOfOriginPedigree + lfClass + row + pos + date
+##   Resid. Df Resid. Dev Df Deviance    F Pr(>F)
+## 1       369        423                        
+## 2       363        417  6     5.61 0.92   0.48
+</pre></div><div class="source"><pre class="knitr r"><span class="functioncall">anova</span>(a5.2, a5, test = <span class="string">"F"</span>)
+</pre></div><div class="output"><pre class="knitr r">## Analysis of Deviance Table
+## 
+## Model 1: aphidLH ~ siteOfOriginPedigree + row + pos + date
+## Model 2: aphidLH ~ siteOfOriginPedigree + lfClass + row + pos + date
+##   Resid. Df Resid. Dev Df Deviance   F Pr(>F)   
+## 1       365        428                          
+## 2       363        417  2     11.2 5.5 0.0044 **
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+</pre></div><div class="source"><pre class="knitr r"><span class="functioncall">anova</span>(a5.3, a5, test = <span class="string">"F"</span>)
+</pre></div><div class="output"><pre class="knitr r">## Analysis of Deviance Table
+## 
+## Model 1: aphidLH ~ siteOfOriginPedigree + lfClass + pos + date
+## Model 2: aphidLH ~ siteOfOriginPedigree + lfClass + row + pos + date
+##   Resid. Df Resid. Dev Df Deviance  F Pr(>F)
+## 1       364        419                      
+## 2       363        417  1     2.05  2   0.16
+</pre></div><div class="source"><pre class="knitr r"><span class="functioncall">anova</span>(a5.4, a5, test = <span class="string">"F"</span>)
+</pre></div><div class="output"><pre class="knitr r">## Analysis of Deviance Table
+## 
+## Model 1: aphidLH ~ siteOfOriginPedigree + lfClass + row + date
+## Model 2: aphidLH ~ siteOfOriginPedigree + lfClass + row + pos + date
+##   Resid. Df Resid. Dev Df Deviance    F Pr(>F)
+## 1       364        417                        
+## 2       363        417  1    0.368 0.36   0.55
+</pre></div><div class="source"><pre class="knitr r"><span class="functioncall">anova</span>(a5.5, a5, test = <span class="string">"F"</span>)
+</pre></div><div class="output"><pre class="knitr r">## Analysis of Deviance Table
+## 
+## Model 1: aphidLH ~ siteOfOriginPedigree + lfClass + row + pos
+## Model 2: aphidLH ~ siteOfOriginPedigree + lfClass + row + pos + date
+##   Resid. Df Resid. Dev Df Deviance    F Pr(>F)  
+## 1       367        425                          
+## 2       363        417  4     8.11 1.99  0.096 .
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+</pre></div><div class="source"><pre class="knitr r">
+a4 &lt;- <span class="functioncall">glm</span>(aphidLH ~ siteOfOriginPedigree + lfClass + row + date, family = quasibinomial, 
+    data = ss)
+a4.1 &lt;- <span class="functioncall">glm</span>(aphidLH ~ lfClass + row + date, family = quasibinomial, data = ss)
+a4.2 &lt;- <span class="functioncall">glm</span>(aphidLH ~ siteOfOriginPedigree + row + date, family = quasibinomial, 
+    data = ss)
+a4.3 &lt;- <span class="functioncall">glm</span>(aphidLH ~ siteOfOriginPedigree + lfClass + date, family = quasibinomial, 
+    data = ss)
+a4.4 &lt;- <span class="functioncall">glm</span>(aphidLH ~ siteOfOriginPedigree + lfClass + row, family = quasibinomial, 
+    data = ss)
+
+<span class="functioncall">anova</span>(a4.1, a4, test = <span class="string">"F"</span>)
+</pre></div><div class="output"><pre class="knitr r">## Analysis of Deviance Table
+## 
+## Model 1: aphidLH ~ lfClass + row + date
+## Model 2: aphidLH ~ siteOfOriginPedigree + lfClass + row + date
+##   Resid. Df Resid. Dev Df Deviance    F Pr(>F)
+## 1       370        423                        
+## 2       364        417  6     5.71 0.93   0.47
+</pre></div><div class="source"><pre class="knitr r"><span class="functioncall">anova</span>(a4.2, a4, test = <span class="string">"F"</span>)
+</pre></div><div class="output"><pre class="knitr r">## Analysis of Deviance Table
+## 
+## Model 1: aphidLH ~ siteOfOriginPedigree + row + date
+## Model 2: aphidLH ~ siteOfOriginPedigree + lfClass + row + date
+##   Resid. Df Resid. Dev Df Deviance    F Pr(>F)   
+## 1       366        430                           
+## 2       364        417  2     12.7 6.23 0.0022 **
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+</pre></div><div class="source"><pre class="knitr r"><span class="functioncall">anova</span>(a4.3, a4, test = <span class="string">"F"</span>)
+</pre></div><div class="output"><pre class="knitr r">## Analysis of Deviance Table
+## 
+## Model 1: aphidLH ~ siteOfOriginPedigree + lfClass + date
+## Model 2: aphidLH ~ siteOfOriginPedigree + lfClass + row + date
+##   Resid. Df Resid. Dev Df Deviance    F Pr(>F)
+## 1       365        419                        
+## 2       364        417  1     2.09 2.05   0.15
+</pre></div><div class="source"><pre class="knitr r"><span class="functioncall">anova</span>(a4.4, a4, test = <span class="string">"F"</span>)
+</pre></div><div class="output"><pre class="knitr r">## Analysis of Deviance Table
+## 
+## Model 1: aphidLH ~ siteOfOriginPedigree + lfClass + row
+## Model 2: aphidLH ~ siteOfOriginPedigree + lfClass + row + date
+##   Resid. Df Resid. Dev Df Deviance    F Pr(>F)
+## 1       368        425                        
+## 2       364        417  4      7.9 1.93    0.1
+</pre></div><div class="source"><pre class="knitr r">
+a3 &lt;- <span class="functioncall">glm</span>(aphidLH ~ lfClass + row + +date, family = quasibinomial, data = ss)
+a3.1 &lt;- <span class="functioncall">glm</span>(aphidLH ~ row + +date, family = quasibinomial, data = ss)
+a3.2 &lt;- <span class="functioncall">glm</span>(aphidLH ~ lfClass + +date, family = quasibinomial, data = ss)
+a3.3 &lt;- <span class="functioncall">glm</span>(aphidLH ~ lfClass + row, family = quasibinomial, data = ss)
+
+<span class="functioncall">anova</span>(a3.1, a3, test = <span class="string">"F"</span>)
+</pre></div><div class="output"><pre class="knitr r">## Analysis of Deviance Table
+## 
+## Model 1: aphidLH ~ row + +date
+## Model 2: aphidLH ~ lfClass + row + +date
+##   Resid. Df Resid. Dev Df Deviance    F Pr(>F)   
+## 1       372        436                           
+## 2       370        423  2     13.3 6.58 0.0016 **
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+</pre></div><div class="source"><pre class="knitr r"><span class="functioncall">anova</span>(a3.2, a3, test = <span class="string">"F"</span>)
+</pre></div><div class="output"><pre class="knitr r">## Analysis of Deviance Table
+## 
+## Model 1: aphidLH ~ lfClass + +date
+## Model 2: aphidLH ~ lfClass + row + +date
+##   Resid. Df Resid. Dev Df Deviance    F Pr(>F)
+## 1       371        425                        
+## 2       370        423  1      2.2 2.18   0.14
+</pre></div><div class="source"><pre class="knitr r"><span class="functioncall">anova</span>(a3.3, a3, test = <span class="string">"F"</span>)
+</pre></div><div class="output"><pre class="knitr r">## Analysis of Deviance Table
+## 
+## Model 1: aphidLH ~ lfClass + row
+## Model 2: aphidLH ~ lfClass + row + +date
+##   Resid. Df Resid. Dev Df Deviance    F Pr(>F)
+## 1       374        431                        
+## 2       370        423  4     7.62 1.89   0.11
+</pre></div><div class="source"><pre class="knitr r">
+a2 &lt;- <span class="functioncall">glm</span>(aphidLH ~ lfClass + date, family = quasibinomial, data = ss)
+a2.1 &lt;- <span class="functioncall">glm</span>(aphidLH ~ date, family = quasibinomial, data = ss)
+a2.2 &lt;- <span class="functioncall">glm</span>(aphidLH ~ lfClass, family = quasibinomial, data = ss)
+<span class="functioncall">anova</span>(a2.1, a2, test = <span class="string">"F"</span>)
+</pre></div><div class="output"><pre class="knitr r">## Analysis of Deviance Table
+## 
+## Model 1: aphidLH ~ date
+## Model 2: aphidLH ~ lfClass + date
+##   Resid. Df Resid. Dev Df Deviance    F Pr(>F)   
+## 1       373        438                           
+## 2       371        425  2     12.5 6.16 0.0023 **
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+</pre></div><div class="source"><pre class="knitr r"><span class="functioncall">anova</span>(a2.2, a2, test = <span class="string">"F"</span>)
+</pre></div><div class="output"><pre class="knitr r">## Analysis of Deviance Table
+## 
+## Model 1: aphidLH ~ lfClass
+## Model 2: aphidLH ~ lfClass + date
+##   Resid. Df Resid. Dev Df Deviance    F Pr(>F)
+## 1       375        433                        
+## 2       371        425  4     7.59 1.87   0.11
+</pre></div><div class="source"><pre class="knitr r">a1 &lt;- <span class="functioncall">glm</span>(aphidLH ~ lfClass, family = quasibinomial, data = ss)
+null &lt;- <span class="functioncall">glm</span>(aphidLH ~ 1, family = quasibinomial, data = ss)
+<span class="functioncall">anova</span>(null, a1, a2, a3, a4, a5, a6, test = <span class="string">"F"</span>)
+</pre></div><div class="output"><pre class="knitr r">## Analysis of Deviance Table
+## 
+## Model 1: aphidLH ~ 1
+## Model 2: aphidLH ~ lfClass
+## Model 3: aphidLH ~ lfClass + date
+## Model 4: aphidLH ~ lfClass + row + +date
+## Model 5: aphidLH ~ siteOfOriginPedigree + lfClass + row + date
+## Model 6: aphidLH ~ siteOfOriginPedigree + lfClass + row + pos + date
+## Model 7: aphidLH ~ siteOfOriginPedigree:lfClass + siteOfOriginPedigree + 
+##     lfClass + row + pos + date
+##   Resid. Df Resid. Dev Df Deviance    F Pr(>F)   
+## 1       377        447                           
+## 2       375        433  2    13.86 6.91 0.0011 **
+## 3       371        425  4     7.59 1.90 0.1108   
+## 4       370        423  1     2.20 2.20 0.1393   
+## 5       364        417  6     5.71 0.95 0.4593   
+## 6       363        417  1     0.37 0.37 0.5450   
+## 7       351        399 12    17.55 1.46 0.1373   
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+</pre></div><div class="source"><pre class="knitr r">
+<span class="comment"># evaluate best model:</span>
+best &lt;- <span class="functioncall">glm</span>(aphidLH ~ lfClass, family = quasibinomial, data = ss)
+<span class="functioncall">summary</span>(best)
+</pre></div><div class="output"><pre class="knitr r">## 
+## Call:
+## glm(formula = aphidLH ~ lfClass, family = quasibinomial, data = ss)
+## 
+## Deviance Residuals: 
+##    Min      1Q  Median      3Q     Max  
+##  -1.74   -1.23    0.75    0.75    1.13  
+## 
+## Coefficients:
+##                  Estimate Std. Error t value Pr(>|t|)    
+## (Intercept)         0.121      0.248    0.49  0.62434    
+## lfClass>6           1.152      0.350    3.29  0.00111 ** 
+## lfClassflowering    1.002      0.294    3.41  0.00073 ***
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1 
+## 
+## (Dispersion parameter for quasibinomial family taken to be 1.008)
+## 
+##     Null deviance: 446.68  on 377  degrees of freedom
+## Residual deviance: 432.82  on 375  degrees of freedom
+## AIC: NA
+## 
+## Number of Fisher Scoring iterations: 4
+</pre></div><div class="source"><pre class="knitr r"><span class="functioncall">par</span>(mfcol = <span class="functioncall">c</span>(2, 2))
+<span class="functioncall">plot</span>(best)
+</pre></div></div><div class="rimage default"><img src="figure/unnamed-chunk-9.png" title="plot of chunk unnamed-chunk-9" alt="plot of chunk unnamed-chunk-9" class="plot" /></div><div class="rcode">
+<div class="source"><pre class="knitr r"><span class="functioncall">par</span>(mfcol = <span class="functioncall">c</span>(1, 1))
+</pre></div></div></div>
+
+
+The qualitative result is more similar to the POLR when I use high and low aphid abundance (0-10 and >10) instead of presence/absence. This leads me to believe that this respose is a better simplified represenation of aphid abundance than presence/absence.
+
+
+Now try the 1997 garden in 2004
+
+<div class="chunk" id="unnamed-chunk-10"><div class="rcode"><div class="source"><pre class="knitr r"><span class="comment"># look at differences my measuredate</span>
+ss &lt;- pp97[pp97$measureYr == 2004, ]
+<span class="functioncall">table</span>(ss$measureDt2)
+</pre></div><div class="output"><pre class="knitr r">## 
+## 2004-08-07 2004-08-08 2004-08-09 2004-08-10 2004-08-12 
+##        121        135        118         12         11
+</pre></div><div class="source"><pre class="knitr r">ss$date &lt;- <span class="functioncall">factor</span>(ss$measureDt2)
+<span class="comment"># these dates are within a week of each other--leave them all <span class="keyword">in</span> for now</span>
+zz &lt;- <span class="functioncall">tapply</span>(ss$aphids2, <span class="functioncall">list</span>(ss$aphids2, ss$date), length)
+zz[<span class="functioncall">is.na</span>(zz)] &lt;- 0
+<span class="functioncall">barplot</span>(zz)
+</pre></div></div><div class="rimage default"><img src="figure/unnamed-chunk-101.png" title="plot of chunk unnamed-chunk-10" alt="plot of chunk unnamed-chunk-10" class="plot" /></div><div class="rcode">
+<div class="source"><pre class="knitr r"><span class="comment"># no obvious difference</span>
+<span class="functioncall">table</span>(ss[ss$Status == <span class="string">"basal"</span>, <span class="string">"basalLfCt"</span>])
+</pre></div><div class="output"><pre class="knitr r">## 
+##  1  2  3  4  5  6  7  8  9 10 11 12 14 15 16 19 
+##  3 33 69 68 47 14 11  8  7  2  3  1  2  1  1  1
+</pre></div><div class="source"><pre class="knitr r"><span class="functioncall">sum</span>(ss[ss$Status == <span class="string">"basal"</span>, <span class="string">"basalLfCt"</span>] &lt;= 3)
+</pre></div><div class="output"><pre class="knitr r">## [1] 105
+</pre></div><div class="source"><pre class="knitr r"><span class="functioncall">sum</span>(ss[ss$Status == <span class="string">"basal"</span>, <span class="string">"basalLfCt"</span>] &gt;= 4)
+</pre></div><div class="output"><pre class="knitr r">## [1] 166
+</pre></div><div class="source"><pre class="knitr r">
+ss$lfClass &lt;- <span class="string">""</span>
+ss[ss$basalLfCt &gt;= 4, <span class="string">"lfClass"</span>] &lt;- <span class="string">"&gt;3"</span>
+ss[ss$basalLfCt &lt;= 3, <span class="string">"lfClass"</span>] &lt;- <span class="string">"1-3"</span>
+ss[ss$Status == <span class="string">"flowering"</span>, <span class="string">"lfClass"</span>] &lt;- <span class="string">"flowering"</span>
+ss$lfClass &lt;- <span class="functioncall">factor</span>(ss$lfClass, levels = <span class="functioncall">c</span>(<span class="string">"1-3"</span>, <span class="string">"&gt;3"</span>, <span class="string">"flowering"</span>))
+uu &lt;- <span class="functioncall">table</span>(ss$lfClass, ss$siteOfOriginPedigree)  #look at distribution of plant sizes/status among pops
+<span class="functioncall">apply</span>(uu, 2, sum)  #exclude sites with &lt;10 plants
+</pre></div><div class="output"><pre class="knitr r">##    TH   BTG    gc    ri    kj    aa  mapp tower   alf  nwlf    lc  ness 
+##     2     4    10    16    16    20    20    27    23    26    27    49 
+##    lf   spp 
+##    53   104
+</pre></div><div class="source"><pre class="knitr r">
+ss &lt;- ss[!ss$siteOfOriginPedigree %<span class="keyword">in</span>% <span class="functioncall">c</span>(<span class="string">"BTG"</span>, <span class="string">"TH"</span>), ]
+ss$siteOfOriginPedigree &lt;- <span class="functioncall">factor</span>(ss$siteOfOriginPedigree, levels = <span class="functioncall">unique</span>(ss$siteOfOriginPedigree))
+<span class="functioncall">table</span>(ss$siteOfOriginPedigree)
+</pre></div><div class="output"><pre class="knitr r">## 
+##   spp  nwlf   alf    lf    kj  mapp    ri    lc  ness    aa    gc tower 
+##   104    26    23    53    16    20    16    27    49    20    10    27
+</pre></div><div class="source"><pre class="knitr r"><span class="comment"># make categories <span class="keyword">for</span> plant size and status:</span>
+
+ss$aphids2 &lt;- <span class="functioncall">ordered</span>(ss$aphids2, levels = <span class="functioncall">c</span>(<span class="string">"0"</span>, <span class="string">"1-10"</span>, <span class="string">"11-80"</span>, <span class="string">"&gt;80"</span>))
+<span class="functioncall">table</span>(ss$lfClass, ss$siteOfOriginPedigree)
+</pre></div><div class="output"><pre class="knitr r">##            
+##             spp nwlf alf lf kj mapp ri lc ness aa gc tower
+##   1-3        34    8   6 19  2    5  3  8    5  3  2     7
+##   >3         35    8   8 24  7    6  9 13   23 13  5    13
+##   flowering  35   10   9 10  7    9  4  6   21  4  3     7
+</pre></div><div class="source"><pre class="knitr r"><span class="functioncall">table</span>(ss$aphids2, ss$siteOfOriginPedigree)
+</pre></div><div class="output"><pre class="knitr r">##        
+##         spp nwlf alf lf kj mapp ri lc ness aa gc tower
+##   0      25    5   2 13  2    9  8  7    9  4  3     4
+##   1-10    9    3   1  6  2    1  2  3    1  0  1     2
+##   11-80  55   12  16 26  8    7  4 14   25 10  3    15
+##   >80    15    6   4  8  4    3  2  3   14  6  3     6
+</pre></div><div class="source"><pre class="knitr r">
+<span class="comment"># keep row and position as numeric</span>
+<span class="functioncall">library</span>(MASS)
+a6 &lt;- <span class="functioncall">polr</span>(aphids2 ~ lfClass:siteOfOriginPedigree + lfClass + siteOfOriginPedigree + 
+    row + pos + date, data = ss)
+</pre></div><div class="warning"><pre class="knitr r">## Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred
+</pre></div><div class="source"><pre class="knitr r">a5 &lt;- <span class="functioncall">polr</span>(aphids2 ~ lfClass + siteOfOriginPedigree + row + pos + date, data = ss)
+<span class="functioncall">anova</span>(a5, a6)
+</pre></div><div class="output"><pre class="knitr r">## Likelihood ratio tests of ordinal regression models
+## 
+## Response: aphids2
+##                                                                              Model
+## 1                                lfClass + siteOfOriginPedigree + row + pos + date
+## 2 lfClass:siteOfOriginPedigree + lfClass + siteOfOriginPedigree + row + pos + date
+##   Resid. df Resid. Dev   Test    Df LR stat.  Pr(Chi)
+## 1       369      802.4                               
+## 2       347      757.2 1 vs 2    22    45.25 0.002469
+</pre></div><div class="source"><pre class="knitr r"><span class="comment">## The error message probably means I shouldn't use the interaction</span>
+<span class="comment">## between lfClass and siteOfOriginPedigree</span>
+a5.1 &lt;- <span class="functioncall">polr</span>(aphids2 ~ siteOfOriginPedigree + row + pos + date, data = ss)
+a5.2 &lt;- <span class="functioncall">polr</span>(aphids2 ~ lfClass + row + pos + date, data = ss)
+a5.3 &lt;- <span class="functioncall">polr</span>(aphids2 ~ lfClass + siteOfOriginPedigree + pos + date, data = ss)
+a5.4 &lt;- <span class="functioncall">polr</span>(aphids2 ~ lfClass + siteOfOriginPedigree + row + date, data = ss)
+a5.5 &lt;- <span class="functioncall">polr</span>(aphids2 ~ lfClass + siteOfOriginPedigree + row + pos, data = ss)
+<span class="functioncall">anova</span>(a5.1, a5)
+</pre></div><div class="output"><pre class="knitr r">## Likelihood ratio tests of ordinal regression models
+## 
+## Response: aphids2
+##                                               Model Resid. df Resid. Dev
+## 1           siteOfOriginPedigree + row + pos + date       371      848.5
+## 2 lfClass + siteOfOriginPedigree + row + pos + date       369      802.4
+##     Test    Df LR stat.   Pr(Chi)
+## 1                                
+## 2 1 vs 2     2    46.03 1.009e-10
+</pre></div><div class="source"><pre class="knitr r"><span class="functioncall">anova</span>(a5.2, a5)
+</pre></div><div class="output"><pre class="knitr r">## Likelihood ratio tests of ordinal regression models
+## 
+## Response: aphids2
+##                                               Model Resid. df Resid. Dev
+## 1                        lfClass + row + pos + date       380      818.9
+## 2 lfClass + siteOfOriginPedigree + row + pos + date       369      802.4
+##     Test    Df LR stat. Pr(Chi)
+## 1                              
+## 2 1 vs 2    11    16.44  0.1255
+</pre></div><div class="source"><pre class="knitr r"><span class="functioncall">anova</span>(a5.3, a5)
+</pre></div><div class="output"><pre class="knitr r">## Likelihood ratio tests of ordinal regression models
+## 
+## Response: aphids2
+##                                               Model Resid. df Resid. Dev
+## 1       lfClass + siteOfOriginPedigree + pos + date       370      807.7
+## 2 lfClass + siteOfOriginPedigree + row + pos + date       369      802.4
+##     Test    Df LR stat. Pr(Chi)
+## 1                              
+## 2 1 vs 2     1    5.243 0.02204
+</pre></div><div class="source"><pre class="knitr r"><span class="functioncall">anova</span>(a5.4, a5)
+</pre></div><div class="output"><pre class="knitr r">## Likelihood ratio tests of ordinal regression models
+## 
+## Response: aphids2
+##                                               Model Resid. df Resid. Dev
+## 1       lfClass + siteOfOriginPedigree + row + date       370      809.7
+## 2 lfClass + siteOfOriginPedigree + row + pos + date       369      802.4
+##     Test    Df LR stat.  Pr(Chi)
+## 1                               
+## 2 1 vs 2     1    7.214 0.007232
+</pre></div><div class="source"><pre class="knitr r"><span class="functioncall">anova</span>(a5.5, a5)
+</pre></div><div class="output"><pre class="knitr r">## Likelihood ratio tests of ordinal regression models
+## 
+## Response: aphids2
+##                                               Model Resid. df Resid. Dev
+## 1        lfClass + siteOfOriginPedigree + row + pos       373      848.0
+## 2 lfClass + siteOfOriginPedigree + row + pos + date       369      802.4
+##     Test    Df LR stat.   Pr(Chi)
+## 1                                
+## 2 1 vs 2     4    45.51 3.114e-09
+</pre></div><div class="source"><pre class="knitr r">a4 &lt;- <span class="functioncall">polr</span>(aphids2 ~ lfClass + row + pos + date, data = ss)
+a4.1 &lt;- <span class="functioncall">polr</span>(aphids2 ~ row + pos + date, data = ss)
+a4.2 &lt;- <span class="functioncall">polr</span>(aphids2 ~ lfClass + pos + date, data = ss)
+a4.3 &lt;- <span class="functioncall">polr</span>(aphids2 ~ lfClass + row + date, data = ss)
+a4.4 &lt;- <span class="functioncall">polr</span>(aphids2 ~ lfClass + row + pos, data = ss)
+
+<span class="functioncall">anova</span>(a4.1, a4)
+</pre></div><div class="output"><pre class="knitr r">## Likelihood ratio tests of ordinal regression models
+## 
+## Response: aphids2
+##                        Model Resid. df Resid. Dev   Test    Df LR stat.
+## 1           row + pos + date       382      866.2                      
+## 2 lfClass + row + pos + date       380      818.9 1 vs 2     2    47.34
+##     Pr(Chi)
+## 1          
+## 2 5.264e-11
+</pre></div><div class="source"><pre class="knitr r"><span class="functioncall">anova</span>(a4.2, a4)
+</pre></div><div class="output"><pre class="knitr r">## Likelihood ratio tests of ordinal regression models
+## 
+## Response: aphids2
+##                        Model Resid. df Resid. Dev   Test    Df LR stat.
+## 1       lfClass + pos + date       381      826.1                      
+## 2 lfClass + row + pos + date       380      818.9 1 vs 2     1    7.227
+##   Pr(Chi)
+## 1        
+## 2 0.00718
+</pre></div><div class="source"><pre class="knitr r"><span class="functioncall">anova</span>(a4.3, a4)
+</pre></div><div class="output"><pre class="knitr r">## Likelihood ratio tests of ordinal regression models
+## 
+## Response: aphids2
+##                        Model Resid. df Resid. Dev   Test    Df LR stat.
+## 1       lfClass + row + date       381      826.4                      
+## 2 lfClass + row + pos + date       380      818.9 1 vs 2     1    7.475
+##    Pr(Chi)
+## 1         
+## 2 0.006256
+</pre></div><div class="source"><pre class="knitr r"><span class="functioncall">anova</span>(a4.4, a4)
+</pre></div><div class="output"><pre class="knitr r">## Likelihood ratio tests of ordinal regression models
+## 
+## Response: aphids2
+##                        Model Resid. df Resid. Dev   Test    Df LR stat.
+## 1        lfClass + row + pos       384      865.2                      
+## 2 lfClass + row + pos + date       380      818.9 1 vs 2     4    46.35
+##     Pr(Chi)
+## 1          
+## 2 2.081e-09
+</pre></div><div class="source"><pre class="knitr r">
+a3 &lt;- <span class="functioncall">polr</span>(aphids2 ~ lfClass + pos + date, data = ss)
+a3.1 &lt;- <span class="functioncall">polr</span>(aphids2 ~ pos + date, data = ss)
+a3.2 &lt;- <span class="functioncall">polr</span>(aphids2 ~ lfClass + date, data = ss)
+a3.3 &lt;- <span class="functioncall">polr</span>(aphids2 ~ lfClass + pos, data = ss)
+<span class="functioncall">anova</span>(a3.1, a3)
+</pre></div><div class="output"><pre class="knitr r">## Likelihood ratio tests of ordinal regression models
+## 
+## Response: aphids2
+##                  Model Resid. df Resid. Dev   Test    Df LR stat.
+## 1           pos + date       383      875.0                      
+## 2 lfClass + pos + date       381      826.1 1 vs 2     2    48.93
+##     Pr(Chi)
+## 1          
+## 2 2.376e-11
+</pre></div><div class="source"><pre class="knitr r"><span class="functioncall">anova</span>(a3.2, a3)
+</pre></div><div class="output"><pre class="knitr r">## Likelihood ratio tests of ordinal regression models
+## 
+## Response: aphids2
+##                  Model Resid. df Resid. Dev   Test    Df LR stat.  Pr(Chi)
+## 1       lfClass + date       382      832.9                               
+## 2 lfClass + pos + date       381      826.1 1 vs 2     1    6.781 0.009214
+</pre></div><div class="source"><pre class="knitr r"><span class="functioncall">anova</span>(a3.3, a3)
+</pre></div><div class="output"><pre class="knitr r">## Likelihood ratio tests of ordinal regression models
+## 
+## Response: aphids2
+##                  Model Resid. df Resid. Dev   Test    Df LR stat.
+## 1        lfClass + pos       385      865.9                      
+## 2 lfClass + pos + date       381      826.1 1 vs 2     4    39.75
+##     Pr(Chi)
+## 1          
+## 2 4.884e-08
+</pre></div><div class="source"><pre class="knitr r">
+a2 &lt;- <span class="functioncall">polr</span>(aphids2 ~ lfClass + date, data = ss)
+a2.1 &lt;- <span class="functioncall">polr</span>(aphids2 ~ date, data = ss)
+a2.2 &lt;- <span class="functioncall">polr</span>(aphids2 ~ lfClass, data = ss)
+
+<span class="functioncall">anova</span>(a2.1, a2)
+</pre></div><div class="output"><pre class="knitr r">## Likelihood ratio tests of ordinal regression models
+## 
+## Response: aphids2
+##            Model Resid. df Resid. Dev   Test    Df LR stat.   Pr(Chi)
+## 1           date       384      889.3                                
+## 2 lfClass + date       382      832.9 1 vs 2     2    56.42 5.611e-13
+</pre></div><div class="source"><pre class="knitr r"><span class="functioncall">anova</span>(a2.2, a2)
+</pre></div><div class="output"><pre class="knitr r">## Likelihood ratio tests of ordinal regression models
+## 
+## Response: aphids2
+##            Model Resid. df Resid. Dev   Test    Df LR stat.   Pr(Chi)
+## 1        lfClass       386      871.1                                
+## 2 lfClass + date       382      832.9 1 vs 2     4    38.18 1.028e-07
+</pre></div><div class="source"><pre class="knitr r">a1 &lt;- <span class="functioncall">polr</span>(aphids2 ~ lfClass, data = ss)
+null &lt;- <span class="functioncall">polr</span>(aphids2 ~ 1, data = ss)
+<span class="functioncall">anova</span>(null, a1, a2, a3, a4, a5, a6)
+</pre></div><div class="output"><pre class="knitr r">## Likelihood ratio tests of ordinal regression models
+## 
+## Response: aphids2
+##                                                                              Model
+## 1                                                                                1
+## 2                                                                          lfClass
+## 3                                                                   lfClass + date
+## 4                                                             lfClass + pos + date
+## 5                                                       lfClass + row + pos + date
+## 6                                lfClass + siteOfOriginPedigree + row + pos + date
+## 7 lfClass:siteOfOriginPedigree + lfClass + siteOfOriginPedigree + row + pos + date
+##   Resid. df Resid. Dev   Test    Df LR stat.   Pr(Chi)
+## 1       388      940.2                                
+## 2       386      871.1 1 vs 2     2   69.094 9.992e-16
+## 3       382      832.9 2 vs 3     4   38.182 1.028e-07
+## 4       381      826.1 3 vs 4     1    6.781 9.214e-03
+## 5       380      818.9 4 vs 5     1    7.227 7.180e-03
+## 6       369      802.4 5 vs 6    11   16.441 1.255e-01
+## 7       347      757.2 6 vs 7    22   45.247 2.469e-03
+</pre></div><div class="source"><pre class="knitr r">
+<span class="comment">## evaluate model:</span>
+best &lt;- <span class="functioncall">polr</span>(aphids2 ~ lfClass + row + pos + date, data = ss)
+(pb &lt;- <span class="functioncall">profile</span>(best))
+</pre></div><div class="message"><pre class="knitr r">## Re-fitting to get Hessian
+</pre></div><div class="output"><pre class="knitr r">## $`lfClass>3`
+##          z par.vals.lfClass>3 par.vals.lfClassflowering par.vals.row
+## 1  -2.6183            0.74040                   1.38129     -0.04016
+## 2  -2.0908            0.87205                   1.46923     -0.04039
+## 3  -1.5652            1.00369                   1.55736     -0.04064
+## 4  -1.0417            1.13534                   1.64575     -0.04093
+## 5  -0.5205            1.26698                   1.73483     -0.04123
+## 6   0.0000            1.39862                   1.82273     -0.04162
+## 7   0.5152            1.53027                   1.91137     -0.04202
+## 8   1.0274            1.66191                   2.00194     -0.04239
+## 9   1.5375            1.79356                   2.09175     -0.04283
+## 10  2.0444            1.92520                   2.18190     -0.04331
+## 11  2.5478            2.05685                   2.27244     -0.04381
+## 12  3.0477            2.18849                   2.36327     -0.04435
+##    par.vals.pos par.vals.date2004-08-08 par.vals.date2004-08-09
+## 1      -0.04416                -0.12463                 1.24245
+## 2      -0.04366                -0.14059                 1.23356
+## 3      -0.04324                -0.15698                 1.22509
+## 4      -0.04283                -0.17358                 1.21725
+## 5      -0.04225                -0.19064                 1.20965
+## 6      -0.04229                -0.20798                 1.20340
+## 7      -0.04233                -0.22568                 1.19747
+## 8      -0.04156                -0.24390                 1.19102
+## 9      -0.04133                -0.26246                 1.18577
+## 10     -0.04113                -0.28144                 1.18101
+## 11     -0.04093                -0.30083                 1.17673
+## 12     -0.04081                -0.32072                 1.17295
+##    par.vals.date2004-08-10 par.vals.date2004-08-12
+## 1                  2.23282                -1.37078
+## 2                  2.21812                -1.34421
+## 3                  2.20465                -1.31815
+## 4                  2.19169                -1.29465
+## 5                  2.17896                -1.27151
+## 6                  2.17023                -1.25048
+## 7                  2.15927                -1.22911
+## 8                  2.14784                -1.20872
+## 9                  2.13874                -1.18942
+## 10                 2.13038                -1.17080
+## 11                 2.12263                -1.15310
+## 12                 2.11581                -1.13521
+## 
+## $lfClassflowering
+##          z par.vals.lfClass>3 par.vals.lfClassflowering par.vals.row
+## 1  -2.6025            1.00677                   1.08780     -0.04355
+## 2  -2.0776            1.08508                   1.23479     -0.04311
+## 3  -1.5550            1.16351                   1.38177     -0.04269
+## 4  -1.0349            1.24190                   1.52876     -0.04230
+## 5  -0.5174            1.32024                   1.67574     -0.04193
+## 6   0.0000            1.39862                   1.82273     -0.04162
+## 7   0.5084            1.47701                   1.96972     -0.04129
+## 8   1.0167            1.55541                   2.11670     -0.04101
+## 9   1.5216            1.63382                   2.26369     -0.04076
+## 10  2.0230            1.71224                   2.41067     -0.04054
+## 11  2.5207            1.79068                   2.55766     -0.04034
+## 12  3.0147            1.86912                   2.70464     -0.04016
+##    par.vals.pos par.vals.date2004-08-08 par.vals.date2004-08-09
+## 1      -0.04807                -0.16074                 1.27019
+## 2      -0.04685                -0.16933                 1.25542
+## 3      -0.04561                -0.17887                 1.24094
+## 4      -0.04443                -0.18820                 1.22776
+## 5      -0.04325                -0.19806                 1.21492
+## 6      -0.04229                -0.20798                 1.20340
+## 7      -0.04106                -0.21818                 1.19213
+## 8      -0.04002                -0.22859                 1.18194
+## 9      -0.03902                -0.23925                 1.17255
+## 10     -0.03806                -0.25016                 1.16396
+## 11     -0.03713                -0.26131                 1.15619
+## 12     -0.03624                -0.27269                 1.14919
+##    par.vals.date2004-08-10 par.vals.date2004-08-12
+## 1                  2.16600                -1.43749
+## 2                  2.16430                -1.39801
+## 3                  2.16416                -1.35907
+## 4                  2.16462                -1.32078
+## 5                  2.16575                -1.28544
+## 6                  2.17023                -1.25048
+## 7                  2.17195                -1.21500
+## 8                  2.17681                -1.18089
+## 9                  2.18278                -1.14755
+## 10                 2.18986                -1.11493
+## 11                 2.19813                -1.08297
+## 12                 2.20748                -1.05169
+## 
+## $row
+##          z par.vals.lfClass>3 par.vals.lfClassflowering par.vals.row
+## 1  -3.0327           1.457428                  1.807694    -0.089530
+## 2  -2.5344           1.445493                  1.807763    -0.081546
+## 3  -2.0331           1.436253                  1.811630    -0.073561
+## 4  -1.5287           1.422668                  1.810916    -0.065577
+## 5  -1.0220           1.413500                  1.814023    -0.057592
+## 6  -0.5127           1.405616                  1.818223    -0.049607
+## 7   0.0000           1.398624                  1.822730    -0.041623
+## 8   0.5114           1.393919                  1.830092    -0.033638
+## 9   1.0263           1.390702                  1.837646    -0.025653
+## 10  1.5425           1.387614                  1.846216    -0.017669
+## 11  2.0599           1.387535                  1.856267    -0.009684
+## 12  2.5780           1.386319                  1.866286    -0.001699
+##    par.vals.pos par.vals.date2004-08-08 par.vals.date2004-08-09
+## 1     -0.045918               -0.135864                1.442636
+## 2     -0.045295               -0.146433                1.403364
+## 3     -0.044598               -0.162589                1.359016
+## 4     -0.043856               -0.172079                1.320269
+## 5     -0.043253               -0.184084                1.280689
+## 6     -0.042680               -0.196008                1.241709
+## 7     -0.042294               -0.207979                1.203401
+## 8     -0.041593               -0.220026                1.165113
+## 9     -0.041063               -0.231680                1.127397
+## 10    -0.040629               -0.243958                1.090758
+## 11    -0.040127               -0.255442                1.055159
+## 12    -0.039744               -0.268373                1.017850
+##    par.vals.date2004-08-10 par.vals.date2004-08-12
+## 1                 2.577615               -1.429447
+## 2                 2.511068               -1.398276
+## 3                 2.439564               -1.357658
+## 4                 2.369212               -1.334536
+## 5                 2.301536               -1.305190
+## 6                 2.234762               -1.276599
+## 7                 2.170230               -1.250479
+## 8                 2.102938               -1.224155
+## 9                 2.038003               -1.200278
+## 10                1.974125               -1.176148
+## 11                1.908338               -1.154745
+## 12                1.847306               -1.134429
+## 
+## $pos
+##           z par.vals.lfClass>3 par.vals.lfClassflowering par.vals.row
+## 1  -0.14576            1.39766                   1.81790     -0.04175
+## 2  -0.13071            1.39780                   1.81847     -0.04174
+## 3  -0.11564            1.39798                   1.81909     -0.04172
+## 4  -0.10055            1.39810                   1.81965     -0.04170
+## 5  -0.09219            1.39967                   1.82210     -0.04166
+## 6  -0.07025            1.39841                   1.82083     -0.04167
+## 7  -0.05499            1.39856                   1.82142     -0.04166
+## 8  -0.03952            1.39870                   1.82200     -0.04164
+## 9  -0.02346            1.39883                   1.82257     -0.04162
+## 10  0.00000            1.39862                   1.82273     -0.04162
+## 11  0.00000            1.39908                   1.82371     -0.04159
+## 12  0.01487            1.39925                   1.82432     -0.04158
+## 13  0.03183            1.39941                   1.82491     -0.04156
+## 14  0.04749            1.39956                   1.82550     -0.04155
+## 15  0.06285            1.39971                   1.82609     -0.04153
+## 16  0.07807            1.39987                   1.82669     -0.04152
+## 17  0.09323            1.40001                   1.82735     -0.04150
+## 18  0.10835            1.40018                   1.82788     -0.04148
+## 19  0.12345            1.40034                   1.82847     -0.04147
+##    par.vals.pos par.vals.date2004-08-08 par.vals.date2004-08-09
+## 1      -0.04439                -0.20755                 1.20591
+## 2      -0.04415                -0.20760                 1.20561
+## 3      -0.04392                -0.20765                 1.20532
+## 4      -0.04369                -0.20771                 1.20502
+## 5      -0.04346                -0.20611                 1.20652
+## 6      -0.04322                -0.20782                 1.20442
+## 7      -0.04299                -0.20787                 1.20412
+## 8      -0.04276                -0.20792                 1.20383
+## 9      -0.04253                -0.20798                 1.20355
+## 10     -0.04229                -0.20798                 1.20340
+## 11     -0.04206                -0.20807                 1.20299
+## 12     -0.04183                -0.20814                 1.20267
+## 13     -0.04160                -0.20819                 1.20239
+## 14     -0.04136                -0.20824                 1.20210
+## 15     -0.04113                -0.20829                 1.20181
+## 16     -0.04090                -0.20835                 1.20153
+## 17     -0.04067                -0.20833                 1.20124
+## 18     -0.04043                -0.20845                 1.20095
+## 19     -0.04020                -0.20850                 1.20067
+##    par.vals.date2004-08-10 par.vals.date2004-08-12
+## 1                  2.17491                -1.25198
+## 2                  2.17419                -1.25176
+## 3                  2.17347                -1.25152
+## 4                  2.17281                -1.25130
+## 5                  2.18205                -1.23050
+## 6                  2.17146                -1.25084
+## 7                  2.17077                -1.25061
+## 8                  2.17008                -1.25037
+## 9                  2.16940                -1.25012
+## 10                 2.17023                -1.25048
+## 11                 2.16804                -1.24960
+## 12                 2.16736                -1.24943
+## 13                 2.16669                -1.24918
+## 14                 2.16601                -1.24896
+## 15                 2.16534                -1.24877
+## 16                 2.16466                -1.24847
+## 17                 2.16399                -1.24832
+## 18                 2.16333                -1.24804
+## 19                 2.16263                -1.24777
+## 
+## $`date2004-08-08`
+##          z par.vals.lfClass>3 par.vals.lfClassflowering par.vals.row
+## 1  -3.0716            1.53105                   1.91611     -0.03767
+## 2  -2.5633            1.50542                   1.89712     -0.03826
+## 3  -2.0533            1.48126                   1.87957     -0.03887
+## 4  -1.5417            1.45856                   1.86344     -0.03951
+## 5  -1.0288            1.43726                   1.84863     -0.04018
+## 6  -0.5147            1.41740                   1.83520     -0.04088
+## 7   0.0000            1.39862                   1.82273     -0.04162
+## 8   0.5159            1.38185                   1.81237     -0.04237
+## 9   1.0321            1.36616                   1.80298     -0.04317
+## 10  1.5485            1.35183                   1.79488     -0.04400
+## 11  2.0649            1.33884                   1.78808     -0.04486
+## 12  2.5812            1.32698                   1.78229     -0.04576
+##    par.vals.pos par.vals.date2004-08-08 par.vals.date2004-08-09
+## 1      -0.04204                -0.98049                 0.79989
+## 2      -0.04208                -0.85174                 0.86521
+## 3      -0.04212                -0.72299                 0.93130
+## 4      -0.04216                -0.59424                 0.99815
+## 5      -0.04221                -0.46548                 1.06577
+## 6      -0.04225                -0.33673                 1.13416
+## 7      -0.04229                -0.20798                 1.20340
+## 8      -0.04233                -0.07923                 1.27319
+## 9      -0.04238                 0.04952                 1.34383
+## 10     -0.04242                 0.17828                 1.41523
+## 11     -0.04247                 0.30703                 1.48737
+## 12     -0.04251                 0.43578                 1.56027
+##    par.vals.date2004-08-10 par.vals.date2004-08-12
+## 1                  1.75246                -1.61567
+## 2                  1.81904                -1.55474
+## 3                  1.88673                -1.49378
+## 4                  1.95555                -1.43278
+## 5                  2.02547                -1.37177
+## 6                  2.09654                -1.31077
+## 7                  2.17023                -1.25048
+## 8                  2.24211                -1.18898
+## 9                  2.31655                -1.12803
+## 10                 2.39218                -1.06717
+## 11                 2.46877                -1.00630
+## 12                 2.54691                -0.94562
+## 
+## $`date2004-08-09`
+##          z par.vals.lfClass>3 par.vals.lfClassflowering par.vals.row
+## 1  -2.5938            1.43811                   1.89448     -0.03074
+## 2  -2.0713            1.42886                   1.87848     -0.03291
+## 3  -1.5503            1.42033                   1.86337     -0.03507
+## 4  -1.0310            1.41252                   1.84918     -0.03725
+## 5  -0.5137            1.40544                   1.83592     -0.03942
+## 6   0.0000            1.39862                   1.82273     -0.04162
+## 7   0.5145            1.39368                   1.81308     -0.04376
+## 8   1.0240            1.38833                   1.80143     -0.04598
+## 9   1.5314            1.38396                   1.79165     -0.04817
+## 10  2.0359            1.38021                   1.78269     -0.05038
+## 11  2.5372            1.37709                   1.77454     -0.05258
+## 12  3.0353            1.37456                   1.76721     -0.05479
+##    par.vals.pos par.vals.date2004-08-08 par.vals.date2004-08-09
+## 1      -0.03952                -0.52938                 0.49971
+## 2      -0.03999                -0.46433                 0.64045
+## 3      -0.04050                -0.39965                 0.78118
+## 4      -0.04103                -0.33534                 0.92192
+## 5      -0.04157                -0.27143                 1.06266
+## 6      -0.04229                -0.20798                 1.20340
+## 7      -0.04230                -0.14464                 1.34414
+## 8      -0.04328                -0.08210                 1.48488
+## 9      -0.04389                -0.01984                 1.62562
+## 10     -0.04451                 0.04199                 1.76636
+## 11     -0.04515                 0.10337                 1.90710
+## 12     -0.04580                 0.16429                 2.04784
+##    par.vals.date2004-08-10 par.vals.date2004-08-12
+## 1                  1.72616                -1.47553
+## 2                  1.81312                -1.42922
+## 3                  1.90080                -1.38340
+## 4                  1.98926                -1.33819
+## 5                  2.07846                -1.29357
+## 6                  2.17023                -1.25048
+## 7                  2.25818                -1.20549
+## 8                  2.35071                -1.16347
+## 9                  2.44301                -1.12140
+## 10                 2.53612                -1.08002
+## 11                 2.63002                -1.03929
+## 12                 2.72472                -0.99925
+## 
+## $`date2004-08-10`
+##          z par.vals.lfClass>3 par.vals.lfClassflowering par.vals.row
+## 1  -2.5897            1.42639                   1.82651     -0.03320
+## 2  -2.0718            1.42032                   1.82449     -0.03481
+## 3  -1.5519            1.41457                   1.82311     -0.03648
+## 4  -1.0316            1.40907                   1.82242     -0.03818
+## 5  -0.5126            1.40384                   1.82254     -0.03989
+## 6   0.0000            1.39862                   1.82273     -0.04162
+## 7   0.5153            1.39509                   1.82688     -0.04326
+## 8   1.0193            1.39120                   1.82876     -0.04493
+## 9   1.5159            1.38848                   1.83289     -0.04649
+## 10  2.0027            1.38668                   1.83790     -0.04795
+## 11  2.4782            1.38579                   1.84358     -0.04930
+## 12  2.9410            1.38575                   1.84970     -0.05053
+##    par.vals.pos par.vals.date2004-08-08 par.vals.date2004-08-09
+## 1      -0.03976                -0.35935                 1.00488
+## 2      -0.04012                -0.32975                 1.04228
+## 3      -0.04054                -0.29951                 1.08124
+## 4      -0.04102                -0.26890                 1.12140
+## 5      -0.04154                -0.23822                 1.16226
+## 6      -0.04229                -0.20798                 1.20340
+## 7      -0.04229                -0.17815                 1.24354
+## 8      -0.04337                -0.14967                 1.28350
+## 9      -0.04400                -0.12261                 1.32142
+## 10     -0.04463                -0.09739                 1.35714
+## 11     -0.04522                -0.07430                 1.39017
+## 12     -0.04577                -0.05354                 1.42011
+##    par.vals.date2004-08-10 par.vals.date2004-08-12
+## 1                  0.61677                -1.34170
+## 2                  0.92746                -1.32314
+## 3                  1.23815                -1.30448
+## 4                  1.54885                -1.28591
+## 5                  1.85954                -1.26761
+## 6                  2.17023                -1.25048
+## 7                  2.48092                -1.23156
+## 8                  2.79161                -1.21533
+## 9                  3.10230                -1.19939
+## 10                 3.41300                -1.18449
+## 11                 3.72369                -1.17072
+## 12                 4.03438                -1.15821
+## 
+## $`date2004-08-12`
+##          z par.vals.lfClass>3 par.vals.lfClassflowering par.vals.row
+## 1  -2.7339            1.38592                   1.77505     -0.04461
+## 2  -2.3327            1.38523                   1.77857     -0.04427
+## 3  -1.9092            1.38506                   1.78342     -0.04385
+## 4  -1.4638            1.38623                   1.79139     -0.04331
+## 5  -0.9961            1.38829                   1.79946     -0.04278
+## 6  -0.5078            1.39237                   1.80995     -0.04221
+## 7   0.0000            1.39862                   1.82273     -0.04162
+## 8   0.5223            1.40831                   1.83907     -0.04102
+## 9   1.0583            1.42091                   1.85912     -0.04041
+## 10  1.6050            1.43582                   1.88027     -0.03990
+## 11  2.1587            1.45278                   1.90296     -0.03946
+## 12  2.7157            1.47111                   1.92650     -0.03911
+##    par.vals.pos par.vals.date2004-08-08 par.vals.date2004-08-09
+## 1      -0.04319                -0.30136                 1.13317
+## 2      -0.04305                -0.29192                 1.13990
+## 3      -0.04289                -0.28017                 1.14839
+## 4      -0.04218                -0.26603                 1.15814
+## 5      -0.04221                -0.24915                 1.17101
+## 6      -0.04225                -0.22976                 1.18606
+## 7      -0.04229                -0.20798                 1.20340
+## 8      -0.04234                -0.18448                 1.22235
+## 9      -0.04180                -0.15948                 1.24244
+## 10     -0.04173                -0.13343                 1.26446
+## 11     -0.04172                -0.10696                 1.28749
+## 12     -0.04178                -0.08065                 1.31104
+##    par.vals.date2004-08-10 par.vals.date2004-08-12
+## 1                  2.10768                -3.32420
+## 2                  2.11332                -2.97858
+## 3                  2.12050                -2.63296
+## 4                  2.12777                -2.28734
+## 5                  2.13933                -1.94172
+## 6                  2.15298                -1.59610
+## 7                  2.17023                -1.25048
+## 8                  2.18636                -0.90486
+## 9                  2.20424                -0.55924
+## 10                 2.22499                -0.21362
+## 11                 2.24715                 0.13200
+## 12                 2.27031                 0.47762
+## 
+## attr(,"original.fit")
+## Call:
+## polr(formula = aphids2 ~ lfClass + row + pos + date, data = ss)
+## 
+## Coefficients:
+##        lfClass>3 lfClassflowering              row              pos 
+##          1.39862          1.82273         -0.04162         -0.04229 
+##   date2004-08-08   date2004-08-09   date2004-08-10   date2004-08-12 
+##         -0.20798          1.20340          2.17023         -1.25048 
+## 
+## Intercepts:
+##     0|1-10 1-10|11-80  11-80|>80 
+##     -42.20     -41.69     -38.87 
+## 
+## Residual Deviance: 818.89 
+## AIC: 840.89 
+## attr(,"summary")
+## Call:
+## polr(formula = aphids2 ~ lfClass + row + pos + date, data = ss)
+## 
+## Coefficients:
+##                     Value Std. Error  t value
+## lfClass>3         1.39862  0.2555375   5.4733
+## lfClassflowering  1.82273  0.2853168   6.3884
+## row              -0.04162  0.0154992  -2.6855
+## pos              -0.04229  0.0004514 -93.6931
+## date2004-08-08   -0.20798  0.2499234  -0.8322
+## date2004-08-09    1.20340  0.2731916   4.4050
+## date2004-08-10    2.17023  0.6030908   3.5985
+## date2004-08-12   -1.25048  0.6708903  -1.8639
+## 
+## Intercepts:
+##            Value      Std. Error t value   
+## 0|1-10       -42.2007     0.0088 -4796.3046
+## 1-10|11-80   -41.6934     0.0882  -472.9440
+## 11-80|>80    -38.8675     0.2008  -193.5271
+## 
+## Residual Deviance: 818.89 
+## AIC: 840.89 
+## attr(,"class")
+## [1] "profile.polr" "profile"
+</pre></div><div class="source"><pre class="knitr r"><span class="functioncall">plot</span>(pb)
+</pre></div></div><div class="rimage default"><img src="figure/unnamed-chunk-102.png" title="plot of chunk unnamed-chunk-10" alt="plot of chunk unnamed-chunk-10" class="plot" /></div><div class="rcode">
+<div class="source"><pre class="knitr r"><span class="functioncall">pairs</span>(pb)
+</pre></div></div><div class="rimage default"><img src="figure/unnamed-chunk-103.png" title="plot of chunk unnamed-chunk-10" alt="plot of chunk unnamed-chunk-10" class="plot" /></div><div class="rcode">
+<div class="source"><pre class="knitr r">
+## use goodness of fit <span class="functioncall">test</span> (<span class="keyword">if</span> p val &gt;0.05, model is a good fit)
+<span class="functioncall">pchisq</span>(<span class="functioncall">deviance</span>(best), <span class="functioncall">df.residual</span>(best))
+</pre></div><div class="output"><pre class="knitr r">## [1] 1
+</pre></div><div class="source"><pre class="knitr r">
+# compare predicted abundances to actual <span class="functioncall">abundances</span> (by size class on
+<span class="comment"># modal date <span class="keyword">in</span> median location</span>
+newd &lt;- <span class="functioncall">data.frame</span>(lfClass = <span class="functioncall">levels</span>(ss$lfClass), date = <span class="string">"2004-08-08"</span>, pos = <span class="functioncall">median</span>(ss$pos), 
+    row = <span class="functioncall">median</span>(ss$row))
+pred &lt;- <span class="functioncall">predict</span>(best, type = <span class="string">"prob"</span>, newdata = newd)
+obs &lt;- <span class="functioncall">tapply</span>(ss$lfClass, <span class="functioncall">list</span>(ss$lfClass, ss$aphids2), length)
+(obs &lt;- obs/<span class="functioncall">apply</span>(obs, 1, sum))
+</pre></div><div class="output"><pre class="knitr r">##                0    1-10  11-80      >80
+## 1-3       0.4412 0.15686 0.3922 0.009804
+## >3        0.1951 0.06098 0.5366 0.207317
+## flowering 0.1120 0.04000 0.5360 0.312000
+</pre></div><div class="source"><pre class="knitr r"><span class="functioncall">par</span>(mfcol = <span class="functioncall">c</span>(1, 2))
+<span class="functioncall">barplot</span>(pred, beside = T, ylim = <span class="functioncall">c</span>(0, 1))
+<span class="functioncall">legend</span>(<span class="string">"topleft"</span>, legend = <span class="string">"pred."</span>, bty = <span class="string">"n"</span>)
+<span class="functioncall">barplot</span>(obs, beside = T, ylim = <span class="functioncall">c</span>(0, 1))
+<span class="functioncall">legend</span>(<span class="string">"topleft"</span>, legend = <span class="string">"obs"</span>, bty = <span class="string">"n"</span>)
+</pre></div></div><div class="rimage default"><img src="figure/unnamed-chunk-104.png" title="plot of chunk unnamed-chunk-10" alt="plot of chunk unnamed-chunk-10" class="plot" /></div><div class="rcode">
+<div class="source"><pre class="knitr r"><span class="functioncall">par</span>(mfcol = <span class="functioncall">c</span>(1, 1))
+
+<span class="comment"># it looks pretty good.</span>
+</pre></div></div></div>
+
+
+Compare results to binomial glm with low( 0-10) vs high (>10) aphid abundance:
+<div class="chunk" id="unnamed-chunk-11"><div class="rcode"><div class="source"><pre class="knitr r">
+ss$aphidLH &lt;- 0
+ss[ss$aphids2 %<span class="keyword">in</span>% <span class="functioncall">c</span>(<span class="string">"0"</span>, <span class="string">"1-10"</span>), <span class="string">"aphidLH"</span>] &lt;- 0
+ss[ss$aphids2 %<span class="keyword">in</span>% <span class="functioncall">c</span>(<span class="string">"11-80"</span>, <span class="string">"&gt;80"</span>), <span class="string">"aphidLH"</span>] &lt;- 1
+
+a6 &lt;- <span class="functioncall">glm</span>(aphidLH ~ siteOfOriginPedigree:lfClass + siteOfOriginPedigree + lfClass + 
+    row + pos + date, family = quasibinomial, data = ss)
+<span class="functioncall">summary</span>(a6)
+</pre></div><div class="output"><pre class="knitr r">## 
+## Call:
+## glm(formula = aphidLH ~ siteOfOriginPedigree:lfClass + siteOfOriginPedigree + 
+##     lfClass + row + pos + date, family = quasibinomial, data = ss)
+## 
+## Deviance Residuals: 
+##    Min      1Q  Median      3Q     Max  
+## -2.349  -0.526   0.378   0.713   2.174  
+## 
+## Coefficients:
+##                                             Estimate Std. Error t value
+## (Intercept)                                  49.8846    22.0771    2.26
+## siteOfOriginPedigreenwlf                      0.0707     0.8230    0.09
+## siteOfOriginPedigreealf                       0.0819     0.9999    0.08
+## siteOfOriginPedigreelf                       -0.3438     0.6367   -0.54
+## siteOfOriginPedigreekj                       18.9940  4524.6469    0.00
+## siteOfOriginPedigreemapp                    -17.7614  2733.5580   -0.01
+## siteOfOriginPedigreeri                      -15.5914  1451.2170   -0.01
+## siteOfOriginPedigreelc                       -1.9896     1.1475   -1.73
+## siteOfOriginPedigreeness                     -1.3460     1.2648   -1.06
+## siteOfOriginPedigreeaa                        1.6502     1.2904    1.28
+## siteOfOriginPedigreegc                        1.0525     1.4800    0.71
+## siteOfOriginPedigreetower                     0.1042     0.9190    0.11
+## lfClass>3                                     1.0032     0.5318    1.89
+## lfClassflowering                              1.3598     0.5897    2.31
+## row                                          -0.0403     0.0205   -1.97
+## pos                                          -0.0507     0.0226   -2.24
+## date2004-08-08                                0.1250     0.3260    0.38
+## date2004-08-09                                1.5282     0.3927    3.89
+## date2004-08-10                               32.0779  2079.6478    0.02
+## date2004-08-12                               -1.4658     0.9605   -1.53
+## siteOfOriginPedigreenwlf:lfClass>3           -0.6690     1.2376   -0.54
+## siteOfOriginPedigreealf:lfClass>3            17.5045  2131.1510    0.01
+## siteOfOriginPedigreelf:lfClass>3              0.9653     0.9049    1.07
+## siteOfOriginPedigreekj:lfClass>3            -18.3047  4524.6471    0.00
+## siteOfOriginPedigreemapp:lfClass>3           17.0762  2733.5581    0.01
+## siteOfOriginPedigreeri:lfClass>3             12.7045  1451.2174    0.01
+## siteOfOriginPedigreelc:lfClass>3              2.8534     1.4665    1.95
+## siteOfOriginPedigreeness:lfClass>3            1.7062     1.4190    1.20
+## siteOfOriginPedigreeaa:lfClass>3             -0.6504     1.5917   -0.41
+## siteOfOriginPedigreegc:lfClass>3             -2.7405     1.8199   -1.51
+## siteOfOriginPedigreetower:lfClass>3           1.1187     1.4420    0.78
+## siteOfOriginPedigreenwlf:lfClassflowering    -0.5732     1.2600   -0.45
+## siteOfOriginPedigreealf:lfClassflowering     17.1011  2037.9795    0.01
+## siteOfOriginPedigreelf:lfClassflowering       1.4825     1.3130    1.13
+## siteOfOriginPedigreekj:lfClassflowering     -20.0913  4524.6470    0.00
+## siteOfOriginPedigreemapp:lfClassflowering    17.2749  2733.5581    0.01
+## siteOfOriginPedigreeri:lfClassflowering      33.0427  3348.7632    0.01
+## siteOfOriginPedigreelc:lfClassflowering       1.7603     1.6587    1.06
+## siteOfOriginPedigreeness:lfClassflowering     2.8679     1.6882    1.70
+## siteOfOriginPedigreeaa:lfClassflowering      -2.7730     1.8565   -1.49
+## siteOfOriginPedigreegc:lfClassflowering      14.7702  3376.6849    0.00
+## siteOfOriginPedigreetower:lfClassflowering   -0.8914     1.3502   -0.66
+##                                            Pr(>|t|)    
+## (Intercept)                                 0.02446 *  
+## siteOfOriginPedigreenwlf                    0.93155    
+## siteOfOriginPedigreealf                     0.93477    
+## siteOfOriginPedigreelf                      0.58949    
+## siteOfOriginPedigreekj                      0.99665    
+## siteOfOriginPedigreemapp                    0.99482    
+## siteOfOriginPedigreeri                      0.99143    
+## siteOfOriginPedigreelc                      0.08383 .  
+## siteOfOriginPedigreeness                    0.28796    
+## siteOfOriginPedigreeaa                      0.20180    
+## siteOfOriginPedigreegc                      0.47747    
+## siteOfOriginPedigreetower                   0.90983    
+## lfClass>3                                   0.06010 .  
+## lfClassflowering                            0.02171 *  
+## row                                         0.04983 *  
+## pos                                         0.02553 *  
+## date2004-08-08                              0.70161    
+## date2004-08-09                              0.00012 ***
+## date2004-08-10                              0.98770    
+## date2004-08-12                              0.12789    
+## siteOfOriginPedigreenwlf:lfClass>3          0.58916    
+## siteOfOriginPedigreealf:lfClass>3           0.99345    
+## siteOfOriginPedigreelf:lfClass>3            0.28683    
+## siteOfOriginPedigreekj:lfClass>3            0.99677    
+## siteOfOriginPedigreemapp:lfClass>3          0.99502    
+## siteOfOriginPedigreeri:lfClass>3            0.99302    
+## siteOfOriginPedigreelc:lfClass>3            0.05250 .  
+## siteOfOriginPedigreeness:lfClass>3          0.23003    
+## siteOfOriginPedigreeaa:lfClass>3            0.68306    
+## siteOfOriginPedigreegc:lfClass>3            0.13301    
+## siteOfOriginPedigreetower:lfClass>3         0.43839    
+## siteOfOriginPedigreenwlf:lfClassflowering   0.64947    
+## siteOfOriginPedigreealf:lfClassflowering    0.99331    
+## siteOfOriginPedigreelf:lfClassflowering     0.25963    
+## siteOfOriginPedigreekj:lfClassflowering     0.99646    
+## siteOfOriginPedigreemapp:lfClassflowering   0.99496    
+## siteOfOriginPedigreeri:lfClassflowering     0.99213    
+## siteOfOriginPedigreelc:lfClassflowering     0.28933    
+## siteOfOriginPedigreeness:lfClassflowering   0.09025 .  
+## siteOfOriginPedigreeaa:lfClassflowering     0.13616    
+## siteOfOriginPedigreegc:lfClassflowering     0.99651    
+## siteOfOriginPedigreetower:lfClassflowering  0.50958    
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1 
+## 
+## (Dispersion parameter for quasibinomial family taken to be 0.964)
+## 
+##     Null deviance: 485.39  on 390  degrees of freedom
+## Residual deviance: 335.16  on 349  degrees of freedom
+## AIC: NA
+## 
+## Number of Fisher Scoring iterations: 17
+</pre></div><div class="source"><pre class="knitr r"><span class="comment"># overdispersion--use quasibinomial</span>
+a5 &lt;- <span class="functioncall">glm</span>(aphidLH ~ siteOfOriginPedigree + lfClass + row + pos + date, family = quasibinomial, 
+    data = ss)
+<span class="functioncall">anova</span>(a5, a6, test = <span class="string">"F"</span>)
+</pre></div><div class="output"><pre class="knitr r">## Analysis of Deviance Table
+## 
+## Model 1: aphidLH ~ siteOfOriginPedigree + lfClass + row + pos + date
+## Model 2: aphidLH ~ siteOfOriginPedigree:lfClass + siteOfOriginPedigree + 
+##     lfClass + row + pos + date
+##   Resid. Df Resid. Dev Df Deviance    F Pr(>F)  
+## 1       371        375                          
+## 2       349        335 22     39.5 1.86  0.011 *
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+</pre></div><div class="source"><pre class="knitr r">a5.1 &lt;- <span class="functioncall">glm</span>(aphidLH ~ lfClass + row + pos + date, family = quasibinomial, data = ss)
+a5.2 &lt;- <span class="functioncall">glm</span>(aphidLH ~ siteOfOriginPedigree + row + pos + date, family = quasibinomial, 
+    data = ss)
+a5.3 &lt;- <span class="functioncall">glm</span>(aphidLH ~ siteOfOriginPedigree + lfClass + pos + date, family = quasibinomial, 
+    data = ss)
+a5.4 &lt;- <span class="functioncall">glm</span>(aphidLH ~ siteOfOriginPedigree + lfClass + row + date, family = quasibinomial, 
+    data = ss)
+a5.5 &lt;- <span class="functioncall">glm</span>(aphidLH ~ siteOfOriginPedigree + lfClass + row + pos, family = quasibinomial, 
+    data = ss)
+<span class="functioncall">anova</span>(a5.1, a5, test = <span class="string">"F"</span>)
+</pre></div><div class="output"><pre class="knitr r">## Analysis of Deviance Table
+## 
+## Model 1: aphidLH ~ lfClass + row + pos + date
+## Model 2: aphidLH ~ siteOfOriginPedigree + lfClass + row + pos + date
+##   Resid. Df Resid. Dev Df Deviance    F Pr(>F)  
+## 1       382        395                          
+## 2       371        375 11     20.9 1.86  0.043 *
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+</pre></div><div class="source"><pre class="knitr r"><span class="functioncall">anova</span>(a5.2, a5, test = <span class="string">"F"</span>)
+</pre></div><div class="output"><pre class="knitr r">## Analysis of Deviance Table
+## 
+## Model 1: aphidLH ~ siteOfOriginPedigree + row + pos + date
+## Model 2: aphidLH ~ siteOfOriginPedigree + lfClass + row + pos + date
+##   Resid. Df Resid. Dev Df Deviance    F  Pr(>F)    
+## 1       373        410                             
+## 2       371        375  2       35 17.2 7.3e-08 ***
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+</pre></div><div class="source"><pre class="knitr r"><span class="functioncall">anova</span>(a5.3, a5, test = <span class="string">"F"</span>)
+</pre></div><div class="output"><pre class="knitr r">## Analysis of Deviance Table
+## 
+## Model 1: aphidLH ~ siteOfOriginPedigree + lfClass + pos + date
+## Model 2: aphidLH ~ siteOfOriginPedigree + lfClass + row + pos + date
+##   Resid. Df Resid. Dev Df Deviance    F Pr(>F)  
+## 1       372        378                          
+## 2       371        375  1     2.99 2.94  0.087 .
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+</pre></div><div class="source"><pre class="knitr r"><span class="functioncall">anova</span>(a5.4, a5, test = <span class="string">"F"</span>)
+</pre></div><div class="output"><pre class="knitr r">## Analysis of Deviance Table
+## 
+## Model 1: aphidLH ~ siteOfOriginPedigree + lfClass + row + date
+## Model 2: aphidLH ~ siteOfOriginPedigree + lfClass + row + pos + date
+##   Resid. Df Resid. Dev Df Deviance    F Pr(>F)
+## 1       372        377                        
+## 2       371        375  1     2.02 1.98   0.16
+</pre></div><div class="source"><pre class="knitr r"><span class="functioncall">anova</span>(a5.5, a5, test = <span class="string">"F"</span>)
+</pre></div><div class="output"><pre class="knitr r">## Analysis of Deviance Table
+## 
+## Model 1: aphidLH ~ siteOfOriginPedigree + lfClass + row + pos
+## Model 2: aphidLH ~ siteOfOriginPedigree + lfClass + row + pos + date
+##   Resid. Df Resid. Dev Df Deviance    F  Pr(>F)    
+## 1       375        409                             
+## 2       371        375  4     34.1 8.37 1.8e-06 ***
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+</pre></div><div class="source"><pre class="knitr r">
+a4 &lt;- <span class="functioncall">glm</span>(aphidLH ~ siteOfOriginPedigree + lfClass + pos + date, family = quasibinomial, 
+    data = ss)
+
+
+a4.1 &lt;- <span class="functioncall">glm</span>(aphidLH ~ lfClass + pos + date, family = quasibinomial, data = ss)
+a4.2 &lt;- <span class="functioncall">glm</span>(aphidLH ~ siteOfOriginPedigree + pos + date, family = quasibinomial, 
+    data = ss)
+a4.3 &lt;- <span class="functioncall">glm</span>(aphidLH ~ siteOfOriginPedigree + lfClass + date, family = quasibinomial, 
+    data = ss)
+a4.4 &lt;- <span class="functioncall">glm</span>(aphidLH ~ siteOfOriginPedigree + lfClass + pos, family = quasibinomial, 
+    data = ss)
+
+<span class="functioncall">anova</span>(a4.1, a4, test = <span class="string">"F"</span>)
+</pre></div><div class="output"><pre class="knitr r">## Analysis of Deviance Table
+## 
+## Model 1: aphidLH ~ lfClass + pos + date
+## Model 2: aphidLH ~ siteOfOriginPedigree + lfClass + pos + date
+##   Resid. Df Resid. Dev Df Deviance    F Pr(>F)  
+## 1       383        401                          
+## 2       372        378 11       23 2.08  0.021 *
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+</pre></div><div class="source"><pre class="knitr r"><span class="functioncall">anova</span>(a4.2, a4, test = <span class="string">"F"</span>)
+</pre></div><div class="output"><pre class="knitr r">## Analysis of Deviance Table
+## 
+## Model 1: aphidLH ~ siteOfOriginPedigree + pos + date
+## Model 2: aphidLH ~ siteOfOriginPedigree + lfClass + pos + date
+##   Resid. Df Resid. Dev Df Deviance    F  Pr(>F)    
+## 1       374        415                             
+## 2       372        378  2     36.9 18.3 2.6e-08 ***
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+</pre></div><div class="source"><pre class="knitr r"><span class="functioncall">anova</span>(a4.3, a4, test = <span class="string">"F"</span>)
+</pre></div><div class="output"><pre class="knitr r">## Analysis of Deviance Table
+## 
+## Model 1: aphidLH ~ siteOfOriginPedigree + lfClass + date
+## Model 2: aphidLH ~ siteOfOriginPedigree + lfClass + pos + date
+##   Resid. Df Resid. Dev Df Deviance    F Pr(>F)
+## 1       373        379                        
+## 2       372        378  1     1.57 1.56   0.21
+</pre></div><div class="source"><pre class="knitr r"><span class="functioncall">anova</span>(a4.4, a4, test = <span class="string">"F"</span>)
+</pre></div><div class="output"><pre class="knitr r">## Analysis of Deviance Table
+## 
+## Model 1: aphidLH ~ siteOfOriginPedigree + lfClass + pos
+## Model 2: aphidLH ~ siteOfOriginPedigree + lfClass + pos + date
+##   Resid. Df Resid. Dev Df Deviance    F  Pr(>F)    
+## 1       376        409                             
+## 2       372        378  4     31.1 7.73 5.4e-06 ***
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+</pre></div><div class="source"><pre class="knitr r">
+a3 &lt;- <span class="functioncall">glm</span>(aphidLH ~ siteOfOriginPedigree + lfClass + date, family = quasibinomial, 
+    data = ss)
+a3.1 &lt;- <span class="functioncall">glm</span>(aphidLH ~ lfClass + date, family = quasibinomial, data = ss)
+a3.2 &lt;- <span class="functioncall">glm</span>(aphidLH ~ siteOfOriginPedigree + date, family = quasibinomial, data = ss)
+a3.3 &lt;- <span class="functioncall">glm</span>(aphidLH ~ siteOfOriginPedigree + lfClass, family = quasibinomial, 
+    data = ss)
+
+<span class="functioncall">anova</span>(a3.1, a3, test = <span class="string">"F"</span>)
+</pre></div><div class="output"><pre class="knitr r">## Analysis of Deviance Table
+## 
+## Model 1: aphidLH ~ lfClass + date
+## Model 2: aphidLH ~ siteOfOriginPedigree + lfClass + date
+##   Resid. Df Resid. Dev Df Deviance    F Pr(>F)  
+## 1       384        403                          
+## 2       373        379 11     23.4 2.11  0.019 *
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+</pre></div><div class="source"><pre class="knitr r"><span class="functioncall">anova</span>(a3.2, a3, test = <span class="string">"F"</span>)
+</pre></div><div class="output"><pre class="knitr r">## Analysis of Deviance Table
+## 
+## Model 1: aphidLH ~ siteOfOriginPedigree + date
+## Model 2: aphidLH ~ siteOfOriginPedigree + lfClass + date
+##   Resid. Df Resid. Dev Df Deviance    F Pr(>F)    
+## 1       375        421                            
+## 2       373        379  2     41.8 20.7  3e-09 ***
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+</pre></div><div class="source"><pre class="knitr r"><span class="functioncall">anova</span>(a3.3, a3, test = <span class="string">"F"</span>)
+</pre></div><div class="output"><pre class="knitr r">## Analysis of Deviance Table
+## 
+## Model 1: aphidLH ~ siteOfOriginPedigree + lfClass
+## Model 2: aphidLH ~ siteOfOriginPedigree + lfClass + date
+##   Resid. Df Resid. Dev Df Deviance    F  Pr(>F)    
+## 1       377        410                             
+## 2       373        379  4     30.4 7.53 7.7e-06 ***
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+</pre></div><div class="source"><pre class="knitr r">
+a2 &lt;- <span class="functioncall">glm</span>(aphidLH ~ lfClass + date, family = quasibinomial, data = ss)
+a2.1 &lt;- <span class="functioncall">glm</span>(aphidLH ~ date, family = quasibinomial, data = ss)
+a2.2 &lt;- <span class="functioncall">glm</span>(aphidLH ~ lfClass, family = quasibinomial, data = ss)
+<span class="functioncall">anova</span>(a2.1, a2, test = <span class="string">"F"</span>)
+</pre></div><div class="output"><pre class="knitr r">## Analysis of Deviance Table
+## 
+## Model 1: aphidLH ~ date
+## Model 2: aphidLH ~ lfClass + date
+##   Resid. Df Resid. Dev Df Deviance    F  Pr(>F)    
+## 1       386        444                             
+## 2       384        403  2     41.8 20.7 2.9e-09 ***
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+</pre></div><div class="source"><pre class="knitr r"><span class="functioncall">anova</span>(a2.2, a2, test = <span class="string">"F"</span>)
+</pre></div><div class="output"><pre class="knitr r">## Analysis of Deviance Table
+## 
+## Model 1: aphidLH ~ lfClass
+## Model 2: aphidLH ~ lfClass + date
+##   Resid. Df Resid. Dev Df Deviance    F  Pr(>F)    
+## 1       388        431                             
+## 2       384        403  4       28 6.94 2.1e-05 ***
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+</pre></div><div class="source"><pre class="knitr r">a1 &lt;- <span class="functioncall">glm</span>(aphidLH ~ lfClass, family = quasibinomial, data = ss)
+null &lt;- <span class="functioncall">glm</span>(aphidLH ~ 1, family = quasibinomial, data = ss)
+<span class="functioncall">anova</span>(null, a1, a2, a3, a4, a5, a6, test = <span class="string">"F"</span>)
+</pre></div><div class="output"><pre class="knitr r">## Analysis of Deviance Table
+## 
+## Model 1: aphidLH ~ 1
+## Model 2: aphidLH ~ lfClass
+## Model 3: aphidLH ~ lfClass + date
+## Model 4: aphidLH ~ siteOfOriginPedigree + lfClass + date
+## Model 5: aphidLH ~ siteOfOriginPedigree + lfClass + pos + date
+## Model 6: aphidLH ~ siteOfOriginPedigree + lfClass + row + pos + date
+## Model 7: aphidLH ~ siteOfOriginPedigree:lfClass + siteOfOriginPedigree + 
+##     lfClass + row + pos + date
+##   Resid. Df Resid. Dev Df Deviance     F  Pr(>F)    
+## 1       390        485                              
+## 2       388        431  2     54.8 28.42 3.7e-12 ***
+## 3       384        403  4     28.0  7.27 1.2e-05 ***
+## 4       373        379 11     23.4  2.21   0.014 *  
+## 5       372        378  1      1.6  1.63   0.203    
+## 6       371        375  1      3.0  3.10   0.079 .  
+## 7       349        335 22     39.5  1.86   0.011 *  
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+</pre></div><div class="source"><pre class="knitr r">
+<span class="comment"># evaluate best model:</span>
+best &lt;- <span class="functioncall">glm</span>(aphidLH ~ siteOfOriginPedigree * lfClass + date, family = quasibinomial, 
+    data = ss)
+<span class="functioncall">summary</span>(best)
+</pre></div><div class="output"><pre class="knitr r">## 
+## Call:
+## glm(formula = aphidLH ~ siteOfOriginPedigree * lfClass + date, 
+##     family = quasibinomial, data = ss)
+## 
+## Deviance Residuals: 
+##    Min      1Q  Median      3Q     Max  
+## -2.340  -0.553   0.389   0.745   2.190  
+## 
+## Coefficients:
+##                                             Estimate Std. Error t value
+## (Intercept)                                  -0.4563     0.4062   -1.12
+## siteOfOriginPedigreenwlf                      0.1296     0.8023    0.16
+## siteOfOriginPedigreealf                       0.7004     0.9841    0.71
+## siteOfOriginPedigreelf                       -0.4449     0.6310   -0.71
+## siteOfOriginPedigreekj                       18.9232  4531.4937    0.00
+## siteOfOriginPedigreemapp                    -17.9330  2780.0962   -0.01
+## siteOfOriginPedigreeri                      -15.9047  1431.7729   -0.01
+## siteOfOriginPedigreelc                       -1.9447     1.1322   -1.72
+## siteOfOriginPedigreeness                     -1.2750     1.1852   -1.08
+## siteOfOriginPedigreeaa                        1.1167     1.2593    0.89
+## siteOfOriginPedigreegc                        0.3571     1.4422    0.25
+## siteOfOriginPedigreetower                     0.2603     0.9096    0.29
+## lfClass>3                                     0.9227     0.5202    1.77
+## lfClassflowering                              1.5977     0.5736    2.79
+## date2004-08-08                                0.0992     0.3223    0.31
+## date2004-08-09                                1.2637     0.3719    3.40
+## date2004-08-10                               31.9885  2055.3325    0.02
+## date2004-08-12                               -1.4112     0.9477   -1.49
+## siteOfOriginPedigreenwlf:lfClass>3           -0.2467     1.2220   -0.20
+## siteOfOriginPedigreealf:lfClass>3            17.0944  2212.1372    0.01
+## siteOfOriginPedigreelf:lfClass>3              1.1062     0.8944    1.24
+## siteOfOriginPedigreekj:lfClass>3            -18.1102  4531.4938    0.00
+## siteOfOriginPedigreemapp:lfClass>3           17.2361  2780.0963    0.01
+## siteOfOriginPedigreeri:lfClass>3             13.1782  1431.7734    0.01
+## siteOfOriginPedigreelc:lfClass>3              2.9109     1.4448    2.01
+## siteOfOriginPedigreeness:lfClass>3            1.7471     1.3432    1.30
+## siteOfOriginPedigreeaa:lfClass>3             -0.1685     1.5491   -0.11
+## siteOfOriginPedigreegc:lfClass>3             -1.8034     1.7679   -1.02
+## siteOfOriginPedigreetower:lfClass>3           1.2262     1.4356    0.85
+## siteOfOriginPedigreenwlf:lfClassflowering    -0.6411     1.2311   -0.52
+## siteOfOriginPedigreealf:lfClassflowering     16.3749  2070.8101    0.01
+## siteOfOriginPedigreelf:lfClassflowering       1.2890     1.2999    0.99
+## siteOfOriginPedigreekj:lfClassflowering     -20.1326  4531.4938    0.00
+## siteOfOriginPedigreemapp:lfClassflowering    17.2830  2780.0964    0.01
+## siteOfOriginPedigreeri:lfClassflowering      33.0246  3440.5049    0.01
+## siteOfOriginPedigreelc:lfClassflowering       1.8664     1.6437    1.14
+## siteOfOriginPedigreeness:lfClassflowering     2.8045     1.6231    1.73
+## siteOfOriginPedigreeaa:lfClassflowering      -2.0731     1.7944   -1.16
+## siteOfOriginPedigreegc:lfClassflowering      15.2083  3364.4320    0.00
+## siteOfOriginPedigreetower:lfClassflowering   -0.8544     1.3447   -0.64
+##                                            Pr(>|t|)    
+## (Intercept)                                 0.26211    
+## siteOfOriginPedigreenwlf                    0.87175    
+## siteOfOriginPedigreealf                     0.47711    
+## siteOfOriginPedigreelf                      0.48127    
+## siteOfOriginPedigreekj                      0.99667    
+## siteOfOriginPedigreemapp                    0.99486    
+## siteOfOriginPedigreeri                      0.99114    
+## siteOfOriginPedigreelc                      0.08675 .  
+## siteOfOriginPedigreeness                    0.28277    
+## siteOfOriginPedigreeaa                      0.37579    
+## siteOfOriginPedigreegc                      0.80459    
+## siteOfOriginPedigreetower                   0.77493    
+## lfClass>3                                   0.07697 .  
+## lfClassflowering                            0.00564 ** 
+## date2004-08-08                              0.75852    
+## date2004-08-09                              0.00076 ***
+## date2004-08-10                              0.98759    
+## date2004-08-12                              0.13735    
+## siteOfOriginPedigreenwlf:lfClass>3          0.84011    
+## siteOfOriginPedigreealf:lfClass>3           0.99384    
+## siteOfOriginPedigreelf:lfClass>3            0.21694    
+## siteOfOriginPedigreekj:lfClass>3            0.99681    
+## siteOfOriginPedigreemapp:lfClass>3          0.99506    
+## siteOfOriginPedigreeri:lfClass>3            0.99266    
+## siteOfOriginPedigreelc:lfClass>3            0.04470 *  
+## siteOfOriginPedigreeness:lfClass>3          0.19422    
+## siteOfOriginPedigreeaa:lfClass>3            0.91343    
+## siteOfOriginPedigreegc:lfClass>3            0.30840    
+## siteOfOriginPedigreetower:lfClass>3         0.39362    
+## siteOfOriginPedigreenwlf:lfClassflowering   0.60286    
+## siteOfOriginPedigreealf:lfClassflowering    0.99370    
+## siteOfOriginPedigreelf:lfClassflowering     0.32206    
+## siteOfOriginPedigreekj:lfClassflowering     0.99646    
+## siteOfOriginPedigreemapp:lfClassflowering   0.99504    
+## siteOfOriginPedigreeri:lfClassflowering     0.99235    
+## siteOfOriginPedigreelc:lfClassflowering     0.25695    
+## siteOfOriginPedigreeness:lfClassflowering   0.08489 .  
+## siteOfOriginPedigreeaa:lfClassflowering     0.24874    
+## siteOfOriginPedigreegc:lfClassflowering     0.99640    
+## siteOfOriginPedigreetower:lfClassflowering  0.52557    
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1 
+## 
+## (Dispersion parameter for quasibinomial family taken to be 0.9653)
+## 
+##     Null deviance: 485.39  on 390  degrees of freedom
+## Residual deviance: 343.19  on 351  degrees of freedom
+## AIC: NA
+## 
+## Number of Fisher Scoring iterations: 17
+</pre></div><div class="source"><pre class="knitr r"><span class="functioncall">par</span>(mfcol = <span class="functioncall">c</span>(2, 2))
+<span class="functioncall">plot</span>(best)
+</pre></div><div class="warning"><pre class="knitr r">## Warning: NaNs produced
+</pre></div><div class="warning"><pre class="knitr r">## Warning: NaNs produced
+</pre></div></div><div class="rimage default"><img src="figure/unnamed-chunk-111.png" title="plot of chunk unnamed-chunk-11" alt="plot of chunk unnamed-chunk-11" class="plot" /></div><div class="rcode">
+<div class="source"><pre class="knitr r"><span class="functioncall">par</span>(mfcol = <span class="functioncall">c</span>(1, 1))
+
+<span class="comment"># predict values based on typical individual, across all populations</span>
+<span class="functioncall">table</span>(ss$lfClass)
+</pre></div><div class="output"><pre class="knitr r">## 
+##       1-3        >3 flowering 
+##       102       164       125
+</pre></div><div class="source"><pre class="knitr r"><span class="functioncall">table</span>(ss$date)
+</pre></div><div class="output"><pre class="knitr r">## 
+## 2004-08-07 2004-08-08 2004-08-09 2004-08-10 2004-08-12 
+##        119        133        116         12         11
+</pre></div><div class="source"><pre class="knitr r">sites &lt;- <span class="functioncall">dimnames</span>(<span class="functioncall">sort</span>(<span class="functioncall">table</span>(ss$siteOfOriginPedigree)))[[1]]
+newd &lt;- <span class="functioncall">data.frame</span>(siteOfOriginPedigree = sites, lfClass = <span class="string">"&gt;3"</span>, date = <span class="string">"2004-08-08"</span>)
+pred &lt;- <span class="functioncall">predict</span>(best, type = <span class="string">"response"</span>, newdata = newd, se.fit = T)
+newd$fit &lt;- pred$fit
+newd$se &lt;- pred$se.fit
+
+ss$siteOfOriginPedigree &lt;- <span class="functioncall">factor</span>(ss$siteOfOriginPedigree, levels = sites)
+obs &lt;- <span class="functioncall">tapply</span>(ss$aphidLH, ss$siteOfOriginPedigree, mean)
+<span class="comment"># compare predicted to observed values:</span>
+<span class="functioncall">par</span>(mfcol = <span class="functioncall">c</span>(1, 2))
+bp &lt;- <span class="functioncall">barplot</span>(newd$fit, ylim = <span class="functioncall">c</span>(0, 1))
+<span class="functioncall">segments</span>(bp, newd$fit + newd$se, bp, newd$fit - newd$se)
+<span class="functioncall">text</span>(bp, 0.03, labels = sites)
+bp &lt;- <span class="functioncall">barplot</span>(obs, ylim = <span class="functioncall">c</span>(0, 1))
+<span class="functioncall">text</span>(bp, 0.03, labels = sites)
+</pre></div></div><div class="rimage default"><img src="figure/unnamed-chunk-112.png" title="plot of chunk unnamed-chunk-11" alt="plot of chunk unnamed-chunk-11" class="plot" /></div><div class="rcode">
+<div class="source"><pre class="knitr r"><span class="functioncall">par</span>(mfcol = <span class="functioncall">c</span>(1, 1))
+</pre></div></div></div>
+
+
+</body>
+</html>

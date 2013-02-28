@@ -1,9 +1,9 @@
 .RData
-.csv
 .xls
 .xlsx
 .doc
-
+.png
+.Rproj
 #################
 ## Eclipse
 #################
