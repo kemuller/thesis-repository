@@ -402,7 +402,8 @@ ss$lfClass <- factor(ss$lfClass, levels=c("1-3",">3","flowering"))
 apply(uu,2,sum) #exclude sites with <10 plants
 
 ss <- ss[!ss$siteOfOriginPedigree %in% c("BTG","TH"),]
-ss$siteOfOriginPedigree <- factor(ss$siteOfOriginPedigree,levels=unique(ss$siteOfOriginPedigree))
+ss$siteOfOriginPedigree <- factor(ss$siteOfOriginPedigree,levels=c("gc","ri","kj","aa","mapp","alf","tower","nwlf","lc","ness","lf","spp"))
+
 table(ss$siteOfOriginPedigree)
 #make categories for plant size and status:
 
@@ -470,14 +471,27 @@ table(ss$lfClass)
 table(ss$date)
 newd <- data.frame(lfClass=">3",date="2004-08-08",pos=median(ss$pos),row=median(ss$row),siteOfOriginPedigree=levels(ss$siteOfOriginPedigree))
 pred <- predict(best,type="prob",newdata=newd)
+
+exp <- data.frame(fit = c(pred[,1],pred[,2],pred[,3],pred[,4]),siteOfOriginPedigree=rep(levels(ss$siteOfOriginPedigree),4),aphids2 <- rep(c("0","1-10","11-80",">80"),each=12))
+exp$aphids2 <- factor(exp$aphids2,levels=c(">80","11-80","1-10","0"))
+exp$siteOfOriginPedigree <- factor(exp$siteOfOriginPedigree,levels=levels(ss$siteOfOriginPedigree))
 obs <- tapply(ss$siteOfOriginPedigree,list(ss$siteOfOriginPedigree,ss$aphids2),length)
 obs[is.na(obs)]<-0
-(obs <- obs/apply(obs,1,sum))
+obs <- obs/apply(obs,1,sum)
+obs1 <- data.frame(fit=c(obs[,1],obs[,2],obs[,3],obs[,4]),aphids2 = rep(c("0","1-10","11-80",">80"),each=12),siteOfOriginPedigree=factor(levels(ss$siteOfOriginPedigree),levels=levels(ss$siteOfOriginPedigree)))
+obs1$aphids2 <- factor(obs1$aphids2,levels=c(">80","11-80","1-10","0"))
+obs1
+zz <- tapply(exp$fit,list(exp$aphids2,exp$siteOfOriginPedigree),mean)
+
+zz1 <- tapply(obs1$fit,list(obs1$aphids2,obs1$siteOfOriginPedigree),mean)
+
 par(mfcol=c(1,2))
-barplot(pred,beside=T,ylim=c(0,1))
-legend("topleft",legend="pred.",bty="n")
-barplot(obs,beside=T,ylim=c(0,1))
-legend("topleft",legend="obs",bty="n")
+bp <- barplot(zz)
+text(bp,0.97,labels=table(ss$siteOfOriginPedigree),col="red")
+legend("center",legend="pred.",bty="n")
+bp <- barplot(zz1)
+text(bp,0.97,labels=table(ss$siteOfOriginPedigree),col="red")
+legend("center",legend="obs.",bty="n")
 par(mfcol=c(1,1))
 
 #it looks pretty good. 
@@ -638,6 +652,356 @@ end.rcode-->
 
 <p>3. GLM quasibinomial of low (1-10) vs. high (>10) aphid abundance</p>:
 Similar to the first 2 models, the best model included size/status (p<0.0001), date (p<0.0001), and the interaction between size/status and maternal population (p=0.0114). However, unlike in the other models, row was not significant (p=0.203) and position was marginally significant (p=0.08). Also, the main effect of maternal population was significant at p=0.0138. The qq plot looked decent--better than the one for presence/absence. This is probably the most suitable model for the 1997 garden in 2004.
+
+<p>Next step: 1997 garden, 2005</p>
+<!--begin.rcode
+#look at differences by measuredate
+ss <- pp97[pp97$measureYr==2005,]
+table(ss$measureDt2)
+
+#exclude 2005-08-20
+ss <- ss[ss$measureDt2!="2005-08-29",]
+ss$date <- factor(ss$measureDt2)
+zz <- tapply(ss$aphids2,list(ss$aphids2,ss$date),length)
+zz[is.na(zz)] <- 0
+barplot(zz)
+#no obvious difference
+table(ss[ss$Status=="basal","basalLfCt"])
+sum(ss[ss$Status=="basal","basalLfCt"]<=4)
+sum(ss[ss$Status=="basal","basalLfCt"]>=5)
+
+ss$lfClass <- ""
+ss[ss$basalLfCt >=5,"lfClass"] <- ">4"
+ss[ss$basalLfCt <=4,"lfClass"] <- "1-4"
+ss[ss$Status=="flowering","lfClass"] <- "flowering"
+ss$lfClass <- factor(ss$lfClass, levels=c("1-4",">4","flowering"))
+(uu <- table(ss$lfClass,ss$siteOfOriginPedigree))#look at distribution of plant sizes/status among pops
+apply(uu,2,sum) #exclude sites with <10 plants, and exclude flowering plants
+
+ss <- ss[!ss$siteOfOriginPedigree %in% c("BTG","TH"),]
+#exclude flowering plants:
+ss <- ss[ss$Status!="flowering",]
+ss$lfClass <- factor(ss$lfClass,levels=c("1-4",">4"))
+ss$siteOfOriginPedigree <- factor(ss$siteOfOriginPedigree,levels=c("gc","ri","kj","aa","mapp","alf","tower","nwlf","lc","ness","lf","spp"))
+
+#make categories for plant size and status:
+ss$aphids2 <- ordered(ss$aphids2,levels=c("0","1-10","11-80",">80"))
+table(ss$lfClass,ss$siteOfOriginPedigree)
+table(ss$aphids2,ss$siteOfOriginPedigree)
+
+#keep row and position as numeric
+library(MASS)
+a6 <-polr(aphids2 ~ lfClass:siteOfOriginPedigree + lfClass + siteOfOriginPedigree + row + pos + date,data=ss) 
+a5 <-polr(aphids2 ~ lfClass + siteOfOriginPedigree + row + pos + date,data=ss) 
+anova(a5,a6)
+
+a5.1 <-polr(aphids2 ~           siteOfOriginPedigree + row + pos + date,data=ss) 
+a5.2 <-polr(aphids2 ~ lfClass                        + row + pos + date,data=ss) 
+a5.3 <-polr(aphids2 ~ lfClass + siteOfOriginPedigree       + pos + date,data=ss) 
+a5.4 <-polr(aphids2 ~ lfClass + siteOfOriginPedigree + row       + date,data=ss) 
+a5.5 <-polr(aphids2 ~ lfClass + siteOfOriginPedigree + row + pos        ,data=ss) 
+anova(a5.1,a5)
+anova(a5.2,a5)
+anova(a5.3,a5)
+anova(a5.4,a5)
+anova(a5.5,a5)
+a4 <- polr(aphids2 ~ lfClass + siteOfOriginPedigree + row + date,data=ss) 
+a4.1 <- polr(aphids2 ~           siteOfOriginPedigree + row + date,data=ss) 
+a4.2 <- polr(aphids2 ~ lfClass                        + row + date,data=ss) 
+a4.3 <- polr(aphids2 ~ lfClass + siteOfOriginPedigree       + date,data=ss) 
+a4.4 <- polr(aphids2 ~ lfClass + siteOfOriginPedigree + row       ,data=ss) 
+anova(a4.1,a4)
+anova(a4.2,a4)
+anova(a4.3,a4)
+anova(a4.4,a4)
+
+a3 <- polr(aphids2 ~ lfClass + row + date,data=ss) 
+a3.1 <- polr(aphids2 ~          row + date,data=ss) 
+a3.2 <- polr(aphids2 ~ lfClass      + date,data=ss) 
+a3.3 <- polr(aphids2 ~ lfClass + row      ,data=ss) 
+
+anova(a3.1,a3)
+anova(a3.2,a3)
+anova(a3.3,a3)
+
+a2 <- polr(aphids2 ~ lfClass + date,data=ss) 
+a2.1 <- polr(aphids2 ~           date,data=ss) 
+a2.2 <- polr(aphids2 ~ lfClass       ,data=ss) 
+
+anova(a2.1,a2)
+anova(a2.2,a2)
+a1 <-polr(aphids2 ~ lfClass,data=ss) 
+null <-polr(aphids2 ~ 1,data=ss) 
+anova(null,a1,a2,a3,a4,a5,a6)
+
+end.rcode-->
+
+<!--begin.rcode, fig.width=15,fig.height=15
+##evaluate model:
+best <- polr(aphids2 ~ lfClass + siteOfOriginPedigree + row + date, data=ss)
+
+#There are too many factor levels in the predictors to visualize the model in this way:
+pb <- profile(best)
+
+#plot(pb)
+pairs(pb)
+
+##use goodness of fit test (if p val >0.05, model is a good fit)
+pchisq(deviance(best),df.residual(best))
+
+end.rcode-->
+
+<!--begin.rcode, fig.width=15,fig.height=10
+#compare predicted abundances to actual abundances for a typical individual (modal date and size class in median location)
+table(ss$lfClass)
+table(ss$date)
+newd <- data.frame(lfClass=">4",date="2005-08-14",pos=median(ss$pos),row=median(ss$row),siteOfOriginPedigree=levels(ss$siteOfOriginPedigree))
+pred <- predict(best,type="prob",newdata=newd)
+exp <- data.frame(fit = c(pred[,1],pred[,2],pred[,3],pred[,4]),siteOfOriginPedigree=rep(levels(ss$siteOfOriginPedigree),4),aphids2 <- rep(c("0","1-10","11-80",">80"),each=12))
+exp$aphids2 <- factor(exp$aphids2,levels=c(">80","11-80","1-10","0"))
+exp$siteOfOriginPedigree <- factor(exp$siteOfOriginPedigree,levels=levels(ss$siteOfOriginPedigree))
+obs <- tapply(ss$siteOfOriginPedigree,list(ss$siteOfOriginPedigree,ss$aphids2),length)
+obs[is.na(obs)]<-0
+obs <- obs/apply(obs,1,sum)
+
+obs1 <- data.frame(fit=c(obs[,1],obs[,2],obs[,3],obs[,4]),aphids2 = rep(c("0","1-10","11-80",">80"),each=12),siteOfOriginPedigree=factor(levels(ss$siteOfOriginPedigree),levels=levels(ss$siteOfOriginPedigree)))
+obs1$aphids2 <- factor(obs1$aphids2,levels=c(">80","11-80","1-10","0"))
+obs1
+
+zz <- tapply(exp$fit,list(exp$aphids2,exp$siteOfOriginPedigree),mean)
+zz1 <- tapply(obs1$fit,list(obs1$aphids2,obs1$siteOfOriginPedigree),mean)
+
+par(mfcol=c(1,2))
+bp <- barplot(zz)
+text(bp,0.97,labels=table(ss$siteOfOriginPedigree),col="red")
+legend("center",legend="pred.",bty="n")
+bp <- barplot(zz1)
+text(bp,0.97,labels=table(ss$siteOfOriginPedigree),col="red")
+legend("center",legend="obs.",bty="n")
+par(mfcol=c(1,1))
+
+#it looks pretty good. 
+
+end.rcode-->
+
+Compare results to binomial glm with aphid presence/absence:
+<!--begin.rcode
+ss$aphidsPresent <- 0
+ss[ss$aphids2 !="0","aphidsPresent"] <- 1
+
+a6 <- glm(aphidsPresent ~ siteOfOriginPedigree:lfClass + siteOfOriginPedigree + lfClass + row + pos + date,family=quasibinomial,data=ss)
+#summary(a6)
+#overdispersion, use quasibinomial
+a5 <- glm(aphidsPresent ~  siteOfOriginPedigree + lfClass + row + pos + date,family=quasibinomial,data=ss)
+anova(a5,a6,test="F") 
+a5.1 <- glm(aphidsPresent ~                       + lfClass + row + pos + date,family=quasibinomial,data=ss)
+a5.2 <- glm(aphidsPresent ~  siteOfOriginPedigree           + row + pos + date,family=quasibinomial,data=ss)
+a5.3 <- glm(aphidsPresent ~  siteOfOriginPedigree + lfClass       + pos + date,family=quasibinomial,data=ss)
+a5.4 <- glm(aphidsPresent ~  siteOfOriginPedigree + lfClass + row       + date,family=quasibinomial,data=ss)
+a5.5 <- glm(aphidsPresent ~  siteOfOriginPedigree + lfClass + row + pos       ,family=quasibinomial,data=ss)
+anova(a5.1,a5,test="F")
+anova(a5.2,a5,test="F")
+anova(a5.3,a5,test="F")
+anova(a5.4,a5,test="F")
+anova(a5.5,a5,test="F")
+
+a4 <- glm(aphidsPresent ~ lfClass + row + pos + date,family=quasibinomial,data=ss)
+a4.1 <- glm(aphidsPresent ~         row + pos + date,family=quasibinomial,data=ss)
+a4.2 <- glm(aphidsPresent ~ lfClass      + pos + date,family=quasibinomial,data=ss)
+a4.3 <- glm(aphidsPresent ~ lfClass + row      + date,family=quasibinomial,data=ss)
+a4.4 <- glm(aphidsPresent ~ lfClass + row + pos       ,family=quasibinomial,data=ss)
+anova(a4.1,a4,test="F")
+anova(a4.2,a4,test="F")
+anova(a4.3,a4,test="F")
+anova(a4.4,a4,test="F")
+
+a3 <- glm(aphidsPresent ~ lfClass + row      + date,family=quasibinomial,data=ss)
+a3.1 <- glm(aphidsPresent ~           row      + date,family=quasibinomial,data=ss)
+a3.2 <- glm(aphidsPresent ~ lfClass            + date,family=quasibinomial,data=ss)
+a3.3 <- glm(aphidsPresent ~ lfClass + row            ,family=quasibinomial,data=ss)
+
+anova(a3.1,a3,test="F")
+anova(a3.2,a3,test="F")
+anova(a3.3,a3,test="F")
+
+a2 <- glm(aphidsPresent ~ lfClass     + date       ,family=quasibinomial,data=ss)
+a2.1 <- glm(aphidsPresent ~             date       ,family=quasibinomial,data=ss)
+a2.2 <- glm(aphidsPresent ~ lfClass               ,family=quasibinomial,data=ss)
+anova(a2.1,a2,test="F")
+anova(a2.2,a2,test="F")
+a1 <-  glm(aphidsPresent ~  lfClass      ,family=quasibinomial,data=ss)
+null <- glm(aphidsPresent ~ 1, family=quasibinomial, data=ss)
+anova(null,a1,a2,a3,a4,a5,a6,test="F")
+
+#evaluate best model:
+best <- glm(aphidsPresent ~ lfClass + date + row ,family=quasibinomial,data=ss)
+summary(best)
+par(mfcol=c(2,2))
+plot(best)
+par(mfcol=c(1,1))
+
+#looks okay
+end.rcode-->
+
+
+Compare results to binomial glm with low( 0-10) vs high (>10) aphid abundance:
+<!--begin.rcode
+
+ss$aphidLH <- 0
+ss[ss$aphids2 %in% c("0","1-10"),"aphidLH"] <- 0
+ss[ss$aphids2 %in% c("11-80",">80"),"aphidLH"] <- 1
+
+a6 <- glm(aphidLH ~ siteOfOriginPedigree:lfClass + siteOfOriginPedigree + lfClass + row + pos + date,family=quasibinomial,data=ss)
+#summary(a6)
+#overdispersion--use quasibinomial
+a5 <- glm(aphidLH ~  siteOfOriginPedigree + lfClass + row + pos + date,family=quasibinomial,data=ss)
+anova(a5,a6,test="F") 
+a5.1 <- glm(aphidLH ~                         lfClass + row + pos + date,family=quasibinomial,data=ss)
+a5.2 <- glm(aphidLH ~  siteOfOriginPedigree           + row + pos + date,family=quasibinomial,data=ss)
+a5.3 <- glm(aphidLH ~  siteOfOriginPedigree + lfClass       + pos + date,family=quasibinomial,data=ss)
+a5.4 <- glm(aphidLH ~  siteOfOriginPedigree + lfClass + row       + date,family=quasibinomial,data=ss)
+a5.5 <- glm(aphidLH ~  siteOfOriginPedigree + lfClass + row + pos       ,family=quasibinomial,data=ss)
+anova(a5.1,a5,test="F")
+anova(a5.2,a5,test="F")
+anova(a5.3,a5,test="F")
+anova(a5.4,a5,test="F")
+anova(a5.5,a5,test="F")
+
+a4 <- glm(aphidLH ~  siteOfOriginPedigree + lfClass + row + date,family=quasibinomial,data=ss)
+a4.1 <- glm(aphidLH ~                         lfClass + row + date,family=quasibinomial,data=ss)
+a4.2 <- glm(aphidLH ~  siteOfOriginPedigree           + row + date,family=quasibinomial,data=ss)
+a4.3 <- glm(aphidLH ~  siteOfOriginPedigree + lfClass       + date,family=quasibinomial,data=ss)
+a4.4 <- glm(aphidLH ~  siteOfOriginPedigree + lfClass + row       ,family=quasibinomial,data=ss)
+
+anova(a4.1,a4,test="F")
+anova(a4.2,a4,test="F")
+anova(a4.3,a4,test="F")
+anova(a4.4,a4,test="F")
+
+a3 <-  glm(aphidLH ~lfClass + row + date,family=quasibinomial,data=ss)
+a3.1 <-  glm(aphidLH ~          row + date,family=quasibinomial,data=ss)
+a3.2 <-  glm(aphidLH ~lfClass       + date,family=quasibinomial,data=ss)
+a3.3 <-  glm(aphidLH ~lfClass + row       ,family=quasibinomial,data=ss)
+
+anova(a3.1,a3,test="F")
+anova(a3.2,a3,test="F")
+anova(a3.3,a3,test="F")
+
+a2 <- glm(aphidLH ~ lfClass     + date       ,family=quasibinomial,data=ss)
+a2.1 <- glm(aphidLH ~             date       ,family=quasibinomial,data=ss)
+a2.2 <- glm(aphidLH ~ lfClass               ,family=quasibinomial,data=ss)
+anova(a2.1,a2,test="F")
+anova(a2.2,a2,test="F")
+a1 <-  glm(aphidLH ~  lfClass      ,family=quasibinomial,data=ss)
+null <- glm(aphidLH ~ 1, family=quasibinomial, data=ss)
+anova(null,a1,a2,a3,a4,a5,a6,test="F")
+
+#evaluate best model:
+best <- glm(aphidLH ~ siteOfOriginPedigree + lfClass + row +date,family=quasibinomial,data=ss)
+summary(best)
+par(mfcol=c(2,2))
+plot(best)
+par(mfcol=c(1,1))
+
+#predict values based on typical individual, across all populations (modal measure date and size, median location)
+table(ss$lfClass)
+table(ss$date)
+sites <- levels(ss$siteOfOriginPedigree)
+newd <- data.frame(siteOfOriginPedigree=sites,lfClass=">4",date="2005-08-14",row=median(ss$row))
+pred <- predict(best,type="response",newdata=newd,se.fit=T)
+newd$fit <- pred$fit
+newd$se <- pred$se.fit
+
+obs <- tapply(ss$aphidLH,ss$siteOfOriginPedigree,mean)
+#compare predicted to observed values:
+end.rcode-->
+
+<!--begin.rcode, fig.height=5,fig.width=15
+par(mfcol=c(1,2))
+bp <- barplot(newd$fit,ylim=c(0,1),ylab="prop of plants with >10 aphids (fitted)")
+segments(bp,newd$fit + newd$se,bp,newd$fit-newd$se)
+text(bp,0.03,labels=sites)
+text(bp,0.1,labels=table(ss$siteOfOriginPedigree))
+bp <- barplot(obs,ylim=c(0,1),ylab="prop of plants with >10 aphids (obs.)")
+text(bp,0.03,labels=sites)
+text(bp,0.1,labels=table(ss$siteOfOriginPedigree))
+legend("topright",legend="1997 garden, 2005")
+par(mfcol=c(1,1))
+end.rcode-->
+
+<b>Summary for 1997 garden, 2005:</b>
+<p>I excluded flowering plants because there were so few. The categories of plant size were 1-4 and >4 basal leaves.</p>
+
+<p><b>1. POLR:</b></p>
+Maternal population was a marginally significant predictor of aphid abundance (p=0.053). Other significant predictors were plant size (1-4 vs. >4 lvs))p<0.0001), measure date (p<0.0001), and row (o=0.0053).
+<p></p>
+
+<p><b>2. GLM quasibinomial, presence/absence:</b></p>
+Maternal population was not a significant predictor of the presence of aphids (p=0.24). The best model included plant size (p<0.0001), measure date(p=0.00058), and row(p=0.00077).
+<p></p>
+<p><b>3. GLM binomial, low(1-10) vs high (>10) aphid abundance:</b> </p>
+Maternal population was marginally significant (p=0.0375). Similar to the first two models, plant size (p<0.0001), measure date (p=0.00037), and row (p=0.004) were significant co-variates.
+
+<p>Put 2004 and 2005 side by side for the 1997 garden--were some populations consistently less infested than others?</p>
+<!--begin.rcode
+ss1 <- pp97[pp97$measureYr==2004,]
+ss1$date <- factor(ss1$measureDt2)
+ss1$lfClass <- ""
+ss1[ss1$basalLfCt >=4,"lfClass"] <- ">3"
+ss1[ss1$basalLfCt <=3,"lfClass"] <- "1-3"
+ss1[ss1$Status=="flowering","lfClass"] <- "flowering"
+ss1$lfClass <- factor(ss1$lfClass, levels=c("1-3",">3","flowering"))
+ss1 <- ss1[!ss1$siteOfOriginPedigree %in% c("BTG","TH"),]
+ss1$siteOfOriginPedigree <- factor(ss1$siteOfOriginPedigree,levels=c("gc","ri","kj","aa","mapp","alf","tower","nwlf","lc","ness","lf","spp"))
+ss1$aphids2 <- ordered(ss1$aphids2,levels=c("0","1-10","11-80",">80"))
+
+
+ss2 <- pp97[pp97$measureYr==2005,]
+#exclude 2005-08-20
+ss2 <- ss2[ss2$measureDt2!="2005-08-29",]
+ss2$date <- factor(ss2$measureDt2)
+ss2$lfClass <- ""
+ss2[ss2$basalLfCt >=5,"lfClass"] <- ">4"
+ss2[ss2$basalLfCt <=4,"lfClass"] <- "1-4"
+ss2[ss2$Status=="flowering","lfClass"] <- "flowering"
+ss2$lfClass <- factor(ss2$lfClass, levels=c("1-4",">4","flowering"))
+ss2 <- ss2[!ss2$siteOfOriginPedigree %in% c("BTG","TH"),]
+#exclude flowering plants:
+ss2 <- ss2[ss2$Status!="flowering",]
+ss2$lfClass <- factor(ss2$lfClass,levels=c("1-4",">4"))
+ss2$siteOfOriginPedigree <- factor(ss2$siteOfOriginPedigree,levels=c("gc","ri","kj","aa","mapp","alf","tower","nwlf","lc","ness","lf","spp"))
+ss2$aphids2 <- ordered(ss2$aphids2,levels=c("0","1-10","11-80",">80"))
+
+#2005
+best04 <- polr(aphids2 ~ lfClass*siteOfOriginPedigree + row + pos + date, data=ss1)
+best05 <- polr(aphids2 ~ lfClass + siteOfOriginPedigree + row + date, data=ss2)
+
+newd <- data.frame(lfClass=">3",date="2004-08-08",pos=median(ss$pos),row=median(ss$row),siteOfOriginPedigree=levels(ss$siteOfOriginPedigree))
+pred <- predict(best04,type="prob",newdata=newd)
+exp <- data.frame(fit = c(pred[,1],pred[,2],pred[,3],pred[,4]),siteOfOriginPedigree=rep(levels(ss$siteOfOriginPedigree),4),aphids2 <- rep(c("0","1-10","11-80",">80"),each=12))
+exp$aphids2 <- factor(exp$aphids2,levels=c(">80","11-80","1-10","0"))
+exp$siteOfOriginPedigree <- factor(exp$siteOfOriginPedigree,levels=levels(ss$siteOfOriginPedigree))
+zz1 <- tapply(exp$fit,list(exp$aphids2,exp$siteOfOriginPedigree),mean)
+
+newd <- data.frame(lfClass=">4",date="2005-08-14",pos=median(ss$pos),row=median(ss$row),siteOfOriginPedigree=levels(ss$siteOfOriginPedigree))
+pred <- predict(best05,type="prob",newdata=newd)
+exp <- data.frame(fit = c(pred[,1],pred[,2],pred[,3],pred[,4]),siteOfOriginPedigree=rep(levels(ss$siteOfOriginPedigree),4),aphids2 <- rep(c("0","1-10","11-80",">80"),each=12))
+exp$aphids2 <- factor(exp$aphids2,levels=c(">80","11-80","1-10","0"))
+exp$siteOfOriginPedigree <- factor(exp$siteOfOriginPedigree,levels=levels(ss$siteOfOriginPedigree))
+zz2 <- tapply(exp$fit,list(exp$aphids2,exp$siteOfOriginPedigree),mean)
+
+
+par(mfcol=c(1,2))
+bp <- barplot(zz1)
+text(bp,0.97,labels=table(ss1$siteOfOriginPedigree),col="red")
+legend("center",legend="2004",bty="n")
+bp <- barplot(zz2)
+text(bp,0.97,labels=table(ss2$siteOfOriginPedigree),col="red")
+legend("center",legend="2005",bty="n")
+par(mfcol=c(1,1))
+end.rcode-->
+
+While there are differences among sites, they are not terribly striking. RI and MAPP seem to have relatively low levels of aphid infestation relative to other sites in 2004 and 2005. 
 
 </body>
 </html>
